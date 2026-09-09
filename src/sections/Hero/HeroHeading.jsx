@@ -11,6 +11,8 @@ export const HeroHeading = memo(() => {
           alt=""
           aria-hidden="true"
           className="hero-pen-stroke"
+          width="543"
+          height="180"
           loading="eager"
           decoding="async"
         />

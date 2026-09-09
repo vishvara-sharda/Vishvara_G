@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import Container from '../../components/Container/Container';
 import Section from '../../components/Section/Section';
 import MediaPlaceholder from '../../components/MediaPlaceholder/MediaPlaceholder';
@@ -6,19 +6,10 @@ import Button from '../../components/Button/Button';
 import LinkedInIcon from '../../components/icons/LinkedInIcon';
 import HeroHeading from './HeroHeading';
 import HeroStatement from './HeroStatement';
-import thumbnailVideo from '../../components/Pictures/Thumbnail video.svg';
-import { imageCache, browserCache } from '../../utils/cache';
+import thumbnailVideo from '../../components/Pictures/Thumbnail video.jpg';
 import './Hero.css';
 
 export const Hero = memo(() => {
-  // Preload and cache the hero media into memory and browser cache
-  useEffect(() => {
-    if (thumbnailVideo) {
-      imageCache.preload(thumbnailVideo);
-      browserCache.cacheUrls([thumbnailVideo]);
-    }
-  }, []);
-
   return (
     <Section id="hero" paddingTop="hero" paddingBottom="hero" className="hero-section">
       <Container>
@@ -31,6 +22,7 @@ export const Hero = memo(() => {
             <MediaPlaceholder
               aspectRatio="16 / 9"
               src={thumbnailVideo}
+              priority={true}
               alt="System Thinking featured video thumbnail"
             />
           </div>

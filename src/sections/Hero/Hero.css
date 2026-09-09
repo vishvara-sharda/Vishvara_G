@@ -47,7 +47,8 @@
   left: 50%;
   transform: translate(-50%, -50%) rotate(-5deg);
   width: 114%;
-  height: 155%;
+  height: auto;
+  aspect-ratio: 543 / 180;
   max-width: none;
   pointer-events: none;
   user-select: none;

@@ -133,7 +133,7 @@ export const PersonalGallery = memo(({ items = GALLERY_ITEMS }) => {
       className="personal-gallery-section"
     >
       <Container>
-        <h4 className="personal-gallery-title">Inside designer's heart</h4>
+        <h2 className="personal-gallery-title">Inside designer's heart</h2>
         <div className="personal-gallery-grid">
           {items.map((item) => (
             <GalleryCard

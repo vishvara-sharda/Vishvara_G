@@ -338,7 +338,7 @@ export const Footer = memo(() => {
         </div>
 
         <div className="footer-bottom-bar">
-          <h6 className="footer-tagline">I design products that tell stories.</h6>
+          <p className="footer-tagline">I design products that tell stories.</p>
           <p className="footer-copyright">
             © {new Date().getFullYear()} · Made with{' '}
             <svg

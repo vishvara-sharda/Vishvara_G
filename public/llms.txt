@@ -1,0 +1,10 @@
+# Vishvara G — Product Designer Portfolio
+
+> Product designer who thinks and designs in systems. Predictability is a feature, not a limitation.
+
+## Key Projects & Case Studies
+- [Murmur Case Study](https://vishvara-g.pages.dev/case-study/murmur): An iOS & macOS focused design system and product experience.
+- [Margdarshak Case Study](https://vishvara-g.pages.dev/case-study/margdarshak): User segmentation, systemic research, and digital navigation architecture.
+
+## Portfolio Overview
+- [Home](https://vishvara-g.pages.dev/): Designer mind interactive graph, design essays, observations, and personal gallery.

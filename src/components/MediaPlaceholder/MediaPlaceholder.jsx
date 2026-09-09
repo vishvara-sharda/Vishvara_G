@@ -11,15 +11,9 @@ export const MediaPlaceholder = memo(({
   objectFit,
   imageStyle = {},
   style = {},
+  priority = false,
   ...props
 }) => {
-  // Pre-cache media asset in memory for instant reuse
-  useEffect(() => {
-    if (src) {
-      imageCache.preload(src);
-    }
-  }, [src]);
-
   return (
     <div
       className={`media-placeholder-container ${className}`.trim()}
@@ -33,7 +27,8 @@ export const MediaPlaceholder = memo(({
           src={src}
           alt={alt}
           className="media-placeholder-image"
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
           decoding="async"
           style={{
             ...(objectFit ? { objectFit } : {}),

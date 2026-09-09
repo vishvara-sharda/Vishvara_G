@@ -70,7 +70,7 @@ const ProjectCard = memo(({ project, onSelect }) => {
       {/* Container 1: Project Information */}
       <div className="project-info-container">
         <header className="project-info-header">
-          <h3 className="project-title">{project.heading}</h3>
+          <h2 className="project-title">{project.heading}</h2>
           <p className="project-tagline">{project.tagline}</p>
         </header>
 
@@ -87,7 +87,7 @@ const ProjectCard = memo(({ project, onSelect }) => {
         </div>
 
         <div className="project-about-layer">
-          <h4 className="project-about-label">{project.aboutLabel}</h4>
+          <h3 className="project-about-label">{project.aboutLabel}</h3>
           <p className="project-about-caption">{project.aboutDescription}</p>
         </div>
       </div>
@@ -95,7 +95,7 @@ const ProjectCard = memo(({ project, onSelect }) => {
       {/* Three Separate Question & Answer Containers */}
       {project.qaBlocks.map((block, index) => (
         <div key={index} className="project-qa-card">
-          <h4 className="project-qa-question">{block.question}</h4>
+          <h3 className="project-qa-question">{block.question}</h3>
           <p className="project-qa-answer">{block.answer}</p>
         </div>
       ))}

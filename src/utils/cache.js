@@ -32,43 +32,52 @@ class ImageCacheManager {
     this.cache.set(src, imgElement);
   }
 
-  preload(src) {
+  preload(src, idle = true) {
     if (!src || typeof window === 'undefined') return Promise.resolve(null);
     if (this.cache.has(src)) {
       return Promise.resolve(this.cache.get(src));
     }
 
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = src;
+    const loadTask = () =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
 
-      // When decoded or loaded, cache it
-      if ('decode' in img) {
-        img.decode()
-          .then(() => {
-            this.cache.set(src, img);
-            resolve(img);
-          })
-          .catch(() => {
-            // Fallback to standard onload
-            img.onload = () => {
+        // When decoded or loaded, cache it
+        if ('decode' in img) {
+          img.decode()
+            .then(() => {
               this.cache.set(src, img);
               resolve(img);
-            };
-            img.onerror = () => resolve(null);
-          });
-      } else {
-        img.onload = () => {
-          this.cache.set(src, img);
-          resolve(img);
-        };
-        img.onerror = () => resolve(null);
-      }
-    });
+            })
+            .catch(() => {
+              // Fallback to standard onload
+              img.onload = () => {
+                this.cache.set(src, img);
+                resolve(img);
+              };
+              img.onerror = () => resolve(null);
+            });
+        } else {
+          img.onload = () => {
+            this.cache.set(src, img);
+            resolve(img);
+          };
+          img.onerror = () => resolve(null);
+        }
+      });
+
+    if (idle && 'requestIdleCallback' in window) {
+      return new Promise((resolve) => {
+        window.requestIdleCallback(() => resolve(loadTask()), { timeout: 3000 });
+      });
+    }
+
+    return loadTask();
   }
 
-  preloadAll(sources = []) {
-    return Promise.all(sources.map((src) => this.preload(src)));
+  preloadAll(sources = [], idle = true) {
+    return Promise.all(sources.map((src) => this.preload(src, idle)));
   }
 }
 
@@ -95,16 +104,18 @@ export const storageCache = {
   },
 
   set(key, data, ttlMs = null, storage = 'session') {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return false;
     try {
       const store = storage === 'local' ? window.localStorage : window.sessionStorage;
       const item = {
         data,
-        expires: ttlMs ? Date.now() + ttlMs : null
+        expires: ttlMs ? Date.now() + ttlMs : null,
+        timestamp: Date.now()
       };
       store.setItem(`pf_cache_${key}`, JSON.stringify(item));
+      return true;
     } catch {
-      // Ignore quota errors
+      return false;
     }
   },
 
@@ -114,33 +125,32 @@ export const storageCache = {
       const store = storage === 'local' ? window.localStorage : window.sessionStorage;
       store.removeItem(`pf_cache_${key}`);
     } catch {
-      // Ignore
+      // ignore
     }
   }
 };
 
-// 3. Browser Cache API Integration for Static Media
+// 3. Browser Cache API Manager (CacheStorage)
+const CACHE_NAME = 'portfolio-media-v1';
+
 export const browserCache = {
-  CACHE_NAME: 'portfolio-media-v1',
+  supported: typeof window !== 'undefined' && 'caches' in window,
 
   async cacheUrls(urls = []) {
-    if (typeof window === 'undefined' || !('caches' in window)) return;
-    try {
-      const cache = await window.caches.open(this.CACHE_NAME);
-      await Promise.all(
-        urls.map(async (url) => {
-          try {
-            const match = await cache.match(url);
-            if (!match) {
-              await cache.add(url);
-            }
-          } catch {
-            // Ignore offline or CORS asset errors
-          }
-        })
-      );
-    } catch {
-      // Cache API not available or blocked
+    if (!this.supported || !urls.length) return;
+    const task = async () => {
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.addAll(urls.filter(Boolean));
+      } catch (err) {
+        // Ignore offline or CORS asset errors
+      }
+    };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(task, { timeout: 4000 });
+    } else {
+      setTimeout(task, 2500);
     }
   }
 };
