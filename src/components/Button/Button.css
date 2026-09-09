@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Button Component System (Apple HIG Inspired)
+   ========================================================================== */
+
+.system-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 26px;
+  font-family: var(--font-family-primary);
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  transition: transform 0.12s cubic-bezier(0.25, 1, 0.5, 1),
+              color 0.15s ease,
+              border-color 0.15s ease,
+              background-color 0.15s ease,
+              box-shadow 0.15s ease;
+}
+
+/* Centralized Content Group: Perfect Horizontal & Vertical Alignment */
+.system-btn-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Controlled spacing between badge and text */
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Base Hover State */
+.system-btn:hover:not(.is-disabled):not(:disabled) {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-hover);
+  transform: scale(1.02);
+}
+
+/* Base Pressed State */
+.system-btn:active:not(.is-disabled):not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Focus State */
+.system-btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Apple HIG LinkedIn Variant (Matching Reference Image)
+   ========================================================================== */
+.system-btn-apple-linkedin {
+  background-color: #0B71D6; /* Vibrant reference blue */
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px; /* Apple HIG capsule / pill geometry */
+  height: 50px; /* Fixed height for exact optical & mathematical centering */
+  padding: 0 28px; /* Symmetrical horizontal padding */
+  box-shadow: 0 4px 16px rgba(11, 113, 214, 0.35);
+}
+
+.system-btn-apple-linkedin:hover:not(.is-disabled):not(:disabled) {
+  background-color: #127fe8;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(11, 113, 214, 0.45);
+  transform: scale(1.02);
+}
+
+.system-btn-apple-linkedin:active:not(.is-disabled):not(:disabled) {
+  transform: scale(0.97); /* Apple HIG tactile compression */
+  background-color: #095fb5;
+}
+
+.system-btn-apple-linkedin:focus-visible {
+  outline: 3px solid rgba(11, 113, 214, 0.65);
+  outline-offset: 3px;
+}
+
+/* Disabled State */
+.system-btn:disabled,
+.system-btn.is-disabled {
+  color: var(--color-disabled);
+  border-color: var(--color-disabled);
+  background-color: transparent;
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Icon Container: Exact geometry aligned with text */
+.system-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.system-btn-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.system-btn-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Accent Variant (Apple HIG Capsule CTA)
+   ========================================================================== */
+.system-btn-accent {
+  background-color: var(--color-accent);
+  color: #000000;
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  height: 48px;
+  min-height: 48px;
+  padding: 0 28px;
+  box-shadow: 0 4px 16px rgba(226, 169, 241, 0.25);
+}
+
+.system-btn-accent .system-btn-label {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #000000;
+}
+
+.system-btn-accent:hover:not(.is-disabled):not(:disabled) {
+  background-color: #ecbcf8;
+  border-color: #ecbcf8;
+  color: #000000;
+  box-shadow: 0 6px 20px rgba(226, 169, 241, 0.35);
+}
+
+.system-btn-accent:active:not(.is-disabled):not(:disabled) {
+  transform: scale(0.96);
+  background-color: #d698e6;
+  border-color: #d698e6;
+}
+
+.system-btn-accent:focus-visible {
+  outline: 3px solid rgba(226, 169, 241, 0.65);
+  outline-offset: 3px;
+}
+
+/* Button Text: Default inherits color and typography */
+.system-btn-label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  line-height: 1;
+  letter-spacing: var(--type-button-letter-spacing);
+  color: inherit;
+}
+
+/* LinkedIn Specific Label Overrides for exact visual match */
+.system-btn-apple-linkedin .system-btn-label {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  transform: translateY(1.5px);
+}

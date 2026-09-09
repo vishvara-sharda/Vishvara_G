@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Projects Section — Bento Box Architecture
+   ========================================================================== */
+
+.projects-section {
+  position: relative;
+}
+
+/* 2-Column Bento Grid: Side-by-side on desktop, stacked on mobile */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--space-8);
+  width: 100%;
+}
+
+/* Apple HIG Grid: Left Margin == Middle Gutter == Right Margin (var(--container-padding)) */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--container-padding);
+    row-gap: var(--container-padding);
+    align-items: start;
+  }
+}
+
+/* Single Project Bento Box (2 vertically stacked containers) */
+.project-bento-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* Container 1: Project Information Container */
+.project-info-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .project-info-container {
+    padding: var(--space-7);
+  }
+}
+
+/* Project Header: Heading + Tagline */
+.project-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.project-title {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h1-size, clamp(2rem, 3.2vw + 0.5rem, 2.75rem));
+  font-weight: 700;
+  font-synthesis: none;
+  line-height: 1.12;
+  letter-spacing: 0.04em;
+  color: var(--color-accent, #E2A9F1);
+  margin: 0;
+}
+
+.project-tagline {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-body-size, 1rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.55;
+  letter-spacing: 0.035em;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .project-title {
+    letter-spacing: 0.03em;
+  }
+  .project-tagline {
+    letter-spacing: 0.015em;
+  }
+}
+
+/* Project Media Visual Area */
+.project-media-wrapper {
+  margin: var(--space-6) 0;
+  width: 100%;
+}
+
+/* About The Project: Caption Layer Beneath Image */
+.project-about-layer {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.project-about-label {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-label-size);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: var(--type-label-letter-spacing);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.project-about-caption {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-body-size);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  color: var(--color-disabled);
+  margin: var(--space-2) 0 0 0;
+}
+
+/* Containers 2, 3, 4: Individual Scannable Q&A Cards (Soft Rounded Rectangles) */
+.project-qa-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-media);
+  padding: var(--space-5);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .project-qa-card {
+    padding: var(--space-5) var(--space-6);
+  }
+}
+
+.project-qa-question {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h4-size);
+  font-weight: 500;
+  line-height: var(--line-height-subheading);
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.project-qa-answer {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-body-size);
+  font-weight: 300;
+  line-height: var(--line-height-body);
+  color: var(--color-disabled);
+  margin: var(--space-2) 0 0 0;
+}
+
+/* ==========================================================================
+   Project CTA: Apple-Inspired Full-Width "Why I did it?" Action
+   Aligns exactly with the container edges above (100% available width)
+   ========================================================================== */
+.project-why-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 16px var(--space-6);
+  background-color: var(--color-accent); /* #E2A9F1 */
+  color: #000000; /* Dark/black text */
+  font-family: var(--font-family-primary);
+  font-size: var(--type-button-size);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  border: none;
+  border-radius: var(--radius-pill, 9999px); /* Properly rounded corners */
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  box-shadow: none;
+  background-image: none;
+  box-sizing: border-box;
+  transition: transform 0.14s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.14s ease;
+}
+
+.project-why-cta:hover {
+  background-color: #ecbcf8;
+  transform: scale(1.02); /* the little expand */
+}
+
+.project-why-cta:active {
+  transform: scale(0.97);
+  background-color: #d698e6;
+}
+
+.project-why-cta:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-why-cta {
+    transition: none;
+    transform: none !important;
+  }
+  .project-why-cta:hover,
+  .project-why-cta:active {
+    transform: none !important;
+  }
+}

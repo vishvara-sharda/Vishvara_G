@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Question Sequence Progressive Typographic Scale — Justified Full-Width
+   ========================================================================== */
+
+.question-sequence-track {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.question-word {
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-tight);
+  display: inline-block;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Primary Equal Group: What, How, Why (All identical size & weight) */
+.question-word-primary {
+  font-size: var(--type-h1-size);
+  font-weight: 700;
+  letter-spacing: var(--type-h1-letter-spacing);
+  color: var(--color-text-primary);
+}
+
+/* Step 1: Lowercase why (Noticeably smaller, SemiBold) */
+.question-word-step1 {
+  font-size: var(--type-h2-size);
+  font-weight: 600;
+  letter-spacing: var(--type-h2-letter-spacing);
+  color: var(--color-text-primary);
+}
+
+/* Step 2: Lowercase why (Smaller, Medium) */
+.question-word-step2 {
+  font-size: var(--type-h3-size);
+  font-weight: 500;
+  letter-spacing: var(--type-h3-letter-spacing);
+  color: var(--color-text-secondary);
+}
+
+/* Step 3: Lowercase why.... (Smallest, Regular) */
+.question-word-step3 {
+  font-size: var(--type-h4-size);
+  font-weight: 400;
+  letter-spacing: var(--type-h4-letter-spacing);
+  color: var(--color-disabled);
+}
+
+/* Responsive scaling for mobile viewports to ensure edge-to-edge alignment without horizontal overflow */
+@media (max-width: 640px) {
+  .question-word-primary {
+    font-size: clamp(1.2rem, 5vw, 1.85rem);
+  }
+  .question-word-step1 {
+    font-size: clamp(1.05rem, 4.3vw, 1.6rem);
+  }
+  .question-word-step2 {
+    font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+  }
+  .question-word-step3 {
+    font-size: clamp(0.8rem, 2.8vw, 1.1rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .question-word-primary {
+    font-size: clamp(1.02rem, 4.5vw, 1.18rem);
+  }
+  .question-word-step1 {
+    font-size: clamp(0.92rem, 3.9vw, 1.05rem);
+  }
+  .question-word-step2 {
+    font-size: clamp(0.8rem, 3.1vw, 0.92rem);
+  }
+  .question-word-step3 {
+    font-size: clamp(0.72rem, 2.5vw, 0.8rem);
+  }
+}

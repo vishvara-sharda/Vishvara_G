@@ -1,0 +1,656 @@
+/* ==========================================================================
+   Portfolio Skeleton & Systematic Loading System
+   - Neutral understated grey against #000000
+   - Single coherent calm tonal shimmer sweep
+   - Precise layout mirroring for all 9 sections
+   - Full responsive parity & prefers-reduced-motion compliance
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Core Shimmer Animation & Base Shapes
+   -------------------------------------------------------------------------- */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer-base {
+  background-color: rgba(255, 255, 255, 0.05);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: skeleton-shimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  border-radius: var(--radius-sm, 4px);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer-base {
+    animation: none !important;
+    background-image: none !important;
+    background-color: rgba(255, 255, 255, 0.07) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Skeleton Container Shell & Crossfade
+   -------------------------------------------------------------------------- */
+.portfolio-skeleton-root {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background, #000000);
+  color: var(--color-text-primary, #FFFAFA);
+  overflow-x: hidden;
+  user-select: none;
+  pointer-events: none;
+}
+
+.portfolio-loading-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background, #000000);
+}
+
+.portfolio-content-layer {
+  width: 100%;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.portfolio-content-layer.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.portfolio-content-layer.is-visible {
+  opacity: 1;
+}
+
+.portfolio-skeleton-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.portfolio-skeleton-layer.is-fading {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Navbar Skeleton
+   -------------------------------------------------------------------------- */
+.sk-navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--color-background, #000000);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.sk-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sk-navbar-star {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.sk-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6, 32px);
+}
+
+.sk-navbar-link-pill {
+  width: 52px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+@media (max-width: 860px) {
+  .sk-navbar-links {
+    display: none;
+  }
+  .sk-navbar-mobile-toggle {
+    width: 28px;
+    height: 14px;
+    border-radius: 2px;
+  }
+}
+
+@media (min-width: 861px) {
+  .sk-navbar-mobile-toggle {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Hero Skeleton
+   -------------------------------------------------------------------------- */
+.sk-hero-section {
+  padding-top: calc(var(--space-9, 64px) + 10px);
+  padding-bottom: var(--space-6, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .sk-hero-section {
+    padding-top: calc(var(--space-7, 40px) + 10px);
+  }
+}
+
+.sk-hero-title-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 16px);
+  width: 100%;
+  margin-bottom: var(--space-6, 32px);
+}
+
+.sk-hero-title-pill {
+  width: min(340px, 70vw);
+  height: clamp(32px, 5vw, 48px);
+  border-radius: 8px;
+}
+
+.sk-hero-subtitle-pill {
+  width: min(260px, 60vw);
+  height: clamp(20px, 3vw, 28px);
+  border-radius: 6px;
+}
+
+.sk-hero-media {
+  width: 80%;
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-media, 12px);
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-hero-cta {
+  width: 120px;
+  height: 42px;
+  border-radius: var(--radius-full, 9999px);
+  margin-top: var(--space-5, 24px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Question Introduction Skeleton
+   -------------------------------------------------------------------------- */
+.sk-question-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sk-question-lead {
+  width: min(420px, 80vw);
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: var(--space-8, 48px);
+}
+
+.sk-question-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-5, 24px);
+  width: 100%;
+}
+
+.sk-q-word-1 { width: 90px; height: 38px; border-radius: 6px; }
+.sk-q-word-2 { width: 85px; height: 38px; border-radius: 6px; }
+.sk-q-word-3 { width: 80px; height: 38px; border-radius: 6px; }
+.sk-q-word-4 { width: 65px; height: 30px; border-radius: 5px; }
+.sk-q-word-5 { width: 55px; height: 24px; border-radius: 4px; }
+.sk-q-word-6 { width: 60px; height: 18px; border-radius: 4px; }
+
+/* --------------------------------------------------------------------------
+   4. Projects Skeleton
+   -------------------------------------------------------------------------- */
+.sk-projects-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+}
+
+.sk-projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10, 80px);
+  width: 100%;
+}
+
+.sk-project-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 16px);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .sk-project-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    column-gap: var(--space-5, 24px);
+    row-gap: var(--space-4, 16px);
+  }
+
+  .sk-project-info-block {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+  }
+
+  .sk-project-qa-1 { grid-column: 2 / 3; grid-row: 1 / 2; }
+  .sk-project-qa-2 { grid-column: 2 / 3; grid-row: 2 / 3; }
+  .sk-project-qa-3 { grid-column: 2 / 3; grid-row: 3 / 4; }
+  .sk-project-cta-full { grid-column: 1 / 3; grid-row: 4 / 5; }
+}
+
+.sk-project-info-block {
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-media, 12px);
+  padding: var(--space-6, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sk-project-title-pill { width: 140px; height: 32px; border-radius: 6px; }
+.sk-project-tagline-pill { width: 220px; height: 16px; border-radius: 4px; }
+.sk-project-media-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+}
+.sk-project-about-line { width: 100%; height: 14px; border-radius: 3px; }
+
+.sk-project-qa-card {
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-media, 12px);
+  padding: var(--space-5, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sk-qa-title { width: 180px; height: 18px; border-radius: 4px; }
+.sk-qa-body { width: 90%; height: 14px; border-radius: 3px; }
+
+.sk-project-cta-full {
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+/* --------------------------------------------------------------------------
+   5. Mind at Heart (DesignerMind) Skeleton
+   -------------------------------------------------------------------------- */
+.sk-mind-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sk-mind-header {
+  width: 240px;
+  height: 32px;
+  border-radius: 6px;
+  margin-bottom: var(--space-8, 48px);
+}
+
+.sk-mind-canvas {
+  width: 100%;
+  max-width: 1000px;
+  height: 480px;
+  border-radius: var(--radius-media, 12px);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sk-mind-center-node {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.sk-mind-cluster-node {
+  position: absolute;
+  border-radius: 50%;
+}
+.sk-mc-1 { top: 20%; left: 20%; width: 28px; height: 28px; }
+.sk-mc-2 { top: 15%; right: 25%; width: 32px; height: 32px; }
+.sk-mc-3 { bottom: 25%; left: 30%; width: 30px; height: 30px; }
+.sk-mc-4 { bottom: 20%; right: 20%; width: 28px; height: 28px; }
+
+@media (max-width: 768px) {
+  .sk-mind-canvas {
+    height: 340px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Essays Skeleton
+   -------------------------------------------------------------------------- */
+.sk-essays-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+}
+
+.sk-essays-title {
+  width: 180px;
+  height: 32px;
+  border-radius: 6px;
+  margin-bottom: var(--space-7, 40px);
+}
+
+.sk-essays-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6, 32px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .sk-essays-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sk-essay-card {
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-media, 12px);
+  padding: var(--space-6, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 24px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sk-essay-year { width: 45px; height: 16px; border-radius: 3px; }
+.sk-essay-image-box {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+}
+.sk-essay-title-line { width: 85%; height: 22px; border-radius: 4px; }
+
+/* --------------------------------------------------------------------------
+   7. Observations / Testimonials Skeleton
+   -------------------------------------------------------------------------- */
+.sk-testimonials-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+}
+
+.sk-testimonials-title {
+  width: 200px;
+  height: 32px;
+  border-radius: 6px;
+  margin-bottom: var(--space-7, 40px);
+}
+
+.sk-testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5, 24px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .sk-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sk-test-card {
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-media, 12px);
+  padding: var(--space-6, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sk-test-badge { width: 100px; height: 14px; border-radius: 3px; }
+.sk-test-quote-1 { width: 100%; height: 16px; border-radius: 3px; }
+.sk-test-quote-2 { width: 85%; height: 16px; border-radius: 3px; }
+.sk-test-author-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  margin-top: var(--space-3, 12px);
+}
+.sk-test-avatar { width: 36px; height: 36px; border-radius: 50%; }
+.sk-test-name { width: 110px; height: 14px; border-radius: 3px; }
+
+/* --------------------------------------------------------------------------
+   8. Personal Gallery Skeleton
+   -------------------------------------------------------------------------- */
+.sk-gallery-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-9, 64px);
+}
+
+.sk-gallery-title {
+  width: 220px;
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: var(--space-7, 40px);
+}
+
+.sk-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4, 16px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .sk-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sk-gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.sk-gallery-card {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-media, 12px);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+/* --------------------------------------------------------------------------
+   9. Footer / Contact Skeleton
+   -------------------------------------------------------------------------- */
+.sk-footer-section {
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-8, 48px);
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-footer-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7, 40px);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .sk-footer-layout {
+    grid-template-columns: 1fr 1.35fr;
+    column-gap: var(--space-9, 64px);
+    align-items: center;
+  }
+}
+
+.sk-footer-question {
+  width: min(320px, 80vw);
+  height: 48px;
+  border-radius: 8px;
+}
+
+.sk-footer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  width: 100%;
+  max-width: 620px;
+}
+
+.sk-footer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4, 16px);
+}
+
+@media (max-width: 640px) {
+  .sk-footer-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sk-footer-input {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-footer-textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-footer-submit {
+  width: 110px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.sk-footer-bottom-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3, 12px);
+  margin-top: var(--space-9, 64px);
+  padding-top: var(--space-6, 32px);
+  border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-footer-tagline {
+  width: 280px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.sk-footer-copyright {
+  width: 220px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Case Study Skeleton
+   -------------------------------------------------------------------------- */
+.sk-case-study {
+  width: 100%;
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-10, 80px);
+}
+
+.sk-cs-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-4, 16px);
+  margin-bottom: var(--space-8, 48px);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-cs-back { width: 90px; height: 18px; border-radius: 4px; }
+.sk-cs-badge { width: 120px; height: 18px; border-radius: 4px; }
+
+.sk-cs-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+  margin-bottom: var(--space-8, 48px);
+}
+
+.sk-cs-title { width: min(380px, 75vw); height: 48px; border-radius: 8px; }
+.sk-cs-tagline { width: min(480px, 90vw); height: 24px; border-radius: 6px; }
+
+.sk-cs-hero-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-media, 12px);
+  margin-bottom: var(--space-9, 64px);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.sk-cs-body-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  max-width: 800px;
+}
+
+.sk-cs-text-1 { width: 100%; height: 20px; border-radius: 4px; }
+.sk-cs-text-2 { width: 90%; height: 20px; border-radius: 4px; }
+.sk-cs-text-3 { width: 75%; height: 20px; border-radius: 4px; }
+

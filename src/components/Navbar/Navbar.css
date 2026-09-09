@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Portfolio Navbar
+   - Left: Purple five-pointed star mark (#E2A9F1)
+   - Right: Clean editorial navigation (Desktop) / Compact menu (Mobile)
+   - Sticky, subtle, unobtrusive
+   - Adheres strictly to core design tokens: #000000, #FFFAFA, #F2F0EF, #E2A9F1
+   ========================================================================== */
+
+.portfolio-navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--color-background, #000000);
+  border-bottom: 1px solid transparent;
+  z-index: 1000;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease;
+}
+
+.portfolio-navbar.is-scrolled {
+  border-bottom-color: var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Brand: Purple Five-Pointed Star Only
+   -------------------------------------------------------------------------- */
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin-left: -8px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navbar-brand:hover {
+  transform: scale(1.08);
+}
+
+.navbar-brand:active {
+  transform: scale(0.95);
+}
+
+.navbar-brand:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.navbar-star-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Navigation Links
+   -------------------------------------------------------------------------- */
+.navbar-desktop-nav {
+  display: none;
+}
+
+.navbar-links-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6, 32px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-link-item {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav-link {
+  font-family: var(--font-family-primary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-text-secondary, #F2F0EF);
+  opacity: 0.75;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 4px 0;
+  position: relative;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-nav-link:hover {
+  opacity: 1;
+  color: var(--color-text-primary, #FFFAFA);
+}
+
+.navbar-nav-link.is-active {
+  opacity: 1;
+  color: var(--color-accent, #E2A9F1);
+  font-weight: 500;
+}
+
+.navbar-nav-link:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (min-width: 860px) {
+  .navbar-desktop-nav {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Menu Button
+   -------------------------------------------------------------------------- */
+.navbar-mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin-right: -8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-primary, #FFFAFA);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-mobile-toggle:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.navbar-toggle-line {
+  position: relative;
+  width: 18px;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-toggle-line::before,
+.navbar-toggle-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: transform 0.2s ease, top 0.2s ease;
+}
+
+.navbar-toggle-line::before {
+  top: -5px;
+}
+
+.navbar-toggle-line::after {
+  top: 5px;
+}
+
+.navbar-toggle-line.is-open {
+  background-color: transparent;
+}
+
+.navbar-toggle-line.is-open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.navbar-toggle-line.is-open::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 860px) {
+  .navbar-mobile-toggle {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Menu Drawer
+   -------------------------------------------------------------------------- */
+.navbar-mobile-drawer {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-background, #000000);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+  box-sizing: border-box;
+}
+
+.navbar-mobile-drawer.is-open {
+  display: block;
+}
+
+.navbar-mobile-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 12px var(--container-padding, 20px) 20px;
+  gap: 2px;
+}
+
+.navbar-mobile-item {
+  width: 100%;
+}
+
+.navbar-mobile-link {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  font-family: var(--font-family-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text-secondary, #F2F0EF);
+  opacity: 0.85;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.navbar-mobile-link:hover,
+.navbar-mobile-link:active {
+  opacity: 1;
+  color: var(--color-text-primary, #FFFAFA);
+}
+
+.navbar-mobile-link.is-active {
+  opacity: 1;
+  color: var(--color-accent, #E2A9F1);
+  font-weight: 500;
+}
+
+@media (min-width: 860px) {
+  .navbar-mobile-drawer {
+    display: none !important;
+  }
+}

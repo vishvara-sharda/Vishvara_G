@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Hero Section Layout — Single Horizontal Composition
+   ========================================================================== */
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Horizontal Composition: Heading + Beside Subtitle */
+.hero-heading-composition {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  column-gap: var(--space-6);
+  row-gap: var(--space-5);
+  width: 100%;
+  margin-bottom: var(--space-7);
+}
+
+.hero-title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--type-display-size);
+  font-weight: 700;
+  line-height: var(--type-display-line-height);
+  letter-spacing: var(--type-display-letter-spacing);
+  color: var(--color-accent);
+  font-style: normal;
+  display: inline;
+}
+
+.hero-title-circled {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.12em 0.22em;
+}
+
+.hero-pen-stroke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  width: 114%;
+  height: 155%;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.92;
+}
+
+.hero-subtitle {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--type-hero-sub-size);
+  font-weight: var(--type-hero-sub-weight);
+  font-style: italic;
+  line-height: var(--type-hero-sub-line-height);
+  letter-spacing: var(--type-hero-sub-letter-spacing);
+  color: var(--color-text-secondary);
+  display: inline;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .hero-heading-composition {
+    column-gap: var(--space-5);
+    margin-bottom: var(--space-9);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-heading-composition {
+    column-gap: var(--space-6);
+    margin-bottom: var(--space-10);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-subtitle {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading-composition {
+    margin-bottom: var(--space-6);
+  }
+}
+
+.hero-media-wrapper {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .hero-actions {
+    margin-top: var(--space-6);
+  }
+}

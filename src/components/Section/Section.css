@@ -1,0 +1,53 @@
+.system-section {
+  width: 100%;
+  position: relative;
+}
+
+/* Vertical Rhythm using Space Tokens */
+.section-pt-default {
+  padding-top: var(--space-9);
+}
+
+.section-pb-default {
+  padding-bottom: var(--space-9);
+}
+
+.section-pt-hero {
+  padding-top: var(--space-7);
+}
+
+.section-pb-hero {
+  padding-bottom: var(--space-10);
+}
+
+.section-pt-none {
+  padding-top: 0;
+}
+
+.section-pb-none {
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .section-pt-hero {
+    padding-top: var(--space-9);
+  }
+  .section-pb-hero {
+    padding-bottom: var(--space-11);
+  }
+  .section-pt-default {
+    padding-top: var(--space-10);
+  }
+  .section-pb-default {
+    padding-bottom: var(--space-10);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-pt-hero {
+    padding-top: var(--space-11);
+  }
+  .section-pb-hero {
+    padding-bottom: var(--space-12);
+  }
+}
