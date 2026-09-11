@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useEffect } from 'react';
 import Section from '../../components/Section/Section';
 import Container from '../../components/Container/Container';
-import MediaPlaceholder from '../../components/MediaPlaceholder/MediaPlaceholder';
 import murmurCover from '../../components/Pictures/Projects/Murmur/Cover page.png';
 import margdarshakLogo from '../../components/Pictures/Projects/Margdarshak/Margdarshak Logo.png';
+import margdarshakHome from '../../components/Pictures/Projects/Margdarshak/home.png';
 import { MARGDARSHAK_ALL_ASSETS } from '../../pages/CaseStudy/CaseStudy';
 import { imageCache, browserCache } from '../../utils/cache';
 import './Projects.css';
@@ -14,11 +14,12 @@ const projectsData = [
     slug: 'murmur',
     heading: 'Murmur',
     tagline: 'Making government schemes easier to access.',
-    mediaImage: murmurCover,
-    mediaAlt: 'Murmur project cover',
-    objectFit: 'contain',
-    imageStyle: { padding: 'var(--space-4)' },
-    mediaPlaceholder: '[Project 01 Media / Video]',
+    logoImage: murmurCover,
+    logoAlt: 'Murmur project logo',
+    videoSrc: null,
+    videoImage: null,
+    videoAlt: 'Murmur walkthrough video',
+    videoPlaceholder: 'Walkthrough Video',
     aboutLabel: 'About the project',
     aboutDescription: '[Short one-line description / caption]',
     qaBlocks: [
@@ -41,11 +42,12 @@ const projectsData = [
     slug: 'margdarshak',
     heading: 'Margdarshak',
     tagline: 'Making government schemes easier to access.',
-    mediaImage: margdarshakLogo,
-    mediaAlt: 'Margdarshak logo',
-    objectFit: 'contain',
-    imageStyle: { padding: 'var(--space-4)' },
-    mediaPlaceholder: '[Project 02 Media / Video]',
+    logoImage: margdarshakLogo,
+    logoAlt: 'Margdarshak logo',
+    videoSrc: null,
+    videoImage: null,
+    videoAlt: 'Margdarshak walkthrough video',
+    videoPlaceholder: 'Walkthrough Video',
     aboutLabel: 'About the project',
     aboutDescription: 'Margdarshak is a system designed to help people discover and access government schemes with less friction.',
     qaBlocks: [
@@ -68,9 +70,10 @@ const projectsData = [
 const ProjectCard = memo(({ project, onSelect }) => {
   return (
     <div className="project-bento-box">
-      {/* Container 1: Project Information */}
-      <div className="project-info-container">
-        <header className="project-info-header">
+      {/* Upper Section: 3-Box Bento Layout */}
+      <div className="project-upper-bento">
+        {/* Box 1 — Project Heading (Horizontal Rectangular Box) */}
+        <div className="project-box-heading">
           <h3
             className="project-title"
             onClick={() => onSelect(project.slug || project.id)}
@@ -87,10 +90,11 @@ const ProjectCard = memo(({ project, onSelect }) => {
             {project.heading}
           </h3>
           <p className="project-tagline">{project.tagline}</p>
-        </header>
+        </div>
 
+        {/* Box 2 — Project Logo (Compact Square-ish Box) */}
         <div
-          className="project-media-wrapper"
+          className="project-box-logo"
           onClick={() => onSelect(project.slug || project.id)}
           style={{ cursor: 'pointer' }}
           role="button"
@@ -101,22 +105,85 @@ const ProjectCard = memo(({ project, onSelect }) => {
               onSelect(project.slug || project.id);
             }
           }}
-          aria-label={`View ${project.heading} Case Study`}
+          title={`${project.heading} Logo`}
         >
-          <MediaPlaceholder
-            aspectRatio="16 / 9"
-            src={project.mediaImage}
-            alt={project.mediaAlt || project.heading}
-            label={project.mediaPlaceholder}
-            objectFit={project.objectFit}
-            imageStyle={project.imageStyle}
-            style={project.mediaContainerStyle}
-          />
+          {project.logoImage && (
+            <img
+              src={project.logoImage}
+              alt={project.logoAlt || `${project.heading} Logo`}
+              className="project-box-logo-img"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
         </div>
 
-        <div className="project-about-layer">
-          <span className="project-about-label">{project.aboutLabel}</span>
-          <p className="project-about-caption">{project.aboutDescription}</p>
+        {/* Box 3 — Project Media + Description (Largest Rectangular Box) */}
+        <div className="project-box-media">
+          <div
+            className="project-video-wrapper"
+            onClick={() => onSelect(project.slug || project.id)}
+            style={{ cursor: 'pointer' }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onSelect(project.slug || project.id);
+              }
+            }}
+            aria-label={`View ${project.heading} walkthrough`}
+          >
+            {project.videoSrc ? (
+              <video
+                src={project.videoSrc}
+                className="project-video-player"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : project.videoImage ? (
+              <div className="project-video-preview-wrap">
+                <img
+                  src={project.videoImage}
+                  alt={project.videoAlt || `${project.heading} Walkthrough`}
+                  className="project-video-preview-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="project-video-overlay">
+                  <div className="project-video-play-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                      <polygon points="7,4 20,12 7,20" />
+                    </svg>
+                  </div>
+                  <span className="project-video-badge">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style={{ marginRight: '5px' }}>
+                      <polygon points="6,4 19,12 6,20" />
+                    </svg>
+                    Walkthrough Video
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="project-video-placeholder">
+                <div className="project-video-placeholder-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+                <span className="project-video-placeholder-label">
+                  {project.videoPlaceholder || 'Walkthrough Video'}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="project-about-layer">
+            <span className="project-about-label">{project.aboutLabel}</span>
+            <p className="project-about-caption">{project.aboutDescription}</p>
+          </div>
         </div>
       </div>
 
@@ -149,8 +216,8 @@ export const Projects = memo(({ onSelectProject, title = 'Projects' }) => {
   // Preload and cache project covers and idle-preload case study assets
   useEffect(() => {
     // Immediate cover pre-cache
-    imageCache.preloadAll([murmurCover, margdarshakLogo]);
-    browserCache.cacheUrls([murmurCover, margdarshakLogo]);
+    imageCache.preloadAll([murmurCover, margdarshakLogo, margdarshakHome]);
+    browserCache.cacheUrls([murmurCover, margdarshakLogo, margdarshakHome]);
 
     // Idle preload all Case Study assets in background for instant transition
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
@@ -179,6 +246,7 @@ export const Projects = memo(({ onSelectProject, title = 'Projects' }) => {
     <Section id="projects" paddingTop="default" paddingBottom="default" className="projects-section">
       <Container>
         <div className="projects-container-layout">
+          <div className="projects-layout-spacer" aria-hidden="true" />
           <div className="projects-grid">
             {projectsData.map((project) => (
               <ProjectCard

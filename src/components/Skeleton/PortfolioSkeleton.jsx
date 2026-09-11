@@ -56,14 +56,20 @@ export const PortfolioSkeleton = memo(() => {
       <section className="sk-projects-section">
         <Container>
           <div className="sk-projects-container-layout">
+            <div className="sk-projects-layout-spacer" aria-hidden="true" />
             <div className="sk-projects-grid">
               {[1, 2].map((projId) => (
                 <div key={projId} className="sk-project-bento">
-                  <div className="sk-project-info-block">
-                    <div className="sk-project-title-pill skeleton-shimmer-base" />
-                    <div className="sk-project-tagline-pill skeleton-shimmer-base" />
-                    <div className="sk-project-media-box skeleton-shimmer-base" />
-                    <div className="sk-project-about-line skeleton-shimmer-base" />
+                  <div className="sk-project-upper-bento">
+                    <div className="sk-project-box-heading">
+                      <div className="sk-project-title-pill skeleton-shimmer-base" />
+                      <div className="sk-project-tagline-pill skeleton-shimmer-base" />
+                    </div>
+                    <div className="sk-project-box-logo skeleton-shimmer-base" />
+                    <div className="sk-project-box-media">
+                      <div className="sk-project-video-wrapper skeleton-shimmer-base" />
+                      <div className="sk-project-about-line skeleton-shimmer-base" />
+                    </div>
                   </div>
                   <div className="sk-project-qa-row">
                     <div className="sk-project-qa-card sk-project-qa-1">
