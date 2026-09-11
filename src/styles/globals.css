@@ -2,7 +2,9 @@
    Global Reset & Accessibility Defaults
    ========================================================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,6 +21,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -26,7 +29,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
   line-height: var(--line-height-body);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Accessibility Focus Rings */
@@ -37,7 +40,10 @@ body {
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -45,7 +51,8 @@ body {
   }
 }
 
-img, video {
+img,
+video {
   display: block;
   max-width: 100%;
   height: auto;

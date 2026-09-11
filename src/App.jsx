@@ -15,6 +15,7 @@ import PersonalGallery from './sections/PersonalGallery/PersonalGallery';
 import Footer from './sections/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import CaseStudy from './pages/CaseStudy/CaseStudy';
+import WhatIsMyName from './pages/WhatIsMyName/WhatIsMyName';
 import { PortfolioSkeleton, CaseStudySkeleton } from './components/Skeleton/PortfolioSkeleton';
 
 const parseRoute = () => {
@@ -23,15 +24,23 @@ const parseRoute = () => {
 
   if (pathname.startsWith('/case-study')) {
     const parts = pathname.split('/').filter(Boolean);
-    const slug = parts[1] || 'murmur';
+    const slug = parts[1] || 'margdarshak';
     return { page: 'case-study', projectSlug: slug };
   }
 
   if (hash.startsWith('#/case-study')) {
     const cleanHash = hash.replace('#/case-study', '');
     const parts = cleanHash.split('/').filter(Boolean);
-    const slug = parts[0] || 'murmur';
+    const slug = parts[0] || 'margdarshak';
     return { page: 'case-study', projectSlug: slug };
+  }
+
+  if (pathname.startsWith('/what-is-my-name') || pathname.startsWith('/name')) {
+    return { page: 'what-is-my-name', projectSlug: null };
+  }
+
+  if (hash.startsWith('#/what-is-my-name') || hash.startsWith('#/name') || hash === '#name') {
+    return { page: 'what-is-my-name', projectSlug: null };
   }
 
   return { page: 'home', projectSlug: null };
@@ -99,6 +108,12 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
+  const navigateToNameGame = useCallback(() => {
+    window.history.pushState({}, '', '/what-is-my-name');
+    setRoute({ page: 'what-is-my-name', projectSlug: null });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   return (
     <ClickSpark
       sparkColor="#fff"
@@ -126,13 +141,15 @@ export function App() {
           aria-busy={isLoading}
         >
           <div className="app-root">
-            <Navbar />
+            {route.page !== 'what-is-my-name' && <Navbar />}
             <main>
               {route.page === 'case-study' ? (
                 <CaseStudy
                   projectSlug={route.projectSlug}
                   onNavigateBack={navigateToHome}
                 />
+              ) : route.page === 'what-is-my-name' ? (
+                <WhatIsMyName onNavigateBack={navigateToHome} />
               ) : (
                 <>
                   <Hero />
@@ -142,7 +159,7 @@ export function App() {
                   <Essays />
                   <Testimonials />
                   <PersonalGallery />
-                  <Footer />
+                  <Footer onOpenNameGame={navigateToNameGame} />
                 </>
               )}
             </main>

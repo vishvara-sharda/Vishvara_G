@@ -55,30 +55,40 @@ export const PortfolioSkeleton = memo(() => {
       {/* 4. Projects Skeleton */}
       <section className="sk-projects-section">
         <Container>
-          <div className="sk-projects-grid">
-            {[1, 2].map((projId) => (
-              <div key={projId} className="sk-project-bento">
-                <div className="sk-project-info-block">
-                  <div className="sk-project-title-pill skeleton-shimmer-base" />
-                  <div className="sk-project-tagline-pill skeleton-shimmer-base" />
-                  <div className="sk-project-media-box skeleton-shimmer-base" />
-                  <div className="sk-project-about-line skeleton-shimmer-base" />
+          <div className="sk-projects-container-layout">
+            <div className="sk-projects-grid">
+              {[1, 2].map((projId) => (
+                <div key={projId} className="sk-project-bento">
+                  <div className="sk-project-info-block">
+                    <div className="sk-project-title-pill skeleton-shimmer-base" />
+                    <div className="sk-project-tagline-pill skeleton-shimmer-base" />
+                    <div className="sk-project-media-box skeleton-shimmer-base" />
+                    <div className="sk-project-about-line skeleton-shimmer-base" />
+                  </div>
+                  <div className="sk-project-qa-row">
+                    <div className="sk-project-qa-card sk-project-qa-1">
+                      <div className="sk-qa-title skeleton-shimmer-base" />
+                      <div className="sk-qa-body skeleton-shimmer-base" />
+                    </div>
+                    <div className="sk-project-qa-card sk-project-qa-2">
+                      <div className="sk-qa-title skeleton-shimmer-base" />
+                      <div className="sk-qa-body skeleton-shimmer-base" />
+                    </div>
+                    <div className="sk-project-qa-card sk-project-qa-3">
+                      <div className="sk-qa-title skeleton-shimmer-base" />
+                      <div className="sk-qa-body skeleton-shimmer-base" />
+                    </div>
+                  </div>
+                  <div className="sk-project-cta-full skeleton-shimmer-base" />
                 </div>
-                <div className="sk-project-qa-card sk-project-qa-1">
-                  <div className="sk-qa-title skeleton-shimmer-base" />
-                  <div className="sk-qa-body skeleton-shimmer-base" />
-                </div>
-                <div className="sk-project-qa-card sk-project-qa-2">
-                  <div className="sk-qa-title skeleton-shimmer-base" />
-                  <div className="sk-qa-body skeleton-shimmer-base" />
-                </div>
-                <div className="sk-project-qa-card sk-project-qa-3">
-                  <div className="sk-qa-title skeleton-shimmer-base" />
-                  <div className="sk-qa-body skeleton-shimmer-base" />
-                </div>
-                <div className="sk-project-cta-full skeleton-shimmer-base" />
+              ))}
+            </div>
+
+            <header className="sk-projects-header">
+              <div className="sk-projects-sticky-title-wrap">
+                <div className="sk-projects-title-pill-vertical skeleton-shimmer-base" />
               </div>
-            ))}
+            </header>
           </div>
         </Container>
       </section>

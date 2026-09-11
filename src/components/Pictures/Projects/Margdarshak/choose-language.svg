@@ -1,0 +1,87 @@
+<svg width="412" height="917" viewBox="0 0 412 917" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="412" height="917" fill="#FFFFFF"/>
+
+  <!-- Status Bar -->
+  <text x="36" y="28" fill="#1F2024" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" letter-spacing="-0.2">9:41</text>
+  
+  <!-- Cellular / Wifi / Battery -->
+  <g transform="translate(330, 16)">
+    <!-- Cellular -->
+    <rect x="0" y="8" width="3" height="4" rx="1" fill="#1F2024"/>
+    <rect x="5" y="6" width="3" height="6" rx="1" fill="#1F2024"/>
+    <rect x="10" y="3" width="3" height="9" rx="1" fill="#1F2024"/>
+    <rect x="15" y="0" width="3" height="12" rx="1" fill="#1F2024"/>
+    <!-- Wifi -->
+    <path d="M26 2 C30 0 36 0 40 2 M28 6 C31 4 35 4 38 6 M31 10 A2 2 0 1 1 35 10" stroke="#1F2024" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Battery -->
+    <rect x="48" y="1" width="22" height="11" rx="3" stroke="#1F2024" stroke-width="1.5" fill="none"/>
+    <rect x="50" y="3" width="15" height="7" rx="1.5" fill="#1F2024"/>
+    <path d="M71 4.5 C71.8 4.5 72 5.2 72 6.5 C72 7.8 71.8 8.5 71 8.5" stroke="#1F2024" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Top Navigation Bar -->
+  <g transform="translate(24, 64)">
+    <path d="M12 2 L4 10 L12 18" stroke="#1F2024" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="24" y="132" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="700">Choose Language</text>
+  <text x="24" y="158" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400">अपनी पसंदीदा भाषा चुनें / Select preferred language</text>
+
+  <!-- Language Cards Grid -->
+  <!-- 1. English (Selected) -->
+  <g transform="translate(24, 192)">
+    <rect width="364" height="64" rx="16" fill="#FFF7ED" stroke="#FF6A00" stroke-width="2"/>
+    <text x="20" y="33" fill="#FF6A00" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">English</text>
+    <text x="20" y="49" fill="#EA580C" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Default</text>
+    <circle cx="334" cy="32" r="11" fill="#FF6A00"/>
+    <path d="M329 32 L332.5 35.5 L339 29" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 2. हिन्दी -->
+  <g transform="translate(24, 268)">
+    <rect width="364" height="64" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="20" y="33" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">हिन्दी</text>
+    <text x="20" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Hindi</text>
+    <circle cx="334" cy="32" r="11" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+  </g>
+
+  <!-- 3. मराठी -->
+  <g transform="translate(24, 344)">
+    <rect width="364" height="64" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="20" y="33" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">मराठी</text>
+    <text x="20" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Marathi</text>
+    <circle cx="334" cy="32" r="11" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+  </g>
+
+  <!-- 4. বাংলা -->
+  <g transform="translate(24, 420)">
+    <rect width="364" height="64" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="20" y="33" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">বাংলা</text>
+    <text x="20" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Bengali</text>
+    <circle cx="334" cy="32" r="11" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+  </g>
+
+  <!-- 5. తెలుగు -->
+  <g transform="translate(24, 496)">
+    <rect width="364" height="64" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="20" y="33" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">తెలుగు</text>
+    <text x="20" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Telugu</text>
+    <circle cx="334" cy="32" r="11" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+  </g>
+
+  <!-- 6. தமிழ் -->
+  <g transform="translate(24, 572)">
+    <rect width="364" height="64" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="20" y="33" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">தமிழ்</text>
+    <text x="20" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400">Tamil</text>
+    <circle cx="334" cy="32" r="11" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+  </g>
+
+  <!-- Bottom Action Button -->
+  <g transform="translate(24, 825)">
+    <rect width="364" height="52" rx="26" fill="#FF6A00"/>
+    <text x="182" y="32" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Continue</text>
+  </g>
+</svg>

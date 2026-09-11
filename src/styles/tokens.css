@@ -4,7 +4,7 @@
      ========================================================================== */
   --color-background: #000000;
   --color-text-primary: #FFFAFA;
-  --color-text-secondary: #F2F0EF;
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
   --color-accent: #E2A9F1;
   --color-accent-light: #EAD5FA;
   --color-accent-orchid: #E89FE4;

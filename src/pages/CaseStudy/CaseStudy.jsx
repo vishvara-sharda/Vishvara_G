@@ -5,6 +5,19 @@ import group31Img from '../../components/Pictures/Projects/Margdarshak/Group 31.
 import group32Img from '../../components/Pictures/Projects/Margdarshak/Group 32.jpg';
 import group33Img from '../../components/Pictures/Projects/Margdarshak/Group 33.jpg';
 import group34Img from '../../components/Pictures/Projects/Margdarshak/Group 34.jpg';
+import ideationImg from '../../components/Pictures/Projects/Margdarshak/Ideation .png';
+import ideationImg2 from '../../components/Pictures/Projects/Margdarshak/1.png';
+import affinityMappingImg from '../../components/Pictures/Projects/Margdarshak/affinity mapping.png';
+import recommendationImg from '../../components/Pictures/Projects/Margdarshak/recommendation.png';
+import homeImg from '../../components/Pictures/Projects/Margdarshak/home.png';
+import schemeImg from '../../components/Pictures/Projects/Margdarshak/scheme.png';
+import aiImg from '../../components/Pictures/Projects/Margdarshak/ai.png';
+import schemesImg from '../../components/Pictures/Projects/Margdarshak/Schemes.jpg';
+import operateImg from '../../components/Pictures/Projects/Margdarshak/operate.jpg';
+import bookGuideImg from '../../components/Pictures/Projects/Margdarshak/book guide.png';
+import chooseLanguageImg from '../../components/Pictures/Projects/Margdarshak/choose-language.svg';
+import physicalGuideImg from '../../components/Pictures/Projects/Margdarshak/physical guide.png';
+import physicalGuide2Img from '../../components/Pictures/Projects/Margdarshak/physical guide 2.png';
 import { imageCache, browserCache } from '../../utils/cache';
 import './CaseStudy.css';
 
@@ -16,6 +29,27 @@ const MARGDARSHAK_ROLE_IMAGES = [
   { src: group34Img, alt: 'In-home interview with community members' }
 ];
 
+export const MARGDARSHAK_ALL_ASSETS = [
+  group30Img,
+  group31Img,
+  group32Img,
+  group33Img,
+  group34Img,
+  affinityMappingImg,
+  ideationImg,
+  ideationImg2,
+  recommendationImg,
+  homeImg,
+  schemeImg,
+  aiImg,
+  schemesImg,
+  chooseLanguageImg,
+  operateImg,
+  bookGuideImg,
+  physicalGuideImg,
+  physicalGuide2Img
+];
+
 /**
  * Case Studies Project Meta Registry
  * Allows additional case studies and project-specific content to plug in seamlessly.
@@ -23,7 +57,7 @@ const MARGDARSHAK_ROLE_IMAGES = [
 const CASE_STUDIES_METADATA = {
   murmur: {
     title: 'Murmur',
-    tagline: 'Helping families claim govt schemes.',
+    tagline: 'Making government schemes easier to access.',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -43,7 +77,7 @@ const CASE_STUDIES_METADATA = {
   },
   margdarshak: {
     title: 'Margdarshak',
-    tagline: 'Helping families claim govt schemes.',
+    tagline: 'Making government schemes easier to access.',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -63,7 +97,7 @@ const CASE_STUDIES_METADATA = {
   },
   default: {
     title: 'Project Case Study',
-    tagline: 'Helping families claim govt schemes.',
+    tagline: 'Making government schemes easier to access.',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -83,19 +117,26 @@ const CASE_STUDIES_METADATA = {
   }
 };
 
-export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
-  const meta = CASE_STUDIES_METADATA[projectSlug?.toLowerCase()] || CASE_STUDIES_METADATA.default;
+export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) => {
+  const meta = CASE_STUDIES_METADATA[projectSlug?.toLowerCase()] || CASE_STUDIES_METADATA.margdarshak || CASE_STUDIES_METADATA.default;
+
+  // Set document title
+  useEffect(() => {
+    document.title = 'Margdarshak Case Study | Vishvara';
+    return () => {
+      document.title = 'Vishvara | Product Designer & UX Researcher';
+    };
+  }, []);
 
   // Scroll to top upon entering case study
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [projectSlug]);
 
-  // Pre-cache case study research images into memory and browser cache
+  // Pre-cache all case study assets into memory and browser cache
   useEffect(() => {
-    const images = MARGDARSHAK_ROLE_IMAGES.map((img) => img.src);
-    imageCache.preloadAll(images);
-    browserCache.cacheUrls(images);
+    imageCache.preloadAll(MARGDARSHAK_ALL_ASSETS);
+    browserCache.cacheUrls(MARGDARSHAK_ALL_ASSETS);
   }, []);
 
   const handleBack = useCallback((e) => {
@@ -121,7 +162,7 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
           >
             ← Back to Projects
           </button>
-          <span className="case-study-category-badge">Case Study</span>
+          <span className="case-study-category-badge">Margdarshak Case Study</span>
         </nav>
 
         {/* Case Study Hero Header */}
@@ -171,6 +212,24 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
                 ))}
               </div>
             )}
+
+            {/* Affinity Mapping: Left-aligned image with h3 heading on the right */}
+            <div className="case-study-affinity-block">
+              <div className="case-study-affinity-img-wrap">
+                <img
+                  src={affinityMappingImg}
+                  alt="Affinity mapping synthesized after user interviews"
+                  className="case-study-affinity-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="case-study-affinity-content">
+                <h3 className="case-study-affinity-heading">
+                  after user interview and affinity mapping
+                </h3>
+              </div>
+            </div>
+
             <div className="case-study-extension-slot" />
           </section>
 
@@ -497,7 +556,7 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
                 <div className="user-seg-group-col user-seg-group-col--primary">
                   <div className="user-seg-group-header">
                     <span className="user-seg-group-badge user-seg-group-badge--primary">USER 01</span>
-                    <span className="user-seg-group-state">Primary Focus</span>
+                    <span className="user-seg-group-state">Tier 1</span>
                   </div>
                   <div className="user-seg-group-attributes">
                     <div className="user-seg-attr-row">
@@ -516,7 +575,7 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
                 <div className="user-seg-group-col">
                   <div className="user-seg-group-header">
                     <span className="user-seg-group-badge">USER 02</span>
-                    <span className="user-seg-group-state">Secondary Focus</span>
+                    <span className="user-seg-group-state">Tier 2</span>
                   </div>
                   <div className="user-seg-group-attributes">
                     <div className="user-seg-attr-row">
@@ -545,44 +604,630 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
           </section>
 
           {/* ================================================================
-              5. THE RESOURCES WE TOOK
+              5. PAIN POINTS OF THE USERS
               ================================================================ */}
-          <section className="case-study-section" id="resources" aria-labelledby="heading-resources">
+          <section className="case-study-section pain-points-section" id="pain-points" aria-labelledby="heading-pain-points">
+            <h2 id="heading-pain-points" className="case-study-section-heading">
+              Pain points of the users
+            </h2>
+            <p className="case-study-supporting-text">
+              Understanding the distinct friction points across each user segment to guide our systemic intervention.
+            </p>
+
+            <div className="pain-points-grid">
+              {/* Half 1: Tier 1 — User 1 */}
+              <div className="pain-points-col">
+                <div className="pain-points-header">
+                  <span className="pain-points-tier">Tier 1</span>
+                  <h3 className="pain-points-user">User 1</h3>
+                </div>
+                <ul className="pain-points-list" role="list">
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">01</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>Not enough time or energy</strong> to find relevant schemes.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">02</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>Too many platforms</strong> for too many different schemes.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">03</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        Users have to do <strong>a lot of research before applying</strong>, creating too much cognitive load.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">04</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>If an application fails</strong>, users have to start the entire process again.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">05</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>Government portals are poorly designed</strong>, making it difficult to navigate and sometimes causing users to lose their progress during submission.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Half 2: Tier 2 — User 2 */}
+              <div className="pain-points-col">
+                <div className="pain-points-header">
+                  <span className="pain-points-tier">Tier 2</span>
+                  <h3 className="pain-points-user">User 2</h3>
+                </div>
+
+                <div className="pain-points-inherited-block">
+                  <span className="pain-points-inherited-text">Pain points of User 1</span>
+                  <span className="pain-points-inherited-plus" aria-hidden="true">+</span>
+                </div>
+
+                <ul className="pain-points-list" role="list">
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">01</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>Not proficient with digital devices</strong>, making online processes difficult to navigate independently.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">02</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        Some users <strong>live in rural areas</strong>, where access to reliable digital infrastructure may be limited.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="pain-points-item">
+                    <span className="pain-points-item-num">03</span>
+                    <div className="pain-points-item-content">
+                      <p className="pain-points-item-desc">
+                        <strong>No one to assist them</strong> when they get stuck during the application process.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="case-study-extension-slot" />
+          </section>
+
+          {/* ================================================================
+              6. IDEATION
+              ================================================================ */}
+          <section className="case-study-section ideation-section" id="ideation" aria-labelledby="heading-ideation">
+            <h2 id="heading-ideation" className="case-study-section-heading">
+              Ideation and after
+            </h2>
+            <div className="case-study-ideation-wrapper">
+              <img
+                src={ideationImg}
+                alt="Ideation matrix exploring concepts across brainstorming rounds"
+                className="case-study-ideation-img"
+                loading="lazy"
+              />
+              <img
+                src={ideationImg2}
+                alt="Ideation process and synthesis artifact"
+                className="case-study-ideation-img"
+                loading="lazy"
+              />
+              <div className="case-study-ideation-text-wrap">
+                <p className="case-study-ideation-text">
+                  During ideation, we came up with various ideas like money management and budgeting apps, but they didn’t work for the users we were catering to. So we decided to focus on government schemes and limit the resources.
+                </p>
+              </div>
+            </div>
+
+            <h3 className="case-study-ideation-subheading">
+              We decided to go for Govt schemes and limit the resources to these
+            </h3>
+
+            <div className="case-study-extension-slot" />
+          </section>
+
+          {/* ================================================================
+              7. THE RESOURCES WE TOOK
+              ================================================================ */}
+          <section className="case-study-section resources-section" id="resources" aria-labelledby="heading-resources">
             <h2 id="heading-resources" className="case-study-section-heading">
               The resources we took
             </h2>
-            <p className="case-study-supporting-text case-study-supporting-text--italic">
-              Fitting into the existing system
+            <p className="case-study-supporting-text">
+              We fixed our resources and limited them, then designed around their constraints.
             </p>
-            <p className="case-study-placeholder">
-              [Explanation of the resources/tools/methods used goes here]
-            </p>
+
+            <div className="resources-grid">
+              {/* RESOURCE 1 */}
+              <div className="resources-col">
+                <div className="resources-header">
+                  <span className="resources-tag">Resource 1</span>
+                  <h3 className="resources-title">Smart Devices</h3>
+                </div>
+                <p className="resources-desc">
+                  We used smart devices as the primary digital resource, while designing around differences in access and proficiency.
+                </p>
+              </div>
+
+              {/* RESOURCE 2 */}
+              <div className="resources-col">
+                <div className="resources-header">
+                  <span className="resources-tag">Resource 2</span>
+                  <h3 className="resources-title">Public Government Properties</h3>
+                </div>
+                <p className="resources-desc">
+                  We used existing public government properties — schools, Anganwadis, dispensaries, etc. — as physical access points for people who may not have reliable access to digital resources.
+                </p>
+              </div>
+            </div>
+
             <div className="case-study-extension-slot" />
           </section>
 
           {/* ================================================================
               6. APPROACH AROUND RESOURCE 1
               ================================================================ */}
-          <section className="case-study-section" id="resource-1" aria-labelledby="heading-resource-1">
-            <h2 id="heading-resource-1" className="case-study-section-heading">
+          <section className="case-study-section resource-1-section" id="resource-1" aria-labelledby="heading-resource-1">
+            <h3 id="heading-resource-1" className="case-study-section-heading case-study-section-heading--sub">
               Approach around Resource 1
-            </h2>
-            <p className="case-study-placeholder">
-              [Resource 1 approach, selection rationale, and findings go here]
+            </h3>
+
+            {/* 1. User Identification */}
+            <div className="resource-user-banner">
+              <div className="resource-user-badge-wrap">
+                <span className="resource-user-tag">USER 1</span>
+                <span className="resource-user-divider">·</span>
+                <span className="resource-user-tier">TIER 1</span>
+              </div>
+              <div className="resource-user-attrs">
+                <span className="resource-user-attr">High–Medium literacy rate</span>
+                <span className="resource-user-dot">•</span>
+                <span className="resource-user-attr">High–Medium proficiency in digital devices</span>
+              </div>
+            </div>
+
+            {/* 2. Context */}
+            <p className="case-study-supporting-text">
+              We designed around smart devices to tackle the key pain points of User 1.
             </p>
+
+            {/* 3. Pain Points → Solutions (Two-Column Table) */}
+            <div className="resource-solutions-table-wrap">
+              <table className="resource-solutions-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Core pain points</th>
+                    <th scope="col">How we solved it</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Core pain points">Finding relevant schemes takes too much time and effort.</td>
+                    <td data-label="How we solved it">Recommended schemes based on state, occupation, and annual salary.</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Core pain points">Schemes are scattered across too many platforms.</td>
+                    <td data-label="How we solved it">All schemes brought together on one platform.</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Core pain points">Too much research is required before applying.</td>
+                    <td data-label="How we solved it">Recommended schemes reduce the research and cognitive load.</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Core pain points">Government portals are difficult to navigate and users can lose progress.</td>
+                    <td data-label="How we solved it">Simple, easy-to-use interface.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Smart Devices Product Screens Gallery */}
+            <div className="resource-screens-grid" role="group" aria-label="Smart device interface screens">
+              <div className="resource-screen-card">
+                <img
+                  src={recommendationImg}
+                  alt="Recommended schemes interface"
+                  className="resource-screen-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="resource-screen-card">
+                <img
+                  src={homeImg}
+                  alt="All schemes unified on one platform home interface"
+                  className="resource-screen-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="resource-screen-card">
+                <img
+                  src={schemeImg}
+                  alt="Scheme details and easy-to-use interface"
+                  className="resource-screen-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="resource-screen-card">
+                <img
+                  src={aiImg}
+                  alt="AI-assisted form filling and inquiry interface"
+                  className="resource-screen-img"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
             <div className="case-study-extension-slot" />
           </section>
 
           {/* ================================================================
-              7. WHY AND WHERE WE NEED RESOURCE 2
+              USER TESTING MOMENT
               ================================================================ */}
-          <section className="case-study-section" id="resource-2" aria-labelledby="heading-resource-2">
-            <h2 id="heading-resource-2" className="case-study-section-heading case-study-section-heading--single-line">
-              Why and where we need Resource 2?
-            </h2>
-            <p className="case-study-placeholder">
-              [Resource 2 necessity, system fit, and complementary role go here]
-            </p>
+          <section className="case-study-section user-testing-section" id="user-testing" aria-labelledby="label-user-testing">
+            <div className="user-testing-grid">
+              {/* LEFT SIDE: Extremely simple observation */}
+              <div className="user-testing-content">
+                <span id="label-user-testing" className="user-testing-heading">
+                  DURING USER TESTING, WE FOUND
+                </span>
+                <p className="user-testing-main-text">
+                  People struggled to find the right information on their documents.
+                </p>
+              </div>
+
+              {/* RIGHT SIDE — PHONE MOCKUP & WE SOLVED IT CALLOUT */}
+              <div className="user-testing-visual">
+                <div className="user-testing-phone-container">
+                  <div className="device-mockup">
+                    {/* Hardware Buttons on Right */}
+                    <div className="device-btn-power" aria-hidden="true" />
+                    <div className="device-btn-volume" aria-hidden="true" />
+
+                    {/* Device Screen Container */}
+                    <div className="device-screen-wrap">
+                      <div className="device-punch-hole" aria-hidden="true" />
+                      <img
+                        src={schemesImg}
+                        alt="Margdarshak family member details form interface showing PAN card input field and contextual guidance"
+                        className="device-screen-img"
+                        loading="lazy"
+                      />
+                      <div className="user-testing-field-target" aria-hidden="true" />
+                    </div>
+                  </div>
+
+                  {/* CALLOUT — WE SOLVED IT */}
+                  <aside className="user-testing-callout" aria-label="Design solution callout">
+                    <svg className="user-testing-callout-arrow" viewBox="0 0 32 16" fill="none" aria-hidden="true">
+                      <path
+                        d="M32 8H4M4 8L10 2M4 8L10 14"
+                        stroke="#E2A9F1"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+
+                    <div className="user-testing-callout-card">
+                      <span className="user-testing-callout-badge">WE SOLVED IT</span>
+                      <p className="user-testing-callout-text">
+                        Contextual help, right where they needed it.
+                      </p>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </div>
+
+            {/* TRANSITION TO RESOURCE 2 */}
+            <div className="user-testing-transition">
+              <p className="user-testing-transition-text">
+                But not every moment of uncertainty could be solved inside the app.
+              </p>
+            </div>
+
+            <div className="case-study-extension-slot" />
+          </section>
+
+          {/* ================================================================
+              7. WHY WE NEED RESOURCE 2
+              ================================================================ */}
+          <section className="case-study-section resource-2-section" id="resource-2" aria-labelledby="heading-resource-2">
+            {/* 1. WHY WE NEED RESOURCE 2 */}
+            <header className="resource-2-header">
+              <span id="heading-resource-2" className="resource-2-accent-label">
+                WHY WE NEED RESOURCE 2
+              </span>
+              <p className="resource-2-headline">
+                Resource 1 couldn’t support every user.
+              </p>
+            </header>
+
+            {/* 2. USER 2 & TWO BRANCHES */}
+            <div className="resource-2-user-flow">
+              <div className="user-2-anchor">
+                <span className="user-2-pill">USER 2</span>
+                <span className="user-2-persona-label">Less-educated adults → older people</span>
+              </div>
+
+              {/* Vertical connector down to branches */}
+              <div className="flow-vertical-connector" aria-hidden="true">
+                <svg width="12" height="24" viewBox="0 0 12 24" fill="none">
+                  <path d="M6 0V18M6 18L2 14M6 18L10 14" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              {/* Two simple system branches */}
+              <div className="user-2-branches">
+                {/* Branch 1 */}
+                <div className="user-2-branch">
+                  <span className="branch-condition">Can use digital devices but needs assistance</span>
+                  <div className="branch-arrow" aria-hidden="true">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="branch-action-tag">DIGITAL GUIDE</span>
+                </div>
+
+                {/* Vertical divider */}
+                <div className="user-2-branches-sep" aria-hidden="true" />
+
+                {/* Branch 2 */}
+                <div className="user-2-branch">
+                  <span className="branch-condition">No smartphone / keypad phone</span>
+                  <div className="branch-arrow" aria-hidden="true">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="branch-action-tag">PHYSICAL GUIDE</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. PATH 01 — DIGITAL GUIDE */}
+            <div className="guide-path-block digital-guide-block">
+              <div className="guide-path-meta">
+                <span className="guide-path-badge">PATH 01 · <span className="text-accent">DIGITAL GUIDE</span></span>
+                <p className="guide-path-sub">For users who have a digital device but need assistance.</p>
+              </div>
+
+              {/* Horizontal 3-Phone Screen Visual Sequence */}
+              <div className="digital-sequence-track">
+                {/* Step 01 · Choose language */}
+                <div className="sequence-step-card">
+                  <span className="sequence-step-num">01 · Choose language</span>
+                  <div className="device-mockup device-mockup--sequence">
+                    <div className="device-btn-power" aria-hidden="true" />
+                    <div className="device-btn-volume" aria-hidden="true" />
+                    <div className="device-screen-wrap device-screen-wrap--917">
+                      <div className="device-punch-hole" aria-hidden="true" />
+                      <img
+                        src={chooseLanguageImg}
+                        alt="Language selection screen in Margdarshak app"
+                        className="device-screen-img"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Directional arrow between 01 and 02 */}
+                <div className="sequence-track-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 28 16" fill="none">
+                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* Step 02 · Operate (Inside the provided phone base) */}
+                <div className="sequence-step-card">
+                  <span className="sequence-step-num">02 · Operate</span>
+                  <div className="device-mockup device-mockup--sequence">
+                    <div className="device-btn-power" aria-hidden="true" />
+                    <div className="device-btn-volume" aria-hidden="true" />
+                    <div className="device-screen-wrap device-screen-wrap--917">
+                      <div className="device-punch-hole" aria-hidden="true" />
+                      <img
+                        src={operateImg}
+                        alt="Operate interface with I need help to operate option"
+                        className="device-screen-img"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Directional arrow between 02 and 03 */}
+                <div className="sequence-track-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 28 16" fill="none">
+                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* Step 03 · Guide */}
+                <div className="sequence-step-card">
+                  <span className="sequence-step-num">03 · Guide</span>
+                  <div className="device-standalone-frame">
+                    <img
+                      src={bookGuideImg}
+                      alt="Nearby verified guides list interface for booking in-person guidance"
+                      className="device-standalone-img"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Single concise line describing the sequence */}
+              <p className="sequence-caption-line">
+                Choose a language <span className="caption-sep">→</span> request a guide <span className="caption-sep">→</span> connect with the nearest guide.
+              </p>
+            </div>
+
+            {/* 4. PATH 02 — PHYSICAL GUIDE */}
+            <div className="guide-path-block physical-guide-block">
+              <div className="guide-path-meta">
+                <span className="guide-path-badge">PATH 02 · <span className="text-accent">PHYSICAL GUIDE</span></span>
+                <p className="guide-path-sub">For users without a smartphone or with a basic keypad phone.</p>
+              </div>
+
+              {/* Connected Visual Flow */}
+              <div className="physical-flow-diagram" aria-label="Physical guide workflow">
+                {/* Node: USER */}
+                <div className="flow-step flow-step--user">
+                  <span className="flow-step-pill">USER</span>
+                </div>
+
+                <div className="flow-step-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 16" fill="none">
+                    <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* Node: LOCAL GOVERNMENT SPACE & Connected Subnodes */}
+                <div className="flow-step flow-step--spaces">
+                  <span className="flow-step-label">LOCAL GOVERNMENT SPACE</span>
+                  <div className="space-nodes-cluster">
+                    <span className="space-node-pill">School</span>
+                    <span className="space-node-pill">Anganwadi</span>
+                    <span className="space-node-pill">Dispensary</span>
+                    <span className="space-node-pill space-node-pill--muted">etc.</span>
+                  </div>
+                </div>
+
+                <div className="flow-step-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 16" fill="none">
+                    <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* Node: GUIDE */}
+                <div className="flow-step flow-step--guide">
+                  <span className="flow-step-pill flow-step-pill--accent">GUIDE</span>
+                </div>
+
+                <div className="flow-step-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 16" fill="none">
+                    <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* Node: ASSISTANCE */}
+                <div className="flow-step flow-step--assistance">
+                  <span className="flow-step-pill">ASSISTANCE</span>
+                </div>
+              </div>
+
+              {/* Physical Guide: Idea to Reality Comparison */}
+              <div className="physical-guide-showcase">
+                <div className="physical-guide-comparison">
+                  <div className="physical-guide-card">
+                    <img
+                      src={physicalGuideImg}
+                      alt="Physical guide concept illustration"
+                      className="physical-guide-img"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="physical-guide-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 28 16" fill="none">
+                      <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+
+                  <div className="physical-guide-card">
+                    <img
+                      src={physicalGuide2Img}
+                      alt="Physical guide real-world on-ground assistance"
+                      className="physical-guide-img"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <p className="physical-guide-caption">
+                  Ideas could be sometimes reality
+                </p>
+              </div>
+            </div>
+
+            {/* 6. CLOSING LINE */}
+            <div className="resource-2-closing">
+              <p className="resource-2-closing-quote">
+                “When the device couldn’t come to the user, we brought the <span className="text-accent">guide</span> to the user.”
+              </p>
+            </div>
+
+            <div className="case-study-extension-slot" />
+          </section>
+
+          {/* ================================================================
+              8. FUTURE SCOPE
+              ================================================================ */}
+          <section className="case-study-section future-scope-section" id="future-scope" aria-labelledby="heading-future-scope">
+            {/* Header */}
+            <header className="future-scope-header">
+              <h2 id="heading-future-scope" className="future-scope-accent-label">
+                WHAT I WANTED BUT COULDN’T
+              </h2>
+              <p className="future-scope-subtext">
+                Keypad phone <span className="caption-sep">→</span> Lightweight application <span className="caption-sep">→</span> Book a guide <span className="caption-sep">→</span> Get local assistance
+              </p>
+            </header>
+
+            {/* Visual Flow: KEYPAD PHONE -> BOOK A GUIDE -> LOCAL GUIDE */}
+            <div className="future-scope-flow" aria-label="Future keypad phone guide flow">
+              <div className="future-flow-step">
+                <span className="future-flow-pill">KEYPAD PHONE</span>
+              </div>
+
+              <div className="future-flow-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 16" fill="none">
+                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              <div className="future-flow-step">
+                <span className="future-flow-pill">BOOK A GUIDE</span>
+              </div>
+
+              <div className="future-flow-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 16" fill="none">
+                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              <div className="future-flow-step">
+                <span className="future-flow-pill future-flow-pill--accent">LOCAL GUIDE</span>
+              </div>
+            </div>
+
+            {/* Closing Line */}
+            <div className="future-scope-closing">
+              <p className="future-scope-closing-line">
+                This would extend access to users who don’t have a smartphone.
+              </p>
+            </div>
+
             <div className="case-study-extension-slot" />
           </section>
         </div>
@@ -603,6 +1248,7 @@ export const CaseStudy = memo(({ projectSlug = 'murmur', onNavigateBack }) => {
   );
 });
 
-CaseStudy.displayName = 'CaseStudy';
+CaseStudy.displayName = 'MargdarshakCaseStudy';
 
+export const MargdarshakCaseStudy = CaseStudy;
 export default CaseStudy;

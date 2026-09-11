@@ -1,12 +1,35 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 import Section from '../../components/Section/Section';
 import Container from '../../components/Container/Container';
-import { storageCache } from '../../utils/cache';
+import { storageCache, imageCache, browserCache } from '../../utils/cache';
+import v1Svg from '../../assets/V_character_exact_transparent.svg';
+import iSvg from '../../assets/I_character_transparent.svg';
+import sSvg from '../../assets/S_character_transparent.svg';
+import hSvg from '../../assets/H_character_transparent.svg';
+import v2Svg from '../../assets/V_character_transparent.svg';
+import a1Svg from '../../assets/A_character_transparent.svg';
+import rSvg from '../../assets/R_character_transparent.svg';
+import a2Svg from '../../assets/A_character_smile_transparent.svg';
 import './Footer.css';
 
+const NAME_GAME_ASSETS = [v1Svg, iSvg, sSvg, hSvg, v2Svg, a1Svg, rSvg, a2Svg];
 const DEFAULT_MESSAGE = "Hey,\n\nI love your design and would love to connect with you.";
 
-export const Footer = memo(() => {
+export const Footer = memo(({ onOpenNameGame }) => {
+  // Idle pre-cache "What Is My Name?" assets when user reaches the footer
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        imageCache.preloadAll(NAME_GAME_ASSETS);
+        browserCache.cacheUrls(NAME_GAME_ASSETS);
+      }, { timeout: 4000 });
+    } else {
+      setTimeout(() => {
+        imageCache.preloadAll(NAME_GAME_ASSETS);
+        browserCache.cacheUrls(NAME_GAME_ASSETS);
+      }, 2500);
+    }
+  }, []);
   // Contact Form state with cached session draft support
   const [formData, setFormData] = useState(() => {
     const cached = storageCache.get('footer_form_draft');
@@ -210,9 +233,43 @@ export const Footer = memo(() => {
         <div ref={footerRef} className="footer-layout">
           {/* Left Column: The Final Question */}
           <div className="footer-left">
-            <h2 className="footer-question">
+            <h2
+              className={`footer-question ${onOpenNameGame ? 'footer-question--interactive' : ''}`}
+              onClick={onOpenNameGame}
+              role={onOpenNameGame ? 'button' : undefined}
+              tabIndex={onOpenNameGame ? 0 : undefined}
+              onKeyDown={(e) => {
+                if (onOpenNameGame && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  onOpenNameGame();
+                }
+              }}
+              title={onOpenNameGame ? 'Click to play and discover my name' : undefined}
+            >
               What is my <span className="footer-name-highlight">name</span>?
             </h2>
+
+            {onOpenNameGame && (
+              <button
+                type="button"
+                className="footer-discover-link"
+                onClick={onOpenNameGame}
+                aria-label="Play interactive game to discover my name"
+              >
+                <span>Play to discover</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            )}
           </div>
 
           {/* Right Column: Contact Form with Typewritten Textarea */}
@@ -355,7 +412,15 @@ export const Footer = memo(() => {
             >
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
-            , by yours truly
+            , by{' '}
+            <button
+              type="button"
+              onClick={onOpenNameGame}
+              className="footer-name-easter-egg"
+              aria-label="Discover who created this portfolio"
+            >
+              yours truly
+            </button>
           </p>
         </div>
       </Container>

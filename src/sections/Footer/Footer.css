@@ -58,6 +58,52 @@
   color: var(--color-accent, #E2A9F1);
 }
 
+.footer-question--interactive {
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-question--interactive:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+}
+
+.footer-question--interactive:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.footer-discover-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-4, 16px);
+  background: transparent;
+  border: 1px solid rgba(226, 169, 241, 0.3);
+  color: var(--color-accent, #E2A9F1);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.footer-discover-link:hover {
+  background: rgba(226, 169, 241, 0.1);
+  border-color: var(--color-accent, #E2A9F1);
+  transform: translateX(4px);
+}
+
+.footer-discover-link:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 2px;
+}
+
 /* --------------------------------------------------------------------------
    Right Column: Contact Form
    -------------------------------------------------------------------------- */
@@ -329,4 +375,29 @@
   vertical-align: -1.5px;
   margin: 0 2px;
   stroke: currentColor;
+}
+
+.footer-name-easter-egg {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer-name-easter-egg:hover {
+  color: var(--color-accent, #E2A9F1);
+  text-decoration-style: solid;
+}
+
+.footer-name-easter-egg:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 2px;
+  border-radius: 2px;
 }

@@ -19,11 +19,14 @@ export const Navbar = memo(() => {
     if (e) e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    const isCaseStudy =
+    const isSubpage =
       window.location.pathname.startsWith('/case-study') ||
-      window.location.hash.startsWith('#/case-study');
+      window.location.hash.startsWith('#/case-study') ||
+      window.location.pathname.startsWith('/what-is-my-name') ||
+      window.location.hash.startsWith('#/what-is-my-name') ||
+      window.location.pathname.startsWith('/name');
 
-    if (isCaseStudy) {
+    if (isSubpage) {
       const targetHash = targetId && targetId !== 'hero' ? `#${targetId}` : '';
       window.history.pushState({}, '', `/${targetHash}`);
       window.dispatchEvent(new PopStateEvent('popstate'));
@@ -69,11 +72,14 @@ export const Navbar = memo(() => {
       // Toggle subtle border when scrolled
       setIsScrolled(window.scrollY > 20);
 
-      const isCaseStudy =
+      const isSubpage =
         window.location.pathname.startsWith('/case-study') ||
-        window.location.hash.startsWith('#/case-study');
+        window.location.hash.startsWith('#/case-study') ||
+        window.location.pathname.startsWith('/what-is-my-name') ||
+        window.location.hash.startsWith('#/what-is-my-name') ||
+        window.location.pathname.startsWith('/name');
 
-      if (isCaseStudy) {
+      if (isSubpage) {
         setActiveSection(null);
         return;
       }
