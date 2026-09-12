@@ -1,5 +1,6 @@
 import React, { useEffect, memo, useCallback } from 'react';
 import Container from '../../components/Container/Container';
+import { Button } from '../../components/Button/Button';
 import group30Img from '../../components/Pictures/Projects/Margdarshak/Group 30.jpg';
 import group31Img from '../../components/Pictures/Projects/Margdarshak/Group 31.jpg';
 import group32Img from '../../components/Pictures/Projects/Margdarshak/Group 32.jpg';
@@ -58,6 +59,7 @@ const CASE_STUDIES_METADATA = {
   murmur: {
     title: 'Murmur',
     tagline: 'Making government schemes easier to access.',
+    prototypeUrl: 'https://www.figma.com/proto/oKryn0vKJGZ8oZw63x1drX/Margdarshak01?node-id=2285-32311&t=nLrxO20iXKaRMBne-0&scaling=scale-down&content-scaling=fixed&page-id=1972%3A1741&starting-point-node-id=2285%3A32298&show-proto-sidebar=1',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -78,6 +80,7 @@ const CASE_STUDIES_METADATA = {
   margdarshak: {
     title: 'Margdarshak',
     tagline: 'Making government schemes easier to access.',
+    prototypeUrl: 'https://www.figma.com/proto/oKryn0vKJGZ8oZw63x1drX/Margdarshak01?node-id=2285-32311&t=nLrxO20iXKaRMBne-0&scaling=scale-down&content-scaling=fixed&page-id=1972%3A1741&starting-point-node-id=2285%3A32298&show-proto-sidebar=1',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -98,6 +101,7 @@ const CASE_STUDIES_METADATA = {
   default: {
     title: 'Project Case Study',
     tagline: 'Making government schemes easier to access.',
+    prototypeUrl: 'https://www.figma.com/proto/oKryn0vKJGZ8oZw63x1drX/Margdarshak01?node-id=2285-32311&t=nLrxO20iXKaRMBne-0&scaling=scale-down&content-scaling=fixed&page-id=1972%3A1741&starting-point-node-id=2285%3A32298&show-proto-sidebar=1',
     roleSummary: (
       <>
         Product <span className="case-study-text-accent">Designer</span> &{' '}
@@ -819,20 +823,20 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </thead>
                 <tbody>
                   <tr>
-                    <td data-label="Core pain points">Finding relevant schemes takes too much time and effort.</td>
-                    <td data-label="How we solved it">Recommended schemes based on state, occupation, and annual salary.</td>
+                    <td data-label="Core pain points"><span className="table-accent-regular">Finding relevant schemes</span> takes too much time and effort.</td>
+                    <td data-label="How we solved it"><span className="table-weight-regular">Recommended schemes</span> based on state, occupation, and annual salary.</td>
                   </tr>
                   <tr>
-                    <td data-label="Core pain points">Schemes are scattered across too many platforms.</td>
-                    <td data-label="How we solved it">All schemes brought together on one platform.</td>
+                    <td data-label="Core pain points"><span className="table-accent-regular">Schemes are scattered</span> across too many platforms.</td>
+                    <td data-label="How we solved it"><span className="table-weight-regular">All schemes</span> brought together on <span className="table-weight-regular">one platform</span>.</td>
                   </tr>
                   <tr>
-                    <td data-label="Core pain points">Too much research is required before applying.</td>
-                    <td data-label="How we solved it">Recommended schemes reduce the research and cognitive load.</td>
+                    <td data-label="Core pain points"><span className="table-accent-regular">Too much research</span> is required before applying.</td>
+                    <td data-label="How we solved it">Recommended schemes <span className="table-weight-regular">reduce</span> the research and <span className="table-weight-regular">cognitive load</span>.</td>
                   </tr>
                   <tr>
-                    <td data-label="Core pain points">Government portals are difficult to navigate and users can lose progress.</td>
-                    <td data-label="How we solved it">Simple, easy-to-use interface.</td>
+                    <td data-label="Core pain points"><span className="table-accent-regular">Government portals are difficult</span> to navigate and users can lose progress.</td>
+                    <td data-label="How we solved it">Simple, <span className="table-weight-regular">easy-to-use interface</span>.</td>
                   </tr>
                 </tbody>
               </table>
@@ -882,7 +886,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
               ================================================================ */}
           <section className="case-study-section user-testing-section" id="user-testing" aria-labelledby="label-user-testing">
             <div className="user-testing-grid">
-              {/* LEFT SIDE: Extremely simple observation */}
+              {/* LEFT SIDE: Extremely simple observation & Prototype CTA */}
               <div className="user-testing-content">
                 <span id="label-user-testing" className="user-testing-heading">
                   DURING USER TESTING, WE FOUND
@@ -890,6 +894,23 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 <p className="user-testing-main-text">
                   People struggled to find the right information on their documents.
                 </p>
+                <div className="user-testing-prototype-wrap">
+                  <Button
+                    variant="accent"
+                    href={meta.prototypeUrl || '#'}
+                    className="case-study-prototype-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View prototype"
+                    icon={
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="#000000" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    }
+                  >
+                    View Prototype
+                  </Button>
+                </div>
               </div>
 
               {/* RIGHT SIDE — PHONE MOCKUP & WE SOLVED IT CALLOUT */}

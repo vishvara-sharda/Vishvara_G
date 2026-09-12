@@ -59,6 +59,24 @@ const OBSERVATIONS_DATA = [
   }
 ];
 
+/**
+ * Helper to highlight any occurrence of "Vishvara" in accent color
+ */
+const renderWithAccent = (text) => {
+  if (typeof text !== 'string') return text;
+  const parts = text.split(/(Vishvara)/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, index) =>
+    part === 'Vishvara' ? (
+      <span key={index} className="observation-highlight-accent">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+};
+
 export const ObservationCard = memo(({
   id,
   source,
@@ -79,7 +97,7 @@ export const ObservationCard = memo(({
 
       {/* Main Quote */}
       <blockquote className="observation-card-quote">
-        <p>{quote}</p>
+        <p>{renderWithAccent(quote)}</p>
       </blockquote>
 
       {/* Bottom Section: Author info on left, photo on right */}
