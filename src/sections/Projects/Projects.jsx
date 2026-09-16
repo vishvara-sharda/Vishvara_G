@@ -27,15 +27,27 @@ const projectsData = [
     qaBlocks: [
       {
         question: 'What was the problem?',
-        answer: 'New mothers face postpartum emotional isolation, while partners struggle to understand how to help.'
+        answer: (
+          <>
+            <em>New mothers can feel emotionally disconnected</em>, while partners struggle to stay connected during this transition.
+          </>
+        )
       },
       {
         question: 'What was the action I took?',
-        answer: 'Conducted qualitative field interviews with young families and designed a calm hardware-software ecosystem.'
+        answer: (
+          <>
+            <em>Talked to new families</em> and explored what was getting in the way of their connection.
+          </>
+        )
       },
       {
         question: 'How did I solve it?',
-        answer: 'Created ambient tangible companions and an empathetic mobile app using no-shame interaction logic.'
+        answer: (
+          <>
+            <em>Designed a paired physical companion</em> that helps partners feel connected through shared rituals, touch, and distance.
+          </>
+        )
       }
     ]
   },
@@ -55,15 +67,15 @@ const projectsData = [
     qaBlocks: [
       {
         question: 'What was the problem?',
-        answer: 'One concise line explaining the problem.'
+        answer: 'Government schemes were difficult to find and access.'
       },
       {
         question: 'What was the action I took?',
-        answer: 'A concise description of what I did.'
+        answer: 'I researched users, their context, and the barriers they faced.'
       },
       {
         question: 'How did I solve it?',
-        answer: 'A concise explanation of the approach/system.'
+        answer: 'I designed a system combining digital access with human guidance.'
       }
     ]
   }
