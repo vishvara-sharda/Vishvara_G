@@ -597,6 +597,11 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
 
   const handleBack = useCallback((e) => {
     if (e) e.preventDefault();
+    if (typeof window !== 'undefined') {
+      delete window.__murmur_cta_active;
+      window.sessionStorage.removeItem('murmur_cta_active');
+      window.sessionStorage.removeItem('murmur_cta_message');
+    }
     if (onNavigateBack) {
       onNavigateBack();
     } else {
@@ -618,8 +623,9 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
     storageCache.remove('footer_form_draft');
     storageCache.remove('contact_prefill');
 
-    // 2. Set temporary one-time context specifically for this CTA interaction
+    // 2. Set temporary context specifically for this CTA interaction
     if (typeof window !== 'undefined') {
+      window.__murmur_cta_active = true;
       window.sessionStorage.setItem('murmur_cta_active', 'true');
       window.sessionStorage.setItem('murmur_cta_message', murmurMessage);
     }
@@ -633,7 +639,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
     window.dispatchEvent(new PopStateEvent('popstate'));
 
     // 5. Smooth scroll down to contact section
-    setTimeout(() => {
+    const scrollToContact = () => {
       const contactElement = document.getElementById('contact');
       if (contactElement) {
         const navHeight = 60;
@@ -643,7 +649,11 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
           behavior: 'smooth'
         });
       }
-    }, 80);
+    };
+
+    setTimeout(scrollToContact, 60);
+    setTimeout(scrollToContact, 200);
+    setTimeout(scrollToContact, 400);
   }, []);
 
   return (

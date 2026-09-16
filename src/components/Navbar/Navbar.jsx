@@ -19,6 +19,10 @@ export const Navbar = memo(() => {
     if (e) e.preventDefault();
     setIsMobileMenuOpen(false);
 
+    if (targetId === 'contact') {
+      window.dispatchEvent(new CustomEvent('nav_contact_click'));
+    }
+
     const isSubpage =
       window.location.pathname.startsWith('/case-study') ||
       window.location.hash.startsWith('#/case-study') ||

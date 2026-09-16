@@ -11,6 +11,17 @@ const NAME_GAME_ASSETS = [calciferPng, sataoPng, sadijinPng];
 const DEFAULT_MESSAGE = "Hey, I love your design thinking and would love to connect.";
 const MURMUR_CTA_MESSAGE = "Hey, I really liked the Murmur case study. I’d love to talk about the business side of the idea and how you approached solving the problem.";
 
+const isMurmurCtaTriggered = () => {
+  if (typeof window === 'undefined') return false;
+  const urlParams = new URLSearchParams(window.location.search);
+  return Boolean(
+    window.__murmur_cta_active ||
+    window.sessionStorage.getItem('murmur_cta_active') === 'true' ||
+    urlParams.get('cta') === 'murmur' ||
+    window.history.state?.fromMurmurCta
+  );
+};
+
 export const Footer = memo(({ onOpenNameGame }) => {
   // Idle pre-cache "What Is My Name?" assets when user reaches the footer
   useEffect(() => {
@@ -30,36 +41,23 @@ export const Footer = memo(({ onOpenNameGame }) => {
   // Contact Form state: Conditionally populates Murmur CTA message only when explicitly triggered
   const [formData, setFormData] = useState(() => {
     // 1. Check if explicitly triggered by the Murmur business CTA interaction
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const isMurmurQuery = urlParams.get('cta') === 'murmur';
-      const isMurmurSession = window.sessionStorage.getItem('murmur_cta_active') === 'true';
-      const isMurmurHistory = Boolean(window.history.state?.fromMurmurCta);
-
-      if (isMurmurQuery || isMurmurSession || isMurmurHistory) {
-        // One-time consumption: immediately clear so normal visits never see this
-        window.sessionStorage.removeItem('murmur_cta_active');
-        window.sessionStorage.removeItem('murmur_cta_message');
-        if (isMurmurQuery) {
-          window.history.replaceState({}, '', window.location.pathname + '#contact');
-        }
-        return {
-          name: '',
-          email: '',
-          message: MURMUR_CTA_MESSAGE,
-          subject: 'Murmur — Business Discussion'
-        };
-      }
+    if (isMurmurCtaTriggered()) {
+      return {
+        name: '',
+        email: '',
+        message: MURMUR_CTA_MESSAGE,
+        subject: 'Murmur — Business Discussion'
+      };
     }
 
     // 2. Default state: when opened normally, from nav, or from any other project
-    // Ensure any stale draft containing the Murmur CTA message is ignored
+    // Preserve custom user input if they typed a draft, otherwise provide DEFAULT_MESSAGE
     const cached = storageCache.get('footer_form_draft');
     if (cached && (cached.name || cached.email || (cached.message && cached.message !== MURMUR_CTA_MESSAGE))) {
       return {
         name: cached.name || '',
         email: cached.email || '',
-        message: cached.message === MURMUR_CTA_MESSAGE ? '' : cached.message,
+        message: cached.message || DEFAULT_MESSAGE,
         subject: cached.subject || ''
       };
     }
@@ -67,7 +65,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
     return {
       name: '',
       email: '',
-      message: '',
+      message: DEFAULT_MESSAGE,
       subject: ''
     };
   });
@@ -89,135 +87,96 @@ export const Footer = memo(({ onOpenNameGame }) => {
     }
   }, [formData]);
 
-  // Typewriter state for textarea
-  const isMurmurActive = Boolean(formData.message === MURMUR_CTA_MESSAGE);
-  const hasCustomMessage = Boolean(
-    formData.message &&
-    formData.message !== DEFAULT_MESSAGE &&
-    !isMurmurActive
-  );
-  const [hasStartedTyping, setHasStartedTyping] = useState(isMurmurActive || hasCustomMessage);
-  const [hasCompletedTyping, setHasCompletedTyping] = useState(isMurmurActive || hasCustomMessage);
-  const userInteractedRef = useRef(isMurmurActive || hasCustomMessage);
-  const footerRef = useRef(null);
-  const timerRef = useRef(null);
-
-  // Listen for Murmur CTA event dispatched while already mounted
+  // Listen for Murmur CTA event, Navbar direct contact click, or popstate
   useEffect(() => {
     const handleMurmurCta = (e) => {
       const msg = e.detail?.message || MURMUR_CTA_MESSAGE;
-      userInteractedRef.current = true;
-      setHasStartedTyping(true);
-      setHasCompletedTyping(true);
+      const subj = e.detail?.subject || 'Murmur — Business Discussion';
       setFormData((prev) => ({
         ...prev,
         message: msg,
-        subject: e.detail?.subject || 'Murmur — Business Discussion'
+        subject: subj
       }));
-      // Clean up one-time session flags immediately
+    };
+
+    const handleNavContact = () => {
       if (typeof window !== 'undefined') {
+        delete window.__murmur_cta_active;
         window.sessionStorage.removeItem('murmur_cta_active');
         window.sessionStorage.removeItem('murmur_cta_message');
+      }
+      setFormData((prev) => ({
+        ...prev,
+        message: DEFAULT_MESSAGE,
+        subject: ''
+      }));
+    };
+
+    const handlePopState = () => {
+      if (isMurmurCtaTriggered()) {
+        setFormData((prev) => ({
+          ...prev,
+          message: MURMUR_CTA_MESSAGE,
+          subject: 'Murmur — Business Discussion'
+        }));
       }
     };
 
     window.addEventListener('murmur_cta_click', handleMurmurCta);
     window.addEventListener('prefill_contact', handleMurmurCta);
+    window.addEventListener('nav_contact_click', handleNavContact);
+    window.addEventListener('popstate', handlePopState);
+
+    // If Murmur CTA is triggered on mount, ensure message is set and schedule cleanup
+    if (isMurmurCtaTriggered()) {
+      setFormData((prev) => ({
+        ...prev,
+        message: MURMUR_CTA_MESSAGE,
+        subject: 'Murmur — Business Discussion'
+      }));
+
+      const cleanupTimer = setTimeout(() => {
+        if (typeof window !== 'undefined') {
+          delete window.__murmur_cta_active;
+          window.sessionStorage.removeItem('murmur_cta_active');
+          window.sessionStorage.removeItem('murmur_cta_message');
+
+          if (window.location.search.includes('cta=murmur')) {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('cta');
+            window.history.replaceState(
+              { fromMurmurCta: false },
+              '',
+              url.pathname + (url.search ? url.search : '') + (url.hash || '#contact')
+            );
+          }
+        }
+      }, 600);
+
+      return () => {
+        clearTimeout(cleanupTimer);
+        window.removeEventListener('murmur_cta_click', handleMurmurCta);
+        window.removeEventListener('prefill_contact', handleMurmurCta);
+        window.removeEventListener('nav_contact_click', handleNavContact);
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+
     return () => {
       window.removeEventListener('murmur_cta_click', handleMurmurCta);
       window.removeEventListener('prefill_contact', handleMurmurCta);
+      window.removeEventListener('nav_contact_click', handleNavContact);
+      window.removeEventListener('popstate', handlePopState);
     };
   }, []);
-
-  // Trigger typewriter inside textarea when section enters viewport
-  useEffect(() => {
-    // If message is Murmur CTA message, do not overwrite with typewriter
-    if (formData.message === MURMUR_CTA_MESSAGE) {
-      setHasStartedTyping(true);
-      setHasCompletedTyping(true);
-      userInteractedRef.current = true;
-      return;
-    }
-
-    const prefersReducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-      if (!formData.message) {
-        setFormData((prev) => ({ ...prev, message: DEFAULT_MESSAGE }));
-      }
-      setHasStartedTyping(true);
-      setHasCompletedTyping(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasStartedTyping) {
-          setHasStartedTyping(true);
-        }
-      },
-      {
-        threshold: 0.25,
-        rootMargin: '0px 0px -40px 0px'
-      }
-    );
-
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasStartedTyping, formData.message]);
-
-  // Typewriter execution inside textarea for DEFAULT_MESSAGE
-  useEffect(() => {
-    if (!hasStartedTyping || hasCompletedTyping) return;
-    if (formData.message === MURMUR_CTA_MESSAGE) return;
-
-    let charIndex = 0;
-    timerRef.current = setInterval(() => {
-      // If user started editing or focused, stop the animation immediately
-      if (userInteractedRef.current) {
-        clearInterval(timerRef.current);
-        setHasCompletedTyping(true);
-        return;
-      }
-
-      charIndex += 1;
-      setFormData((prev) => ({
-        ...prev,
-        message: DEFAULT_MESSAGE.slice(0, charIndex)
-      }));
-
-      if (charIndex >= DEFAULT_MESSAGE.length) {
-        clearInterval(timerRef.current);
-        setHasCompletedTyping(true);
-      }
-    }, 28);
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [hasStartedTyping, hasCompletedTyping, formData.message]);
 
   // Handle user inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'message') {
-      userInteractedRef.current = true;
-    }
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
-  };
-
-  const handleTextareaFocus = () => {
-    userInteractedRef.current = true;
   };
 
   // Form Validation
@@ -287,7 +246,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
       if (response.ok && (data.success === 'true' || data.success === true)) {
         setStatus('success');
         setStatusMessage('Thank you! Your message has been sent.');
-        setFormData({ name: '', email: '', message: '', subject: '' });
+        setFormData({ name: '', email: '', message: DEFAULT_MESSAGE, subject: '' });
         storageCache.remove('footer_form_draft');
       } else {
         throw new Error(data.message || 'Submission failed');
@@ -310,7 +269,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
       className="footer-section"
     >
       <Container>
-        <div ref={footerRef} className="footer-layout">
+        <div className="footer-layout">
           {/* Left Column: The Final Question */}
           <div className="footer-left">
             <h2
@@ -421,7 +380,6 @@ export const Footer = memo(({ onOpenNameGame }) => {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  onFocus={handleTextareaFocus}
                   placeholder="Write your message…"
                   disabled={status === 'sending'}
                   className={`footer-textarea ${errors.message ? 'is-invalid' : ''}`}
