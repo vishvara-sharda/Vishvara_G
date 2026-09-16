@@ -608,23 +608,31 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
   const handleLetsTalkClick = useCallback((e) => {
     if (e) e.preventDefault();
 
+    const murmurMessage = "Hey, I really liked the Murmur case study. I’d love to talk about the business side of the idea and how you approached solving the problem.";
     const prefillData = {
-      message: "Hey, I really liked the Murmur case study. I’d love to talk about the business side of the idea and how you approached solving the problem.",
+      message: murmurMessage,
       subject: "Murmur — Business Discussion"
     };
 
-    // Store prefill data in storageCache for contact form consumption
-    storageCache.set('contact_prefill', prefillData, 1000 * 60 * 30);
-    storageCache.set('footer_form_draft', prefillData, 1000 * 60 * 60);
+    // 1. Clear any persistent draft so standard visits are never contaminated
+    storageCache.remove('footer_form_draft');
+    storageCache.remove('contact_prefill');
 
-    // Notify any active Footer listener
+    // 2. Set temporary one-time context specifically for this CTA interaction
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('murmur_cta_active', 'true');
+      window.sessionStorage.setItem('murmur_cta_message', murmurMessage);
+    }
+
+    // 3. Dispatch specific event to notify any already mounted Contact listener
+    window.dispatchEvent(new CustomEvent('murmur_cta_click', { detail: prefillData }));
     window.dispatchEvent(new CustomEvent('prefill_contact', { detail: prefillData }));
 
-    // Navigate to Contact section on the main page
-    window.history.pushState({}, '', '/#contact');
+    // 4. Navigate to Contact with temporary query parameter identifying the Murmur CTA
+    window.history.pushState({ fromMurmurCta: true }, '', '/?cta=murmur#contact');
     window.dispatchEvent(new PopStateEvent('popstate'));
 
-    // Smooth scroll down to contact section
+    // 5. Smooth scroll down to contact section
     setTimeout(() => {
       const contactElement = document.getElementById('contact');
       if (contactElement) {

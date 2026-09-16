@@ -8,7 +8,8 @@ import sadijinPng from '../../assets/sadijin.png';
 import './Footer.css';
 
 const NAME_GAME_ASSETS = [calciferPng, sataoPng, sadijinPng];
-const DEFAULT_MESSAGE = "Hey,\n\nI love your design and would love to connect with you.";
+const DEFAULT_MESSAGE = "Hey, I love your design thinking and would love to connect.";
+const MURMUR_CTA_MESSAGE = "Hey, I really liked the Murmur case study. I’d love to talk about the business side of the idea and how you approached solving the problem.";
 
 export const Footer = memo(({ onOpenNameGame }) => {
   // Idle pre-cache "What Is My Name?" assets when user reaches the footer
@@ -25,23 +26,44 @@ export const Footer = memo(({ onOpenNameGame }) => {
       }, 2500);
     }
   }, []);
-  // Contact Form state with cached session draft and prefill support
+
+  // Contact Form state: Conditionally populates Murmur CTA message only when explicitly triggered
   const [formData, setFormData] = useState(() => {
-    const prefill = typeof window !== 'undefined' ? storageCache.get('contact_prefill') : null;
-    if (prefill && prefill.message) {
-      storageCache.remove('contact_prefill');
+    // 1. Check if explicitly triggered by the Murmur business CTA interaction
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isMurmurQuery = urlParams.get('cta') === 'murmur';
+      const isMurmurSession = window.sessionStorage.getItem('murmur_cta_active') === 'true';
+      const isMurmurHistory = Boolean(window.history.state?.fromMurmurCta);
+
+      if (isMurmurQuery || isMurmurSession || isMurmurHistory) {
+        // One-time consumption: immediately clear so normal visits never see this
+        window.sessionStorage.removeItem('murmur_cta_active');
+        window.sessionStorage.removeItem('murmur_cta_message');
+        if (isMurmurQuery) {
+          window.history.replaceState({}, '', window.location.pathname + '#contact');
+        }
+        return {
+          name: '',
+          email: '',
+          message: MURMUR_CTA_MESSAGE,
+          subject: 'Murmur — Business Discussion'
+        };
+      }
+    }
+
+    // 2. Default state: when opened normally, from nav, or from any other project
+    // Ensure any stale draft containing the Murmur CTA message is ignored
+    const cached = storageCache.get('footer_form_draft');
+    if (cached && (cached.name || cached.email || (cached.message && cached.message !== MURMUR_CTA_MESSAGE))) {
       return {
-        name: prefill.name || '',
-        email: prefill.email || '',
-        message: prefill.message,
-        subject: prefill.subject || ''
+        name: cached.name || '',
+        email: cached.email || '',
+        message: cached.message === MURMUR_CTA_MESSAGE ? '' : cached.message,
+        subject: cached.subject || ''
       };
     }
 
-    const cached = storageCache.get('footer_form_draft');
-    if (cached && (cached.name || cached.email || cached.message)) {
-      return cached;
-    }
     return {
       name: '',
       email: '',
@@ -49,54 +71,82 @@ export const Footer = memo(({ onOpenNameGame }) => {
       subject: ''
     };
   });
+
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [statusMessage, setStatusMessage] = useState('');
 
-  // Persist form draft on edits
+  // Persist form draft on edits (never persist the Murmur CTA message as a permanent draft)
   useEffect(() => {
-    if (formData.name || formData.email || (formData.message && formData.message !== DEFAULT_MESSAGE)) {
+    if (
+      formData.name ||
+      formData.email ||
+      (formData.message &&
+        formData.message !== DEFAULT_MESSAGE &&
+        formData.message !== MURMUR_CTA_MESSAGE)
+    ) {
       storageCache.set('footer_form_draft', formData, 1000 * 60 * 60); // 1 hour TTL
     }
   }, [formData]);
 
   // Typewriter state for textarea
-  const hasCustomMessage = Boolean(formData.message && formData.message !== DEFAULT_MESSAGE);
-  const [hasStartedTyping, setHasStartedTyping] = useState(hasCustomMessage);
-  const [hasCompletedTyping, setHasCompletedTyping] = useState(hasCustomMessage);
-  const userInteractedRef = useRef(hasCustomMessage);
+  const isMurmurActive = Boolean(formData.message === MURMUR_CTA_MESSAGE);
+  const hasCustomMessage = Boolean(
+    formData.message &&
+    formData.message !== DEFAULT_MESSAGE &&
+    !isMurmurActive
+  );
+  const [hasStartedTyping, setHasStartedTyping] = useState(isMurmurActive || hasCustomMessage);
+  const [hasCompletedTyping, setHasCompletedTyping] = useState(isMurmurActive || hasCustomMessage);
+  const userInteractedRef = useRef(isMurmurActive || hasCustomMessage);
   const footerRef = useRef(null);
   const timerRef = useRef(null);
 
-  // Listen for prefill events dispatched while mounted
+  // Listen for Murmur CTA event dispatched while already mounted
   useEffect(() => {
-    const handlePrefill = (e) => {
-      const detail = e.detail || (typeof window !== 'undefined' ? storageCache.get('contact_prefill') : null);
-      if (detail && detail.message) {
-        userInteractedRef.current = true;
-        setHasStartedTyping(true);
-        setHasCompletedTyping(true);
-        setFormData((prev) => ({
-          ...prev,
-          message: detail.message,
-          subject: detail.subject || prev.subject || ''
-        }));
-        storageCache.remove('contact_prefill');
+    const handleMurmurCta = (e) => {
+      const msg = e.detail?.message || MURMUR_CTA_MESSAGE;
+      userInteractedRef.current = true;
+      setHasStartedTyping(true);
+      setHasCompletedTyping(true);
+      setFormData((prev) => ({
+        ...prev,
+        message: msg,
+        subject: e.detail?.subject || 'Murmur — Business Discussion'
+      }));
+      // Clean up one-time session flags immediately
+      if (typeof window !== 'undefined') {
+        window.sessionStorage.removeItem('murmur_cta_active');
+        window.sessionStorage.removeItem('murmur_cta_message');
       }
     };
 
-    window.addEventListener('prefill_contact', handlePrefill);
-    return () => window.removeEventListener('prefill_contact', handlePrefill);
+    window.addEventListener('murmur_cta_click', handleMurmurCta);
+    window.addEventListener('prefill_contact', handleMurmurCta);
+    return () => {
+      window.removeEventListener('murmur_cta_click', handleMurmurCta);
+      window.removeEventListener('prefill_contact', handleMurmurCta);
+    };
   }, []);
 
   // Trigger typewriter inside textarea when section enters viewport
   useEffect(() => {
+    // If message is Murmur CTA message, do not overwrite with typewriter
+    if (formData.message === MURMUR_CTA_MESSAGE) {
+      setHasStartedTyping(true);
+      setHasCompletedTyping(true);
+      userInteractedRef.current = true;
+      return;
+    }
+
     const prefersReducedMotion =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      setFormData((prev) => ({ ...prev, message: DEFAULT_MESSAGE }));
+      if (!formData.message) {
+        setFormData((prev) => ({ ...prev, message: DEFAULT_MESSAGE }));
+      }
       setHasStartedTyping(true);
       setHasCompletedTyping(true);
       return;
@@ -121,11 +171,12 @@ export const Footer = memo(({ onOpenNameGame }) => {
     return () => {
       observer.disconnect();
     };
-  }, [hasStartedTyping]);
+  }, [hasStartedTyping, formData.message]);
 
-  // Typewriter execution inside textarea
+  // Typewriter execution inside textarea for DEFAULT_MESSAGE
   useEffect(() => {
     if (!hasStartedTyping || hasCompletedTyping) return;
+    if (formData.message === MURMUR_CTA_MESSAGE) return;
 
     let charIndex = 0;
     timerRef.current = setInterval(() => {
@@ -151,7 +202,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [hasStartedTyping, hasCompletedTyping]);
+  }, [hasStartedTyping, hasCompletedTyping, formData.message]);
 
   // Handle user inputs
   const handleInputChange = (e) => {
