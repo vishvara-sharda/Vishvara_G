@@ -280,9 +280,18 @@
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.project-box-logo-img {
+.project-box-logo .cached-image-wrapper {
   max-width: 85%;
   max-height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.project-box-logo-img {
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;

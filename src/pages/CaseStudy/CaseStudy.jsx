@@ -5,7 +5,8 @@ import group30Img from '../../components/Pictures/Projects/Margdarshak/Group 30.
 import group31Img from '../../components/Pictures/Projects/Margdarshak/Group 31.jpg';
 import group32Img from '../../components/Pictures/Projects/Margdarshak/Group 32.jpg';
 import group33Img from '../../components/Pictures/Projects/Margdarshak/Group 33.jpg';
-import group34Img from '../../components/Pictures/Projects/Margdarshak/Group 34.jpg';
+import group35Img from '../../components/Pictures/Projects/Margdarshak/Group 35.png';
+import group36Img from '../../components/Pictures/Projects/Margdarshak/Group 36.png';
 import ideationImg from '../../components/Pictures/Projects/Margdarshak/Ideation .png';
 import ideationImg2 from '../../components/Pictures/Projects/Margdarshak/1.png';
 import affinityMappingImg from '../../components/Pictures/Projects/Margdarshak/affinity mapping.png';
@@ -19,6 +20,7 @@ import bookGuideImg from '../../components/Pictures/Projects/Margdarshak/book gu
 import chooseLanguageImg from '../../components/Pictures/Projects/Margdarshak/choose-language.svg';
 import physicalGuideImg from '../../components/Pictures/Projects/Margdarshak/physical guide.png';
 import physicalGuide2Img from '../../components/Pictures/Projects/Margdarshak/physical guide 2.png';
+import margdarshakLogo from '../../components/Pictures/Projects/Margdarshak/Margdarshak Logo.png';
 import { imageCache, browserCache } from '../../utils/cache';
 import './CaseStudy.css';
 
@@ -27,7 +29,8 @@ const MARGDARSHAK_ROLE_IMAGES = [
   { src: group31Img, alt: 'Field research team discussion' },
   { src: group32Img, alt: 'Community immersion and user interaction' },
   { src: group33Img, alt: 'On-ground user study and feedback interview' },
-  { src: group34Img, alt: 'In-home interview with community members' }
+  { src: group35Img, alt: 'Contextual field inquiry and community engagement' },
+  { src: group36Img, alt: 'User research observation and in-depth interview' }
 ];
 
 export const MARGDARSHAK_ALL_ASSETS = [
@@ -35,7 +38,8 @@ export const MARGDARSHAK_ALL_ASSETS = [
   group31Img,
   group32Img,
   group33Img,
-  group34Img,
+  group35Img,
+  group36Img,
   affinityMappingImg,
   ideationImg,
   ideationImg2,
@@ -48,7 +52,8 @@ export const MARGDARSHAK_ALL_ASSETS = [
   operateImg,
   bookGuideImg,
   physicalGuideImg,
-  physicalGuide2Img
+  physicalGuide2Img,
+  margdarshakLogo
 ];
 
 /**
@@ -58,22 +63,27 @@ export const MARGDARSHAK_ALL_ASSETS = [
 const CASE_STUDIES_METADATA = {
   murmur: {
     title: 'Murmur',
-    tagline: 'Making government schemes easier to access.',
+    tagline: 'A kinder journey, together · Postpartum care & emotional connection ecosystem for new parents.',
     prototypeUrl: 'https://www.figma.com/proto/oKryn0vKJGZ8oZw63x1drX/Margdarshak01?node-id=2285-32311&t=nLrxO20iXKaRMBne-0&scaling=scale-down&content-scaling=fixed&page-id=1972%3A1741&starting-point-node-id=2285%3A32298&show-proto-sidebar=1',
     roleSummary: (
       <>
-        Product <span className="case-study-text-accent">Designer</span> &{' '}
-        <span className="case-study-text-accent">Lead</span> UX Researcher in a team of 9
+        <span className="case-study-text-accent murmur-text-accent" style={{ color: '#F8C363' }}>Lead</span> Product{' '}
+        <span className="case-study-text-accent murmur-text-accent" style={{ color: '#F8C363' }}>Designer</span> & UX Researcher in a team of 9
       </>
     ),
     roleImages: MARGDARSHAK_ROLE_IMAGES,
     problem: (
       <>
-        Families with{' '}
-        <span className="case-study-text-accent">
-          low income background struggle to save up for future and emergencies
+        During pregnancy and postpartum,{' '}
+        <span className="case-study-text-accent murmur-text-accent" style={{ color: '#F8C363' }}>
+          mothers and families often struggle to know what she needs and how to support her
         </span>
-        , so how can we help them get emergency funds?
+        .{' '}
+        Most of the time, support feels like{' '}
+        <span className="case-study-text-accent murmur-text-accent" style={{ color: '#F8C363' }}>
+          telling her what to do, rather than listening to what she needs
+        </span>
+        .
       </>
     )
   },
@@ -121,7 +131,15 @@ const CASE_STUDIES_METADATA = {
   }
 };
 
+import { MurmurCaseStudy } from './MurmurCaseStudy';
+
+export { MurmurCaseStudy };
+
 export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) => {
+  if (projectSlug?.toLowerCase() === 'murmur') {
+    return <MurmurCaseStudy onNavigateBack={onNavigateBack} />;
+  }
+
   const meta = CASE_STUDIES_METADATA[projectSlug?.toLowerCase()] || CASE_STUDIES_METADATA.margdarshak || CASE_STUDIES_METADATA.default;
 
   // Set document title
@@ -171,7 +189,14 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
 
         {/* Case Study Hero Header */}
         <header className="case-study-header">
-          <h1 className="case-study-project-title">{meta.title}</h1>
+          <div className="case-study-title-row">
+            <h1 className="case-study-project-title">{meta.title}</h1>
+            <img
+              src={margdarshakLogo}
+              alt="Margdarshak Logo"
+              className="case-study-header-logo"
+            />
+          </div>
           <div className="case-study-meta-row">
             <p className="case-study-tagline">{meta.tagline}</p>
           </div>

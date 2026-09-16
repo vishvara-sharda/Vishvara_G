@@ -43,6 +43,14 @@ const parseRoute = () => {
     return { page: 'what-is-my-name', projectSlug: null };
   }
 
+  if (pathname.startsWith('/murmur') || hash.startsWith('#/murmur') || hash === '#murmur') {
+    return { page: 'case-study', projectSlug: 'murmur' };
+  }
+
+  if (pathname.startsWith('/margdarshak') || hash.startsWith('#/margdarshak') || hash === '#margdarshak') {
+    return { page: 'case-study', projectSlug: 'margdarshak' };
+  }
+
   return { page: 'home', projectSlug: null };
 };
 

@@ -18,24 +18,31 @@
 class ImageCacheManager {
   constructor() {
     this.cache = new Map();
+    this.pendingLoads = new Map();
   }
 
   has(src) {
+    if (!src) return false;
     return this.cache.has(src);
   }
 
   get(src) {
+    if (!src) return null;
     return this.cache.get(src);
   }
 
   set(src, imgElement) {
+    if (!src) return;
     this.cache.set(src, imgElement);
   }
 
-  preload(src, idle = true) {
+  preload(src, idle = false) {
     if (!src || typeof window === 'undefined') return Promise.resolve(null);
     if (this.cache.has(src)) {
       return Promise.resolve(this.cache.get(src));
+    }
+    if (this.pendingLoads.has(src)) {
+      return this.pendingLoads.get(src);
     }
 
     const loadTask = () =>
@@ -43,41 +50,41 @@ class ImageCacheManager {
         const img = new Image();
         img.src = src;
 
-        // When decoded or loaded, cache it
-        if ('decode' in img) {
-          img.decode()
-            .then(() => {
-              this.cache.set(src, img);
-              resolve(img);
-            })
-            .catch(() => {
-              // Fallback to standard onload
-              img.onload = () => {
-                this.cache.set(src, img);
-                resolve(img);
-              };
-              img.onerror = () => resolve(null);
-            });
-        } else {
-          img.onload = () => {
+        const onDone = (success) => {
+          this.pendingLoads.delete(src);
+          if (success) {
             this.cache.set(src, img);
             resolve(img);
-          };
-          img.onerror = () => resolve(null);
+          } else {
+            resolve(null);
+          }
+        };
+
+        if ('decode' in img) {
+          img.decode()
+            .then(() => onDone(true))
+            .catch(() => {
+              img.onload = () => onDone(true);
+              img.onerror = () => onDone(false);
+            });
+        } else {
+          img.onload = () => onDone(true);
+          img.onerror = () => onDone(false);
         }
       });
 
-    if (idle && 'requestIdleCallback' in window) {
-      return new Promise((resolve) => {
-        window.requestIdleCallback(() => resolve(loadTask()), { timeout: 3000 });
-      });
-    }
+    const promise = (idle && 'requestIdleCallback' in window)
+      ? new Promise((resolve) => {
+          window.requestIdleCallback(() => resolve(loadTask()), { timeout: 2000 });
+        })
+      : loadTask();
 
-    return loadTask();
+    this.pendingLoads.set(src, promise);
+    return promise;
   }
 
-  preloadAll(sources = [], idle = true) {
-    return Promise.all(sources.map((src) => this.preload(src, idle)));
+  preloadAll(sources = [], idle = false) {
+    return Promise.all(sources.filter(Boolean).map((src) => this.preload(src, idle)));
   }
 }
 
@@ -138,19 +145,37 @@ export const browserCache = {
 
   async cacheUrls(urls = []) {
     if (!this.supported || !urls.length) return;
-    const task = async () => {
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        await cache.addAll(urls.filter(Boolean));
-      } catch (err) {
-        // Ignore offline or CORS asset errors
-      }
-    };
+    const cleanUrls = urls.filter(Boolean);
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      await Promise.allSettled(
+        cleanUrls.map(async (url) => {
+          try {
+            const match = await cache.match(url);
+            if (!match) {
+              const res = await fetch(url, { mode: 'no-cors' });
+              if (res && (res.ok || res.type === 'opaque')) {
+                await cache.put(url, res);
+              }
+            }
+          } catch {
+            // Ignore individual fetch errors
+          }
+        })
+      );
+    } catch {
+      // Ignore cache open error
+    }
+  },
 
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      window.requestIdleCallback(task, { timeout: 4000 });
-    } else {
-      setTimeout(task, 2500);
+  async has(url) {
+    if (!this.supported || !url) return false;
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      const match = await cache.match(url);
+      return Boolean(match);
+    } catch {
+      return false;
     }
   }
 };

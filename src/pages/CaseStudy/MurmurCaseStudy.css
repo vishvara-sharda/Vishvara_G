@@ -1,0 +1,2016 @@
+/* ==========================================================================
+   Murmur Case Study Styles
+   Editorial design system aligned with portfolio tokens
+   ========================================================================== */
+
+.murmur-case-study-page {
+  --color-accent: #F8C363;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background, #000000);
+  color: var(--color-text-primary, #FFFAFA);
+  padding-top: var(--space-9, 64px);
+  padding-bottom: var(--space-10, 80px);
+  box-sizing: border-box;
+}
+
+/* Problem statement accent styling matching Murmur yellow logo */
+.murmur-case-study-page .case-study-text-accent,
+.murmur-case-study-page .murmur-text-accent {
+  color: #F8C363 !important;
+}
+
+/* Back bar & breadcrumbs */
+.murmur-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8, 48px);
+  padding-bottom: var(--space-4, 16px);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.murmur-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  font-family: var(--font-family-primary);
+  font-size: var(--type-body-small-size, 0.875rem);
+  font-weight: 500;
+  color: var(--color-text-secondary, #F2F0EF);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  letter-spacing: var(--type-label-letter-spacing, 0.04em);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.murmur-back-btn:hover {
+  color: #F8C363;
+  transform: translateX(-3px);
+}
+
+.murmur-back-btn:focus-visible {
+  outline: 2px solid #F8C363;
+  outline-offset: 4px;
+}
+
+.murmur-category-badge {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-label-size, 0.8125rem);
+  font-weight: 500;
+  letter-spacing: var(--type-label-letter-spacing, 0.04em);
+  text-transform: uppercase;
+  color: #F8C363;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.murmur-sunflower-icon-wrap {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.murmur-sunflower-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Header */
+.murmur-header {
+  margin-bottom: var(--space-9, 64px);
+}
+
+.murmur-project-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3, 12px);
+}
+
+.murmur-project-title {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-display-size, clamp(2.5rem, 5.5vw, 4.25rem));
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.04em;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFFFFF 70%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.murmur-header-logo-wrap {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.murmur-header-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(248, 195, 99, 0.25));
+}
+
+.murmur-tagline {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.125rem, 1.8vw, 1.45rem);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: 0.015em;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+  margin: 0;
+}
+
+/* Content layout */
+.murmur-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9, 64px);
+  width: 100%;
+}
+
+
+
+/* ==========================================================================
+   Section 01: The Problem & What We Designed
+   ========================================================================== */
+.murmur-designed-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  margin-top: var(--space-7, 40px);
+  width: 100%;
+}
+
+.murmur-designed-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h4-size, clamp(1.15rem, 1.25vw + 0.5rem, 1.45rem));
+  font-weight: 400; /* Regular */
+  font-style: italic;
+  line-height: var(--line-height-subheading, 1.25);
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+
+.murmur-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5, 24px);
+  width: 100%;
+}
+
+.murmur-video-card {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-card, 16px);
+  overflow: hidden;
+  background-color: #0c0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.murmur-video-card:hover {
+  border-color: rgba(248, 195, 99, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(248, 195, 99, 0.08);
+}
+
+.murmur-designed-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  border-radius: inherit;
+  background-color: #000000;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .murmur-videos-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 16px);
+  }
+}
+
+.murmur-why-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h1-size, clamp(2.25rem, 4.5vw, 4rem));
+  font-weight: 700; /* Bold */
+  text-align: center;
+  color: #FFFFFF;
+  margin: var(--space-9, 64px) auto var(--space-2, 8px) auto;
+  width: 100%;
+  line-height: var(--line-height-tight, 1.1);
+  letter-spacing: -0.02em;
+}
+
+.murmur-start-heading {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  font-weight: 400;
+  font-style: italic;
+  text-align: left;
+  align-self: flex-start;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
+  margin: var(--space-3, 12px) 0 var(--space-2, 8px) 0;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.murmur-role-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: var(--space-7, 40px);
+  width: 100%;
+}
+
+/* ==========================================================================
+   Section 02: User Research
+   ========================================================================== */
+
+
+/* Field research gallery: all 6 images kept across viewport */
+.murmur-field-gallery-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin: 20px 0 32px 0;
+}
+
+.murmur-field-photo-card {
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  aspect-ratio: 4 / 3;
+}
+
+.murmur-field-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .murmur-field-gallery-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}
+
+/* ==========================================================================
+   Section 03 & 04: Research Synthesis & Postpartum Experience Hierarchy
+   ========================================================================== */
+
+
+.postpartum-experience-map {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: var(--space-4, 16px);
+}
+
+/* 1. Parent Node: Solid White Background, Yellow Accent Text, Rounded Pill, Minimal */
+.postpartum-parent-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.postpartum-parent-badge {
+  background-color: #FFFFFF;
+  border-radius: 9999px;
+  padding: 14px 44px;
+  box-shadow: none; /* Clean & minimal, no glow, no unnecessary shadow */
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postpartum-parent-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.95rem, 1.25vw, 1.18rem);
+  font-weight: 700; /* Bold display typography */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1;
+  text-align: center;
+}
+
+/* 2. Desktop Connector (Tree Branching into 3 Columns) */
+.postpartum-connector-desktop {
+  width: 100%;
+  height: 52px;
+  margin: 0 0 28px 0;
+  display: block;
+}
+
+.postpartum-tree-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 2b. Mobile Connector (Hidden on Desktop) */
+.postpartum-connector-mobile {
+  display: none !important;
+}
+
+@media (max-width: 899px) {
+  .postpartum-connector-desktop {
+    display: none !important;
+  }
+
+  .postpartum-connector-mobile {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0 24px 0;
+    color: #F8C363;
+  }
+}
+
+.postpartum-stem-line {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(248, 195, 99, 0.45);
+}
+
+.postpartum-stem-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #F8C363;
+  margin-top: -2px;
+}
+
+/* 3. Three Dimensions Grid (True 3-Column Layout on Desktop, 1-Column on Mobile) */
+.postpartum-dimensions-grid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .postpartum-dimensions-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: clamp(24px, 3.5vw, 48px) !important;
+    align-items: stretch !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .postpartum-dimensions-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+}
+
+/* Dimension Container: White background with black text, equal heights & widths */
+.postpartum-dimension-col {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: none;
+  border-radius: 16px;
+  padding: clamp(24px, 2.8vw, 36px) clamp(20px, 2.4vw, 30px);
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+/* Partner container yellow highlight */
+.postpartum-dimension-col.postpartum-dim-partner {
+  background-color: #F8C363;
+}
+
+.postpartum-dim-partner .postpartum-dimension-divider {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.postpartum-dim-partner .postpartum-pain-dash {
+  color: #000000;
+}
+
+.postpartum-dimension-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.postpartum-partner-tagline {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h6-size, clamp(0.85rem, 1.1vw, 1rem));
+  font-weight: 300; /* Thin */
+  font-style: italic;
+  color: #3A3A3A; /* Dark grey */
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+
+
+.postpartum-dimension-heading {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #000000;
+  margin: 0;
+  line-height: 1.15;
+  text-align: center;
+  width: 100%;
+}
+
+/* Simple Subtle Divider */
+.postpartum-dimension-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 16px 0 20px 0;
+}
+
+/* Pain Points List: Clean research list with yellow dash */
+.postpartum-pain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.postpartum-pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+}
+
+.postpartum-pain-dash {
+  color: #D48D1E;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.postpartum-pain-text {
+  font-family: var(--font-family-primary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #111111;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Mobile Inter-dimension Divider (strictly hidden on desktop) */
+.postpartum-mobile-divider {
+  display: none !important;
+}
+
+@media (max-width: 899px) {
+  .postpartum-mobile-divider {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 0;
+    color: #F8C363;
+  }
+
+  .postpartum-mobile-stem-line {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(248, 195, 99, 0.4);
+    display: block;
+  }
+
+  .postpartum-mobile-arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #F8C363;
+    margin-top: 2px;
+  }
+
+  .postpartum-dimension-col {
+    padding: 24px 20px;
+  }
+}
+
+/* Concluding Editorial Takeaway: Clean, subtle note, no heavy card */
+.postpartum-takeaway-block {
+  margin-top: 56px;
+  padding: 24px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  text-align: center;
+}
+
+.postpartum-takeaway-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  font-weight: 350;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 auto;
+  max-width: 780px;
+}
+
+.postpartum-takeaway-highlight {
+  color: #F8C363;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Proposed Solutions Grid: Mobile App, Watch App, Desk Companion
+   ========================================================================== */
+.murmur-solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  width: 100%;
+  margin-top: var(--space-6, 32px);
+}
+
+.murmur-solution-card {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.murmur-solution-card:hover {
+  border-color: rgba(248, 195, 99, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.murmur-solution-image-wrap {
+  width: 100%;
+  height: clamp(260px, 26vw, 360px);
+  background-color: #0c0c0e;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.murmur-solution-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.murmur-solution-caption {
+  padding: 12px 16px;
+  font-family: var(--font-family-primary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--color-disabled, #C4C4C4);
+  background: rgba(10, 10, 10, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 899px) {
+  .murmur-solutions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .murmur-solution-image-wrap {
+    height: 240px;
+  }
+}
+
+/* Image containers */
+/* ==========================================================================
+   Bento Visual Showcase: The Solution We Chose
+   Tightly fitted research artifacts with zero wasted space + Full-Screen Lightbox
+   ========================================================================== */
+.murmur-chosen-section {
+  width: 100%;
+  margin-top: clamp(40px, 5vh, 64px);
+  box-sizing: border-box;
+}
+
+.murmur-chosen-intro {
+  max-width: 980px;
+  margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   First App Concept Flow:
+   Her health + mood → AI companion → Father (Desktop)
+   Her health + mood ↓ AI companion ↓ Guides & nudges father to help (Mobile)
+   ========================================================================== */
+.murmur-app-concept-flow {
+  margin: 18px 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.murmur-flow-track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.murmur-flow-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: 100px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.murmur-flow-node:hover {
+  background: rgba(255, 255, 255, 0.92);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.murmur-flow-node-ai {
+  background: #FFFFFF;
+  border: 1.5px solid #F8C363;
+  box-shadow: 0 4px 16px rgba(248, 195, 99, 0.2);
+}
+
+.murmur-flow-node-ai:hover {
+  background: #FFFDF8;
+  border-color: #F8C363;
+  box-shadow: 0 6px 20px rgba(248, 195, 99, 0.35);
+}
+
+.murmur-flow-node-ai .murmur-flow-title {
+  color: #000000;
+  font-weight: 600;
+}
+
+.murmur-flow-node-ai .murmur-flow-ai-word {
+  color: #D48D1E;
+  font-weight: 700;
+}
+
+.murmur-flow-title {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.murmur-node-desktop-title {
+  display: inline;
+}
+
+.murmur-node-mobile-title {
+  display: none;
+}
+
+.murmur-flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F8C363;
+  font-size: 1.25rem;
+  font-weight: 400;
+  user-select: none;
+  line-height: 1;
+}
+
+.murmur-arrow-desktop {
+  display: inline-block;
+}
+
+.murmur-arrow-mobile {
+  display: none;
+}
+
+.murmur-flow-support-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.925rem, 1.05vw, 1rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  max-width: 840px;
+}
+
+.murmur-flow-accent {
+  color: #F8C363;
+  font-weight: 500;
+}
+
+.murmur-flow-ai-word {
+  color: #F8C363;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .murmur-flow-track {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .murmur-flow-node {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 12px 18px;
+    justify-content: flex-start;
+  }
+
+  .murmur-flow-title {
+    white-space: normal;
+  }
+
+  .murmur-node-desktop-title {
+    display: none;
+  }
+
+  .murmur-node-mobile-title {
+    display: inline;
+  }
+
+  .murmur-flow-arrow {
+    padding-left: 18px;
+    font-size: 1.15rem;
+  }
+
+  .murmur-arrow-desktop {
+    display: none;
+  }
+
+  .murmur-arrow-mobile {
+    display: inline-block;
+  }
+
+  .murmur-flow-support-text {
+    margin-top: 4px;
+    padding-left: 2px;
+  }
+}
+
+/* Bento Wall Canvas */
+.murmur-bento-wall {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+/* Individual Rows: Grid columns calibrated to image aspect ratios */
+.murmur-bento-row {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* Row 1: research IA (1.774) + IA4 (1.364) */
+.murmur-bento-row-1 {
+  grid-template-columns: 1.774fr 1.364fr;
+}
+
+/* Row 2: IA (1.500) + Ia 3 (1.899) */
+.murmur-bento-row-2 {
+  grid-template-columns: 1.500fr 1.899fr;
+}
+
+/* Row 3: IAher (0.910) + iahim (1.621) + idea4 (0.940) */
+.murmur-bento-row-3 {
+  grid-template-columns: 0.910fr 1.621fr 0.940fr;
+}
+
+/* --------------------------------------------------------------------------
+   Bento Tiles: Tight fitting frames hugging each image directly
+   -------------------------------------------------------------------------- */
+.murmur-bento-tile {
+  background: #0E0E0E;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              background-color 0.2s ease;
+}
+
+.murmur-bento-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(248, 195, 99, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background: #141414;
+}
+
+.murmur-bento-tile:focus-visible {
+  border-color: #F8C363;
+  box-shadow: 0 0 0 2px rgba(248, 195, 99, 0.35);
+}
+
+/* Aspect-ratio locks for zero empty container space */
+.bento-tile-research-ia {
+  aspect-ratio: 7264 / 4096;
+}
+
+.bento-tile-ia4 {
+  aspect-ratio: 903 / 662;
+}
+
+.bento-tile-ia {
+  aspect-ratio: 1536 / 1024;
+}
+
+.bento-tile-ia3 {
+  aspect-ratio: 5408 / 2848;
+}
+
+.bento-tile-ia-her {
+  aspect-ratio: 3728 / 4096;
+}
+
+.bento-tile-ia-him {
+  aspect-ratio: 4096 / 2526;
+}
+
+.bento-tile-idea4 {
+  aspect-ratio: 10570 / 11241;
+}
+
+/* Image inside tile: completely fills the tile without cropping or distortion */
+.murmur-bento-tile .cached-image-wrapper {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 6px;
+}
+
+.murmur-bento-tile img,
+.murmur-bento-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Viewport Sizing (approx. one viewport visual moment)
+   -------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+  .murmur-chosen-section {
+    min-height: calc(100svh - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Small Screens (<= 700px):
+   Natural stacked & paired responsive arrangement with full readability
+   -------------------------------------------------------------------------- */
+@media (max-width: 700px) {
+  .murmur-bento-wall {
+    gap: 12px;
+  }
+
+  .murmur-bento-row {
+    gap: 12px;
+  }
+
+  .murmur-bento-row-1,
+  .murmur-bento-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .murmur-bento-row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bento-tile-idea4 {
+    grid-column: 1 / -1;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .murmur-bento-tile {
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .murmur-bento-row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-tile-idea4 {
+    max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Full-Screen Inspection Lightbox Modal
+   ========================================================================== */
+.murmur-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(8, 8, 8, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 36px);
+  box-sizing: border-box;
+  animation: murmurLightboxFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: zoom-out;
+}
+
+@keyframes murmurLightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.murmur-lightbox-close {
+  position: fixed;
+  top: clamp(16px, 3vh, 28px);
+  right: clamp(16px, 3vw, 32px);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100000;
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.murmur-lightbox-close:hover {
+  background: rgba(248, 195, 99, 0.15);
+  border-color: #F8C363;
+  color: #F8C363;
+  transform: scale(1.08);
+}
+
+.murmur-lightbox-content {
+  max-width: 94vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.murmur-lightbox-img {
+  max-width: 94vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+  animation: murmurLightboxZoomIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes murmurLightboxZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bottom CTA / Return */
+.murmur-footer-nav {
+  padding: 48px 0 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.murmur-return-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.murmur-return-btn:hover {
+  transform: translateY(-2px);
+  background: #F8C363;
+}
+
+/* ==========================================================================
+   Turning Point Section: It failed.
+   ========================================================================== */
+.murmur-turning-point-section {
+  padding-top: clamp(16px, 4vh, 60px);
+  margin-top: clamp(16px, 3vh, 32px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.murmur-turning-header {
+  margin-bottom: clamp(36px, 5vh, 56px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.murmur-turning-title {
+  font-family: var(--font-family-primary);
+  font-size: clamp(3.25rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+
+.murmur-turning-why {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h3-size, clamp(1.4rem, 2.2vw, 1.85rem));
+  font-weight: 500;
+  font-style: italic;
+  color: #F8C363;
+  margin: 10px 0 0 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.murmur-turning-understood {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 14px 0 0 0;
+  text-align: center;
+}
+
+.murmur-turning-content-flow {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 6.5vh, 76px);
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.murmur-turning-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Part 1: Key Findings / Realization */
+.murmur-turning-problem-line {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h3-size, clamp(1.45rem, 2.3vw, 2.05rem));
+  line-height: 1.35;
+  text-align: center !important;
+  width: 100%;
+  display: block;
+  margin: 0 auto 0 auto;
+}
+
+.murmur-problem-bold {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.murmur-problem-regular {
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.murmur-turning-found-h4 {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+  line-height: 1.45;
+  text-align: center !important;
+  display: block;
+  width: 100%;
+  margin: 10px auto 24px auto;
+}
+
+.murmur-turning-missing-group {
+  margin: clamp(48px, 6vh, 72px) 0 clamp(100px, 16vh, 180px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.murmur-turning-missing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+.murmur-turning-what-was-h1 {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.45rem, 4.8vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #FFFFFF;
+  margin: 0;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.murmur-turning-missing-h1 {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.45rem, 4.8vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #FFFFFF;
+  margin: 0;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.murmur-turning-track-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 clamp(14px, 2.5vw, 36px);
+  position: relative;
+  overflow: visible;
+  min-width: 40px;
+}
+
+.murmur-turning-blank-line {
+  width: 100%;
+  height: 2px;
+  background-color: #F8C363;
+  border-radius: 2px;
+  margin-top: calc(clamp(1.45rem, 4.8vw, 3.8rem) * 0.84);
+  flex-shrink: 0;
+}
+
+.murmur-turning-flow-svg {
+  width: clamp(40px, 5.5vw, 68px);
+  height: clamp(550px, 80vh, 850px);
+  display: block;
+  overflow: visible;
+  flex-shrink: 0;
+  margin-top: -1px;
+}
+
+.murmur-turning-connection-h3 {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h3-size, clamp(1.4rem, 2.2vw, 1.95rem));
+  font-weight: 500;
+  font-style: italic;
+  color: #F8C363;
+  margin: 6px 0 0 0;
+  text-align: center;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.murmur-turning-connection-sub {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h4-size, clamp(1.1rem, 1.35vw + 0.4rem, 1.4rem));
+  font-weight: 300;
+  font-style: italic;
+  color: #FFFFFF;
+  margin: 14px 0 0 0;
+  text-align: center;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.murmur-turning-connection-context {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.88rem, 1.15vw, 1.05rem);
+  font-weight: 300;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+  margin: 8px 0 0 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .murmur-turning-missing-row {
+    align-items: flex-start;
+  }
+
+  .murmur-turning-track-col {
+    margin: 0 clamp(8px, 2vw, 14px);
+  }
+
+  .murmur-turning-flow-svg {
+    height: clamp(480px, 75vh, 650px);
+    width: 38px;
+  }
+
+  .murmur-turning-connection-sub {
+    white-space: normal;
+    max-width: min(340px, 86vw);
+    font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  }
+
+  .murmur-turning-connection-context {
+    white-space: normal;
+    max-width: min(320px, 84vw);
+    font-size: 0.85rem;
+  }
+}
+
+.murmur-turning-solve-group {
+  margin: clamp(48px, 6vh, 72px) 0 24px 0;
+  width: 100%;
+}
+
+.murmur-turning-solve-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.28em;
+  width: 100%;
+}
+
+.murmur-solve-prefix {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.murmur-solve-we-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+.murmur-turning-solve-h2 {
+  margin: 0;
+  padding: 0;
+  display: block;
+  text-align: left;
+}
+
+.murmur-turning-solve-sub {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.95rem, 1.1vw + 0.35rem, 1.18rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #F8C363;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: clamp(8px, 1.2vh, 12px) 0 0 0;
+  text-align: left;
+  opacity: 0.95;
+}
+
+@media (max-width: 640px) {
+  .murmur-turning-solve-sub {
+    font-size: clamp(0.88rem, 2.8vw, 1.02rem);
+    line-height: 1.3;
+  }
+}
+
+/* Full View Concepts Showcase under solve group */
+.murmur-solve-images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+  width: 100%;
+  margin-top: clamp(24px, 3.5vh, 36px);
+  margin-bottom: clamp(20px, 3vh, 32px);
+  transform: translateX(-clamp(16px, 2.5vw, 36px));
+}
+
+.murmur-solve-image-card {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.murmur-solve-image-card:hover {
+  border-color: rgba(248, 195, 99, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.murmur-solve-image-wrap {
+  width: 100%;
+  height: clamp(240px, 35vh, 420px);
+  background-color: #0c0c0e;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.murmur-solve-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.murmur-solve-image-card:hover .murmur-solve-img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 640px) {
+  .murmur-solve-images-grid {
+    gap: 12px;
+    margin-top: 18px;
+    margin-bottom: 32px;
+    transform: translateX(-6px);
+  }
+
+  .murmur-solve-image-wrap {
+    height: clamp(140px, 24vh, 200px);
+  }
+}
+
+/* ==========================================================================
+   How It Works & Why These Features Section
+   ========================================================================== */
+.murmur-how-it-works-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(28px, 4vh, 48px) 0 clamp(40px, 6vh, 64px) 0;
+  text-align: center;
+}
+
+.murmur-how-it-works-group {
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.murmur-how-grid {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  column-gap: 0;
+  row-gap: 0;
+  align-items: baseline;
+}
+
+.murmur-how-line {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.15);
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-style: normal;
+}
+
+.murmur-how-secondary {
+  grid-column: 2;
+  color: #F8C363 !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+}
+
+@media (max-width: 640px) {
+  .murmur-how-it-works-section {
+    padding: clamp(20px, 3vh, 36px) 0 clamp(32px, 4.5vh, 48px) 0;
+  }
+
+  .murmur-how-line {
+    font-size: clamp(1.1rem, 3.6vw, 1.35rem);
+  }
+
+  .murmur-how-it-works-group {
+    max-width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+}
+
+/* ==========================================================================
+   Murmur Feature Story Cards
+   Each feature gets its own standalone editorial product story card.
+   3-Column structure on desktop: Feature image / name | How it works? | Why this?
+   Spacious, architectural, restrained, with Murmur dark background.
+   ========================================================================== */
+
+.murmur-feature-cards-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(72px, 10vh, 120px) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vh, 64px);
+  box-sizing: border-box;
+}
+
+/* Individual Feature Card */
+.murmur-feature-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(280px, 320px) 1fr 1fr;
+  align-items: stretch;
+  gap: clamp(24px, 3vw, 44px);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: clamp(32px, 4.5vh, 48px) clamp(28px, 3.5vw, 44px);
+  box-sizing: border-box;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.murmur-feature-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+/* Card Columns */
+.murmur-card-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Subtle vertical dividing lines between columns inside the card */
+.murmur-card-col:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  padding-right: clamp(20px, 2.5vw, 36px);
+}
+
+.murmur-card-col:not(:first-child) {
+  padding-left: clamp(4px, 1vw, 12px);
+}
+
+/* Why this section - very light yellow editorial background */
+.murmur-card-col-why {
+  background: rgba(248, 195, 99, 0.055);
+  border: 1px solid rgba(248, 195, 99, 0.16);
+  border-radius: 16px;
+  padding: clamp(20px, 2.2vw, 28px) clamp(18px, 2vw, 24px) !important;
+  box-sizing: border-box;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.murmur-card-col-why:hover {
+  background: rgba(248, 195, 99, 0.075);
+  border-color: rgba(248, 195, 99, 0.25);
+}
+
+.murmur-card-col-why .murmur-card-col-label {
+  color: #F8C363;
+  opacity: 0.92;
+}
+
+.murmur-card-col-how {
+  border-right: none !important;
+}
+
+/* Column Header & Labels */
+.murmur-card-col-header {
+  margin-bottom: clamp(14px, 2vh, 20px);
+  width: 100%;
+}
+
+.murmur-card-col-label {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.74rem, 0.82vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  display: block;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+/* Feature Name on bottom of image */
+.murmur-card-feature-bottom-meta {
+  margin-top: clamp(14px, 2vh, 18px);
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.murmur-card-feature-name {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+  font-weight: 300;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-align: center;
+  width: 100%;
+}
+
+/* Feature Visual Buttons & Wraps */
+.murmur-card-col-feature .murmur-feature-img-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 18px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 320px;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.murmur-card-col-feature .murmur-feature-img-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.murmur-card-col-feature .murmur-feature-img-btn:hover,
+.murmur-card-col-feature .murmur-feature-img-btn:focus,
+.murmur-card-col-feature .murmur-feature-img-btn:active,
+.murmur-card-col-feature .murmur-feature-img-btn:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* 2-Stacked Gallery for Card 02 & Card 03 */
+.murmur-feature-gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0;
+}
+
+.murmur-feature-gallery-btn {
+  width: 100%;
+  max-width: 320px;
+}
+
+.murmur-feature-video-item {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.murmur-feature-img-wrap {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  isolation: isolate;
+  outline: none;
+  border: none;
+  background: transparent !important;
+}
+
+.murmur-feature-video-wrap {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background-color: #000000;
+  display: block;
+}
+
+.murmur-feature-img {
+  width: 100%;
+  height: 100%;
+  max-height: 185px;
+  object-fit: cover !important;
+  border-radius: 18px !important;
+  display: block;
+  outline: none;
+  border: none;
+}
+
+.murmur-feature-video {
+  width: 100%;
+  height: 100%;
+  max-height: 185px;
+  object-fit: cover !important;
+  border-radius: 18px !important;
+  display: block;
+  outline: none;
+  border: none;
+}
+
+/* Body text in How it works & Why this */
+.murmur-card-body-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.68;
+  text-align: left;
+  white-space: pre-line;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.murmur-card-how-text {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.murmur-card-why-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.murmur-card-body-text strong,
+.murmur-card-body-text b {
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* Responsive Behavior: Mobile & Tablet Stacking */
+@media (max-width: 880px) {
+  .murmur-feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: clamp(28px, 4vh, 36px) clamp(20px, 3.5vw, 28px);
+  }
+
+  .murmur-card-col:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding-right: 0;
+    padding-bottom: 28px;
+  }
+
+  .murmur-card-col:not(:first-child) {
+    padding-left: 0;
+  }
+
+  .murmur-card-col-feature .murmur-feature-img-btn,
+  .murmur-feature-gallery-grid,
+  .murmur-feature-gallery-btn,
+  .murmur-feature-img-wrap,
+  .murmur-feature-video-item,
+  .murmur-feature-video-wrap,
+  .murmur-card-feature-bottom-meta {
+    max-width: 100%;
+  }
+
+  .murmur-card-col-how {
+    border-bottom: none !important;
+    padding-bottom: 8px !important;
+  }
+
+  .murmur-card-body-text {
+    padding-top: 0;
+  }
+}
+
+/* ==========================================================================
+   Murmur: The Technicalities
+   Side-by-side technical diagrams (Mother & Partner figures)
+   Spacious editorial presentation with rounded cards & lightbox inspection
+   ========================================================================== */
+
+.murmur-technicalities-section {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(44px, 6.5vh, 76px) auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.murmur-technicalities-header {
+  margin-top: -30px;
+  margin-bottom: clamp(24px, 3.5vh, 38px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.murmur-technicalities-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.15);
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+
+.murmur-technicalities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.murmur-technical-card {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.murmur-technical-card:hover {
+  border-color: rgba(248, 195, 99, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(248, 195, 99, 0.06);
+}
+
+.murmur-technical-card:focus-visible {
+  outline: 2px solid #F8C363;
+  outline-offset: 4px;
+}
+
+.murmur-technical-img-wrap {
+  width: 100%;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background-color: #000000;
+  display: block;
+}
+
+.murmur-technical-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1024 / 1536;
+  object-fit: cover !important;
+  border-radius: 18px !important;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .murmur-technicalities-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ==========================================================================
+   Murmur: Business CTA Section
+   Spacious, confident, editorial closing CTA
+   Centered horizontally with Murmur accent (#F8C363) button focus
+   ========================================================================== */
+
+.murmur-business-cta-section {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(96px, 14vh, 160px) auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.murmur-business-cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.murmur-business-cta-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3.2vw, 2.5rem));
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin: 0 0 clamp(24px, 3.5vh, 36px) 0;
+  text-align: center;
+  max-width: 580px;
+}
+
+.murmur-business-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F8C363;
+  color: #0A0A0C;
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 9999px;
+  border: 1px solid rgba(248, 195, 99, 0.5);
+  padding: clamp(12px, 1.5vh, 15px) clamp(38px, 4vw, 50px);
+  min-width: 120px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(248, 195, 99, 0.15);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              background-color 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.murmur-business-cta-btn:hover {
+  background-color: #f9cb79;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 24px rgba(248, 195, 99, 0.32);
+}
+
+.murmur-business-cta-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.murmur-business-cta-btn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 4px;
+}
+
+
+

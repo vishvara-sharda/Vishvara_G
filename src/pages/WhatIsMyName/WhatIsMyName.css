@@ -1,7 +1,7 @@
 /* ==========================================================================
-   WhatIsMyName — Interactive Memory Matching Game Page
-   Palette: Portfolio Background (#000000), Primary Text (#FFFAFA), Accent (#E2A9F1)
-   Typography: MADE Okine Sans filled typography in accent color for name slots
+   WhatIsMyName — 6-Block Memory Matching Game
+   Palette: Background (#000000), Primary Text (#FFFAFA), Accent (#E2A9F1)
+   Typography: MADE Okine Sans
    ========================================================================== */
 
 /* Full-viewport portfolio dark background */
@@ -17,7 +17,7 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  padding: 24px 20px 60px;
+  padding: 24px 20px 48px;
   box-sizing: border-box;
   user-select: none;
   -webkit-user-select: none;
@@ -28,11 +28,11 @@
    -------------------------------------------------------------------------- */
 .name-nav-bar {
   width: 100%;
-  max-width: 800px;
+  max-width: 720px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: clamp(24px, 4vw, 40px);
+  margin-bottom: clamp(20px, 4vh, 48px);
   padding: 0 4px;
 }
 
@@ -80,117 +80,36 @@
 }
 
 /* --------------------------------------------------------------------------
-   Main Game Container
+   Main Game Container — Centered vertically
    -------------------------------------------------------------------------- */
 .name-game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
+  max-width: 780px;
+  margin: auto 0;
+  padding: 12px 0 24px;
+}
+
+.memory-unified-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* --------------------------------------------------------------------------
-   1. PAGE INTRO: Title & 8 Name Slots
+   Unified 6-Block Grid (3 columns x 2 rows, not separated) — Generous Size
    -------------------------------------------------------------------------- */
-.name-header-section {
-  text-align: center;
-  margin-bottom: clamp(32px, 5vw, 48px);
-  width: 100%;
-}
-
-.name-game-title {
-  font-family: var(--font-family-primary, 'MADE Okine Sans', sans-serif);
-  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
-  font-weight: 400; /* Regular Okine */
-  letter-spacing: 0.16em;
-  color: var(--color-text-primary, #FFFAFA);
-  margin: 0 0 clamp(20px, 3.5vw, 28px);
-  text-transform: uppercase;
-}
-
-/* 8 Letter Slots Row: _ _ _ _ _ _ _ _ */
-.name-slots-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(8px, 2vw, 18px);
-  width: 100%;
-  padding: 0 4px;
-}
-
-.name-slot-box {
-  position: relative;
-  width: clamp(32px, 7.5vw, 48px);
-  height: clamp(44px, 9.5vw, 62px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.name-slot-box.is-filled {
-  border-bottom-color: var(--color-accent, #E2A9F1);
-}
-
-.name-slot-dash {
-  color: rgba(255, 255, 255, 0.25);
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
-  font-weight: 400;
-  line-height: 1;
-  transform: translateY(-2px);
-}
-
-/* Refined Filled Letter Typography (Signature Portfolio Accent Color) */
-.name-slot-letter-filled {
-  font-family: var(--font-family-primary, 'MADE Okine Sans', sans-serif);
-  font-size: clamp(1.6rem, 4.2vw, 2.35rem);
-  font-weight: 600;
-  line-height: 1;
-  color: var(--color-accent, #E2A9F1); /* Signature Accent Color */
-  letter-spacing: 0.02em;
-  display: inline-block;
-  animation: slotLandSettle 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
-}
-
-@keyframes slotLandSettle {
-  0% {
-    transform: scale(0.65);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.15);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Subtle glow across completed name */
-.name-slots-row.is-completed-name .name-slot-letter-filled {
-  filter: drop-shadow(0 0 14px rgba(226, 169, 241, 0.65));
-  transition: filter 0.6s ease;
-}
-
-/* --------------------------------------------------------------------------
-   2. MEMORY MATCHING GAME: 16 Cards (4x4 Grid)
-   -------------------------------------------------------------------------- */
-.memory-grid-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.memory-grid-4x4 {
+.memory-cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(10px, 2.2vw, 16px);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 3vw, 32px);
   width: 100%;
-  max-width: 440px;
+  max-width: 660px;
+  margin: 0 auto;
   perspective: 1000px;
 }
 
@@ -199,13 +118,13 @@
   position: relative;
   aspect-ratio: 1 / 1;
   width: 100%;
-  min-width: 60px;
-  min-height: 60px;
+  min-width: 120px;
+  min-height: 120px;
   background: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
-  border-radius: clamp(12px, 2.5vw, 18px);
+  border-radius: clamp(18px, 3vw, 26px);
   outline: none;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -228,12 +147,12 @@
   border-radius: inherit;
   transform-style: preserve-3d;
   transition: transform 0.38s cubic-bezier(0.2, 0.85, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
 }
 
 .memory-card-btn:hover:not(:disabled) .card-inner-3d {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(226, 169, 241, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(226, 169, 241, 0.28);
 }
 
 /* Flipped State */
@@ -265,33 +184,34 @@
 .card-back {
   background-color: var(--color-accent, #E2A9F1);
   color: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transform: rotateY(0deg);
   transition: background-color 0.2s ease;
 }
 
 .card-back-dot {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
   line-height: 1;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   transform: translateY(-1px);
 }
 
-/* CARD FRONT: Cream/Light Neutral with Black Character SVG */
+/* CARD FRONT: Solid Black Background with subtle refined border */
 .card-front {
-  background-color: #FFFFFF;
-  border: 1.5px solid rgba(26, 25, 30, 0.08);
+  background-color: #000000;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
   transform: rotateY(180deg);
-  padding: clamp(8px, 1.8vw, 12px);
+  padding: clamp(10px, 2vw, 18px);
   box-sizing: border-box;
 }
 
 .memory-card-btn.is-matched .card-front {
-  border-color: rgba(226, 169, 241, 0.45);
-  background-color: #FAF8FB;
+  border-color: var(--color-accent, #E2A9F1);
+  background-color: #000000;
+  box-shadow: inset 0 0 20px rgba(226, 169, 241, 0.18), 0 0 16px rgba(226, 169, 241, 0.25);
 }
 
-/* Character SVG Scaling Inside Card */
+/* Character Image Scaling Inside Card */
 .character-svg-container {
   width: 100%;
   height: 100%;
@@ -302,136 +222,224 @@
 
 .character-svg-container img,
 .character-img {
-  width: 84%;
-  height: 84%;
-  max-width: 84%;
-  max-height: 84%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-}
-
-.flyer-img {
-  width: 100%;
-  height: 100%;
+  width: 92%;
+  height: 92%;
+  max-width: 92%;
+  max-height: 92%;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
 
 /* --------------------------------------------------------------------------
-   3. QUIET COMPLETION MOMENT
+   Pop-forward Name Reveal (Blurred Background, Cross Button, Pure Text)
    -------------------------------------------------------------------------- */
-.completion-reveal-section {
+
+/* Background page blur when reveal is active */
+.name-discovery-page.has-reveal-active .name-game-container,
+.name-discovery-page.has-reveal-active .name-nav-bar {
+  filter: blur(16px);
+  opacity: 0.28;
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* Full-viewport blurred backdrop overlay (click anywhere to dismiss) */
+.name-reveal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  animation: backdropFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  cursor: pointer;
+}
+
+/* Minimal cross sign button at the top */
+.name-reveal-top-close-btn {
+  position: absolute;
+  top: clamp(20px, 4vw, 36px);
+  right: clamp(20px, 4vw, 36px);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-primary, #FFFAFA);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.22s ease;
+  z-index: 10001;
+}
+
+.name-reveal-top-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.08);
+}
+
+.name-reveal-top-close-btn:focus-visible {
+  outline: 2px solid var(--color-accent, #E2A9F1);
+  outline-offset: 2px;
+}
+
+/* Central text block with coming-front pop animation */
+.name-reveal-pop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-top: clamp(32px, 6vw, 48px);
-  animation: completionFadeIn 0.8s ease-out forwards;
+  animation: namePopForward 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.22) forwards;
+  will-change: transform, opacity;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.completion-phrase {
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
-  margin: 0 0 10px 0;
-  letter-spacing: 0.03em;
-}
-
-.completion-signature {
+/* Vishvara in signature accent color — crisp, no glow */
+.name-reveal-accent-name {
   font-family: var(--font-family-primary, 'MADE Okine Sans', sans-serif);
-  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  font-size: clamp(3.8rem, 12vw, 7.2rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--color-accent, #E2A9F1);
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
-@keyframes completionFadeIn {
+/* Pronunciation in pure white — crisp, no shadow */
+.name-reveal-white-pronunciation {
+  font-family: var(--font-family-primary, 'MADE Okine Sans', sans-serif);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  margin: 0;
+  opacity: 0.95;
+  animation: pronunciationFadeIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes backdropFadeIn {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+}
+
+@keyframes namePopForward {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) translateY(50px);
+    filter: blur(14px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.08) translateY(-4px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes pronunciationFadeIn {
   0% {
     opacity: 0;
     transform: translateY(12px);
   }
   100% {
-    opacity: 1;
+    opacity: 0.95;
     transform: translateY(0);
   }
 }
 
 /* --------------------------------------------------------------------------
-   4. FLOATING FLYER CLONE (Flying Morph Animation)
+   Mobile Optimization — Vertical 2-Column Layout with Bigger Cards
    -------------------------------------------------------------------------- */
-.flying-letter-clone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 80px;
-  pointer-events: none;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: flyToSlot 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.flyer-cartoon-layer,
-.flyer-outline-layer {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* During flight: cartoon character fades out while outline letter fades in */
-.flyer-cartoon-layer {
-  animation: fadeOutCartoon 0.75s ease-in forwards;
-}
-
-.flyer-outline-layer {
-  animation: fadeInOutline 0.75s ease-out forwards;
-}
-
-@keyframes flyToSlot {
-  0% {
-    transform: translate3d(calc(var(--start-x) - 40px), calc(var(--start-y) - 40px), 0) scale(1);
-    opacity: 1;
+@media (max-width: 640px) {
+  .name-discovery-page {
+    padding: 16px 16px 32px;
+    justify-content: space-between;
   }
-  80% {
-    transform: translate3d(calc(var(--target-x) - 40px), calc(var(--target-y) - 40px), 0) scale(0.65);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(calc(var(--target-x) - 40px), calc(var(--target-y) - 40px), 0) scale(0.55);
-    opacity: 0;
-  }
-}
 
-@keyframes fadeOutCartoon {
-  0% {
-    opacity: 1;
-    transform: scale(1);
+  .name-nav-bar {
+    max-width: min(360px, 92vw);
+    margin-bottom: 16px;
   }
-  50% {
-    opacity: 0.8;
+
+  .name-back-btn,
+  .name-restart-btn {
+    font-size: 0.78rem;
+    padding: 7px 14px;
+    min-height: 38px;
   }
-  100% {
-    opacity: 0;
-    transform: scale(0.85);
+
+  .name-game-container {
+    padding: 0;
+    margin: auto 0;
+    width: 100%;
+  }
+
+  /* 2 Columns x 3 Rows = Vertical card orientation with significantly bigger cards */
+  .memory-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 4vw, 22px);
+    width: 100%;
+    max-width: min(390px, 92vw);
+  }
+
+  .memory-card-btn {
+    min-width: 125px;
+    min-height: 125px;
+    border-radius: clamp(18px, 4.5vw, 26px);
+  }
+
+  .card-inner-3d {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
+  }
+
+  .card-front {
+    padding: clamp(10px, 2.5vw, 16px);
+  }
+
+  .card-back-dot {
+    font-size: 1.8rem;
   }
 }
 
-@keyframes fadeInOutline {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
+@media (max-width: 360px) {
+  .memory-cards-grid {
+    max-width: 310px;
+    gap: 12px;
   }
-  45% {
-    opacity: 0.2;
+
+  .memory-card-btn {
+    min-width: 110px;
+    min-height: 110px;
+    border-radius: 18px;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+
+  .card-front {
+    padding: 8px;
   }
 }
 
@@ -442,65 +450,9 @@
   .card-inner-3d {
     transition-duration: 0.01ms !important;
   }
-  .flying-letter-clone {
-    display: none !important;
-  }
-  .name-slot-letter-filled {
+  .name-reveal-backdrop,
+  .name-reveal-pop-content,
+  .name-reveal-white-pronunciation {
     animation: none !important;
-  }
-  .completion-reveal-section {
-    animation: none !important;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   Mobile Optimization (Down to 320px)
-   -------------------------------------------------------------------------- */
-@media (max-width: 480px) {
-  .name-discovery-page {
-    padding: 16px 12px 48px;
-  }
-
-  .name-nav-bar {
-    margin-bottom: 20px;
-  }
-
-  .name-back-btn,
-  .name-restart-btn {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-  }
-
-  .name-header-section {
-    margin-bottom: 24px;
-  }
-
-  .name-game-title {
-    font-size: 1.15rem;
-    margin-bottom: 16px;
-  }
-
-  .name-slots-row {
-    gap: 6px;
-  }
-
-  .name-slot-box {
-    width: 32px;
-    height: 44px;
-  }
-
-  .memory-grid-4x4 {
-    gap: 8px;
-    max-width: 320px;
-  }
-
-  .memory-card-btn {
-    min-width: 54px;
-    min-height: 54px;
-    border-radius: 12px;
-  }
-
-  .card-front {
-    padding: 6px;
   }
 }

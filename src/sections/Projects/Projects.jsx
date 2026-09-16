@@ -5,6 +5,8 @@ import murmurCover from '../../components/Pictures/Projects/Murmur/Cover page.pn
 import margdarshakLogo from '../../components/Pictures/Projects/Margdarshak/Margdarshak Logo.png';
 import margdarshakHome from '../../components/Pictures/Projects/Margdarshak/home.png';
 import { MARGDARSHAK_ALL_ASSETS } from '../../pages/CaseStudy/CaseStudy';
+import { MURMUR_ALL_ASSETS } from '../../pages/CaseStudy/MurmurCaseStudy';
+import CachedImage from '../../components/CachedImage/CachedImage';
 import { imageCache, browserCache } from '../../utils/cache';
 import './Projects.css';
 
@@ -13,7 +15,7 @@ const projectsData = [
     id: 'project-01',
     slug: 'murmur',
     heading: 'Murmur',
-    tagline: 'Making government schemes easier to access.',
+    tagline: 'A kinder journey, together.',
     logoImage: murmurCover,
     logoAlt: 'Murmur project logo',
     videoSrc: null,
@@ -21,19 +23,19 @@ const projectsData = [
     videoAlt: 'Murmur walkthrough video',
     videoPlaceholder: 'Walkthrough Video',
     aboutLabel: 'About the project',
-    aboutDescription: '[Short one-line description / caption]',
+    aboutDescription: 'Murmur is an ambient companion ecosystem designed to bridge postpartum care and emotional support between new mothers and partners.',
     qaBlocks: [
       {
         question: 'What was the problem?',
-        answer: 'One concise line explaining the problem.'
+        answer: 'New mothers face postpartum emotional isolation, while partners struggle to understand how to help.'
       },
       {
         question: 'What was the action I took?',
-        answer: 'A concise description of what I did.'
+        answer: 'Conducted qualitative field interviews with young families and designed a calm hardware-software ecosystem.'
       },
       {
         question: 'How did I solve it?',
-        answer: 'A concise explanation of the approach/system.'
+        answer: 'Created ambient tangible companions and an empathetic mobile app using no-shame interaction logic.'
       }
     ]
   },
@@ -108,12 +110,11 @@ const ProjectCard = memo(({ project, onSelect }) => {
           title={`${project.heading} Logo`}
         >
           {project.logoImage && (
-            <img
+            <CachedImage
               src={project.logoImage}
               alt={project.logoAlt || `${project.heading} Logo`}
               className="project-box-logo-img"
-              loading="lazy"
-              decoding="async"
+              objectFit="contain"
             />
           )}
         </div>
@@ -145,12 +146,11 @@ const ProjectCard = memo(({ project, onSelect }) => {
               />
             ) : project.videoImage ? (
               <div className="project-video-preview-wrap">
-                <img
+                <CachedImage
                   src={project.videoImage}
                   alt={project.videoAlt || `${project.heading} Walkthrough`}
                   className="project-video-preview-image"
-                  loading="lazy"
-                  decoding="async"
+                  objectFit="cover"
                 />
                 <div className="project-video-overlay">
                   <div className="project-video-play-btn" aria-hidden="true">
@@ -220,15 +220,16 @@ export const Projects = memo(({ onSelectProject, title = 'Projects' }) => {
     browserCache.cacheUrls([murmurCover, margdarshakLogo, margdarshakHome]);
 
     // Idle preload all Case Study assets in background for instant transition
+    const allStudyAssets = [...MARGDARSHAK_ALL_ASSETS, ...MURMUR_ALL_ASSETS];
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
       window.requestIdleCallback(() => {
-        imageCache.preloadAll(MARGDARSHAK_ALL_ASSETS);
-        browserCache.cacheUrls(MARGDARSHAK_ALL_ASSETS);
+        imageCache.preloadAll(allStudyAssets);
+        browserCache.cacheUrls(allStudyAssets);
       }, { timeout: 3500 });
     } else {
       setTimeout(() => {
-        imageCache.preloadAll(MARGDARSHAK_ALL_ASSETS);
-        browserCache.cacheUrls(MARGDARSHAK_ALL_ASSETS);
+        imageCache.preloadAll(allStudyAssets);
+        browserCache.cacheUrls(allStudyAssets);
       }, 2000);
     }
   }, []);

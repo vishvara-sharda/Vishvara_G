@@ -150,8 +150,8 @@ export const ClickSpark = memo(({
       <canvas
         ref={canvasRef}
         style={{
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: '100%',
           display: 'block',
           userSelect: 'none',
           position: 'fixed',

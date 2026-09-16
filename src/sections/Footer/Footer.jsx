@@ -2,17 +2,12 @@ import React, { useState, useEffect, useRef, memo } from 'react';
 import Section from '../../components/Section/Section';
 import Container from '../../components/Container/Container';
 import { storageCache, imageCache, browserCache } from '../../utils/cache';
-import v1Svg from '../../assets/V_character_exact_transparent.svg';
-import iSvg from '../../assets/I_character_transparent.svg';
-import sSvg from '../../assets/S_character_transparent.svg';
-import hSvg from '../../assets/H_character_transparent.svg';
-import v2Svg from '../../assets/V_character_transparent.svg';
-import a1Svg from '../../assets/A_character_transparent.svg';
-import rSvg from '../../assets/R_character_transparent.svg';
-import a2Svg from '../../assets/A_character_smile_transparent.svg';
+import calciferPng from '../../assets/calcifer.png';
+import sataoPng from '../../assets/satao.png';
+import sadijinPng from '../../assets/sadijin.png';
 import './Footer.css';
 
-const NAME_GAME_ASSETS = [v1Svg, iSvg, sSvg, hSvg, v2Svg, a1Svg, rSvg, a2Svg];
+const NAME_GAME_ASSETS = [calciferPng, sataoPng, sadijinPng];
 const DEFAULT_MESSAGE = "Hey,\n\nI love your design and would love to connect with you.";
 
 export const Footer = memo(({ onOpenNameGame }) => {
@@ -30,8 +25,19 @@ export const Footer = memo(({ onOpenNameGame }) => {
       }, 2500);
     }
   }, []);
-  // Contact Form state with cached session draft support
+  // Contact Form state with cached session draft and prefill support
   const [formData, setFormData] = useState(() => {
+    const prefill = typeof window !== 'undefined' ? storageCache.get('contact_prefill') : null;
+    if (prefill && prefill.message) {
+      storageCache.remove('contact_prefill');
+      return {
+        name: prefill.name || '',
+        email: prefill.email || '',
+        message: prefill.message,
+        subject: prefill.subject || ''
+      };
+    }
+
     const cached = storageCache.get('footer_form_draft');
     if (cached && (cached.name || cached.email || cached.message)) {
       return cached;
@@ -39,7 +45,8 @@ export const Footer = memo(({ onOpenNameGame }) => {
     return {
       name: '',
       email: '',
-      message: ''
+      message: '',
+      subject: ''
     };
   });
   const [errors, setErrors] = useState({});
@@ -54,11 +61,33 @@ export const Footer = memo(({ onOpenNameGame }) => {
   }, [formData]);
 
   // Typewriter state for textarea
-  const [hasStartedTyping, setHasStartedTyping] = useState(false);
-  const [hasCompletedTyping, setHasCompletedTyping] = useState(false);
-  const userInteractedRef = useRef(false);
+  const hasCustomMessage = Boolean(formData.message && formData.message !== DEFAULT_MESSAGE);
+  const [hasStartedTyping, setHasStartedTyping] = useState(hasCustomMessage);
+  const [hasCompletedTyping, setHasCompletedTyping] = useState(hasCustomMessage);
+  const userInteractedRef = useRef(hasCustomMessage);
   const footerRef = useRef(null);
   const timerRef = useRef(null);
+
+  // Listen for prefill events dispatched while mounted
+  useEffect(() => {
+    const handlePrefill = (e) => {
+      const detail = e.detail || (typeof window !== 'undefined' ? storageCache.get('contact_prefill') : null);
+      if (detail && detail.message) {
+        userInteractedRef.current = true;
+        setHasStartedTyping(true);
+        setHasCompletedTyping(true);
+        setFormData((prev) => ({
+          ...prev,
+          message: detail.message,
+          subject: detail.subject || prev.subject || ''
+        }));
+        storageCache.remove('contact_prefill');
+      }
+    };
+
+    window.addEventListener('prefill_contact', handlePrefill);
+    return () => window.removeEventListener('prefill_contact', handlePrefill);
+  }, []);
 
   // Trigger typewriter inside textarea when section enters viewport
   useEffect(() => {
@@ -195,7 +224,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
             name: formData.name.trim(),
             email: formData.email.trim(),
             message: formData.message.trim(),
-            _subject: `New Portfolio Message from ${formData.name.trim()}`,
+            _subject: formData.subject || `New Portfolio Message from ${formData.name.trim()}`,
             _template: 'table',
             _captcha: 'false'
           })
@@ -207,7 +236,7 @@ export const Footer = memo(({ onOpenNameGame }) => {
       if (response.ok && (data.success === 'true' || data.success === true)) {
         setStatus('success');
         setStatusMessage('Thank you! Your message has been sent.');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', message: '', subject: '' });
         storageCache.remove('footer_form_draft');
       } else {
         throw new Error(data.message || 'Submission failed');

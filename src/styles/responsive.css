@@ -7,6 +7,14 @@
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  .app-root {
+    overflow-x: hidden;
+  }
 }
 
 /* Controlled Paragraph Measure */

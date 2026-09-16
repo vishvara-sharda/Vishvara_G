@@ -1,0 +1,74 @@
+/* ==========================================================================
+   CachedImage Component Styles
+   Seamless loading states, zero-layout-shift framing, and dark mode shimmers
+   ========================================================================== */
+.cached-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Shimmer pulse effect while network request or decode is in flight */
+.cached-image-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 100%;
+  animation: cachedImageShimmerWave 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: 1;
+}
+
+@keyframes cachedImageShimmerWave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Image element transitions */
+.cached-image-element {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.cached-image-element.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cached-image-element.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Error State */
+.cached-image-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.85);
+  color: var(--color-disabled, #888888);
+  font-size: 0.8rem;
+  font-family: var(--font-family-primary);
+  text-align: center;
+  padding: 8px;
+}

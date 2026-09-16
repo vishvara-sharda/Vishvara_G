@@ -1,73 +1,31 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { imageCache, browserCache, storageCache } from '../../utils/cache';
+import React, { useState, useEffect, useCallback, memo } from 'react';
+import { imageCache, browserCache } from '../../utils/cache';
 import './WhatIsMyName.css';
 
-// Direct SVG character asset imports from src/assets
-import v1Svg from '../../assets/V_character_exact_transparent.svg';
-import iSvg from '../../assets/I_character_transparent.svg';
-import sSvg from '../../assets/S_character_transparent.svg';
-import hSvg from '../../assets/H_character_transparent.svg';
-import v2Svg from '../../assets/V_character_transparent.svg';
-import a1Svg from '../../assets/A_character_transparent.svg';
-import rSvg from '../../assets/R_character_transparent.svg';
-import a2Svg from '../../assets/A_character_smile_transparent.svg';
+// Character image asset imports from src/assets
+import calciferPng from '../../assets/calcifer.png';
+import sataoPng from '../../assets/satao.png';
+import sadijinPng from '../../assets/sadijin.png';
 
 /**
- * Character SVG assets list for instant memory & browser caching
+ * Character image assets list for instant memory & browser caching
  */
-const CHARACTER_ASSETS = [v1Svg, iSvg, sSvg, hSvg, v2Svg, a1Svg, rSvg, a2Svg];
-const CACHE_KEY = 'name_discovery_game_state';
+const CHARACTER_ASSETS = [calciferPng, sataoPng, sadijinPng];
 
 /**
- * The 8 Letters of the name "V I S H V A R A"
- * Target slot indices 0 to 7.
+ * 6 Cards (3 Matching Pairs)
+ * Pairs: Calcifer, Satao, Sadijin
  */
-const TARGET_NAME = [
-  { index: 0, letter: 'V', pairId: 'v1', label: 'First letter V' },
-  { index: 1, letter: 'I', pairId: 'i',  label: 'Letter I' },
-  { index: 2, letter: 'S', pairId: 's',  label: 'Letter S' },
-  { index: 3, letter: 'H', pairId: 'h',  label: 'Letter H' },
-  { index: 4, letter: 'V', pairId: 'v2', label: 'Second letter V' },
-  { index: 5, letter: 'A', pairId: 'a1', label: 'First letter A' },
-  { index: 6, letter: 'R', pairId: 'r',  label: 'Letter R' },
-  { index: 7, letter: 'A', pairId: 'a2', label: 'Second letter A' }
-];
-
-/**
- * 16 Cards (8 Matching Pairs) using the exact images from src/assets.
- * Two distinct types of V:
- *   - v1: V_character_exact_transparent.svg (Target Slot 0)
- *   - v2: V_character_transparent.svg (Target Slot 4)
- * Two distinct types of A:
- *   - a1: A_character_transparent.svg (Target Slot 5)
- *   - a2: A_character_smile_transparent.svg (Target Slot 7)
- * Cards match ONLY when both flipped cards have the EXACT same image (pairId).
- */
-const INITIAL_CARD_DATA = [
-  // Pair 1: V1
-  { id: 'v1-a', letter: 'V', pairId: 'v1', name: 'Observer V', imgSrc: v1Svg, targetSlotIndex: 0 },
-  { id: 'v1-b', letter: 'V', pairId: 'v1', name: 'Observer V', imgSrc: v1Svg, targetSlotIndex: 0 },
-  // Pair 2: I
-  { id: 'i-a',  letter: 'I', pairId: 'i',  name: 'Calm I', imgSrc: iSvg, targetSlotIndex: 1 },
-  { id: 'i-b',  letter: 'I', pairId: 'i',  name: 'Calm I', imgSrc: iSvg, targetSlotIndex: 1 },
-  // Pair 3: S
-  { id: 's-a',  letter: 'S', pairId: 's',  name: 'Playful S', imgSrc: sSvg, targetSlotIndex: 2 },
-  { id: 's-b',  letter: 'S', pairId: 's',  name: 'Playful S', imgSrc: sSvg, targetSlotIndex: 2 },
-  // Pair 4: H
-  { id: 'h-a',  letter: 'H', pairId: 'h',  name: 'Supporter H', imgSrc: hSvg, targetSlotIndex: 3 },
-  { id: 'h-b',  letter: 'H', pairId: 'h',  name: 'Supporter H', imgSrc: hSvg, targetSlotIndex: 3 },
-  // Pair 5: V2
-  { id: 'v2-a', letter: 'V', pairId: 'v2', name: 'Cool V', imgSrc: v2Svg, targetSlotIndex: 4 },
-  { id: 'v2-b', letter: 'V', pairId: 'v2', name: 'Cool V', imgSrc: v2Svg, targetSlotIndex: 4 },
-  // Pair 6: A1
-  { id: 'a1-a', letter: 'A', pairId: 'a1', name: 'Curious A', imgSrc: a1Svg, targetSlotIndex: 5 },
-  { id: 'a1-b', letter: 'A', pairId: 'a1', name: 'Curious A', imgSrc: a1Svg, targetSlotIndex: 5 },
-  // Pair 7: R
-  { id: 'r-a',  letter: 'R', pairId: 'r',  name: 'Explorer R', imgSrc: rSvg, targetSlotIndex: 6 },
-  { id: 'r-b',  letter: 'R', pairId: 'r',  name: 'Explorer R', imgSrc: rSvg, targetSlotIndex: 6 },
-  // Pair 8: A2
-  { id: 'a2-a', letter: 'A', pairId: 'a2', name: 'Smiling A', imgSrc: a2Svg, targetSlotIndex: 7 },
-  { id: 'a2-b', letter: 'A', pairId: 'a2', name: 'Smiling A', imgSrc: a2Svg, targetSlotIndex: 7 }
+const SIX_CARDS_DATA = [
+  // Pair 1: Calcifer
+  { id: 'calcifer-a', pairId: 'calcifer', name: 'Calcifer', imgSrc: calciferPng },
+  { id: 'calcifer-b', pairId: 'calcifer', name: 'Calcifer', imgSrc: calciferPng },
+  // Pair 2: Satao
+  { id: 'satao-a',    pairId: 'satao',    name: 'Satao',    imgSrc: sataoPng },
+  { id: 'satao-b',    pairId: 'satao',    name: 'Satao',    imgSrc: sataoPng },
+  // Pair 3: Sadijin
+  { id: 'sadijin-a',  pairId: 'sadijin',  name: 'Sadijin',  imgSrc: sadijinPng },
+  { id: 'sadijin-b',  pairId: 'sadijin',  name: 'Sadijin',  imgSrc: sadijinPng }
 ];
 
 /**
@@ -82,132 +40,65 @@ const shuffleCards = (cards) => {
   return shuffled;
 };
 
+const generateShuffledCards = () => shuffleCards(SIX_CARDS_DATA);
+
 export const WhatIsMyName = memo(({ onNavigateBack }) => {
-  // Preload and cache all 8 character SVGs into memory & CacheStorage on mount
+  // Preload and cache character images into memory & browser cache on mount
   useEffect(() => {
     imageCache.preloadAll(CHARACTER_ASSETS);
     browserCache.cacheUrls(CHARACTER_ASSETS);
+
+    // Clean up any obsolete session storage keys
+    try {
+      sessionStorage.removeItem('name_discovery_ghibli_cards_state');
+      sessionStorage.removeItem('name_discovery_6_cards_state');
+      sessionStorage.removeItem('name_discovery_game_state');
+    } catch {
+      // Ignore if sessionStorage is not accessible
+    }
   }, []);
 
-  // Restore game state from storage cache if available
-  const [cards, setCards] = useState(() => {
-    const cached = storageCache.get(CACHE_KEY, 'session');
-    if (cached && Array.isArray(cached.cards) && cached.cards.length === 16) {
-      return cached.cards;
-    }
-    return shuffleCards(INITIAL_CARD_DATA);
-  });
+  // Cards reshuffle fresh on every page load / mount
+  const [cards, setCards] = useState(() => generateShuffledCards());
 
   // Currently flipped card IDs (max 2 at a time)
   const [flippedCardIds, setFlippedCardIds] = useState([]);
 
-  // Set of matched card IDs (restored from cache if user leaves and returns)
-  const [matchedCardIds, setMatchedCardIds] = useState(() => {
-    const cached = storageCache.get(CACHE_KEY, 'session');
-    if (cached && Array.isArray(cached.matchedCardIds)) {
-      return new Set(cached.matchedCardIds);
-    }
-    return new Set();
-  });
+  // Set of matched card IDs
+  const [matchedCardIds, setMatchedCardIds] = useState(() => new Set());
 
-  // Filled slot states in V I S H V A R A (Array of 8 booleans)
-  const [filledSlots, setFilledSlots] = useState(() => {
-    const cached = storageCache.get(CACHE_KEY, 'session');
-    if (cached && Array.isArray(cached.filledSlots) && cached.filledSlots.length === 8) {
-      return cached.filledSlots;
-    }
-    return Array(8).fill(false);
-  });
-
-  // Lock click interactions during match/mismatch animation
+  // Lock click interactions during flip / match delay
   const [isLocked, setIsLocked] = useState(false);
 
   // Completed game state
-  const [isCompleted, setIsCompleted] = useState(() => {
-    const cached = storageCache.get(CACHE_KEY, 'session');
-    return Boolean(cached?.isCompleted);
-  });
+  const [isCompleted, setIsCompleted] = useState(false);
 
-  // Flying letter transitions currently in-flight
-  const [flyingLetters, setFlyingLetters] = useState([]);
+  // Modal reveal state when user finishes matching all 6 blocks
+  const [showNameReveal, setShowNameReveal] = useState(false);
 
-  // DOM Refs for measuring positions for the flying transform
-  const cardRefs = useRef({});
-  const slotRefs = useRef({});
-
-  // Sync game progress to session storage cache whenever cards, matches, or slots change
-  useEffect(() => {
-    storageCache.set(
-      CACHE_KEY,
-      {
-        cards,
-        matchedCardIds: Array.from(matchedCardIds),
-        filledSlots,
-        isCompleted
-      },
-      1000 * 60 * 60, // 1 hour TTL
-      'session'
-    );
-  }, [cards, matchedCardIds, filledSlots, isCompleted]);
-
-  // Reset / Reshuffle Game — Clears session cache
+  // Reset / Reshuffle Game
   const handleResetGame = useCallback(() => {
-    storageCache.remove(CACHE_KEY, 'session');
-    setCards(shuffleCards(INITIAL_CARD_DATA));
+    setCards(generateShuffledCards());
     setFlippedCardIds([]);
     setMatchedCardIds(new Set());
-    setFilledSlots(Array(8).fill(false));
     setIsLocked(false);
     setIsCompleted(false);
-    setFlyingLetters([]);
+    setShowNameReveal(false);
   }, []);
 
-  // Trigger smooth flight from card to target slot with cartoon -> outline morph
-  const triggerFlyingLetter = useCallback((cardId, imgSrc, letter, targetSlotIndex) => {
-    const cardEl = cardRefs.current[cardId];
-    const slotEl = slotRefs.current[targetSlotIndex];
-
-    if (!cardEl || !slotEl) {
-      // Fallback: fill slot directly
-      setFilledSlots((prev) => {
-        const next = [...prev];
-        next[targetSlotIndex] = true;
-        return next;
-      });
-      return;
-    }
-
-    const cardRect = cardEl.getBoundingClientRect();
-    const slotRect = slotEl.getBoundingClientRect();
-
-    const flightId = `${cardId}-${Date.now()}-${Math.random()}`;
-
-    const newFlight = {
-      id: flightId,
-      imgSrc,
-      letter,
-      targetSlotIndex,
-      startX: cardRect.left + cardRect.width / 2,
-      startY: cardRect.top + cardRect.height / 2,
-      targetX: slotRect.left + slotRect.width / 2,
-      targetY: slotRect.top + slotRect.height / 2
+  // Handle escape key to close reveal modal
+  useEffect(() => {
+    if (!showNameReveal) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setShowNameReveal(false);
+      }
     };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showNameReveal]);
 
-    setFlyingLetters((prev) => [...prev, newFlight]);
-
-    // When flight finishes (~750ms), fill the slot and remove flight element
-    setTimeout(() => {
-      setFilledSlots((prev) => {
-        const next = [...prev];
-        next[targetSlotIndex] = true;
-        return next;
-      });
-
-      setFlyingLetters((prev) => prev.filter((f) => f.id !== flightId));
-    }, 750);
-  }, []);
-
-  // Handle Card Click / Keyboard Selection
+  // Handle Card Click
   const handleCardClick = useCallback((card) => {
     if (isLocked) return;
     if (matchedCardIds.has(card.id)) return;
@@ -216,32 +107,31 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
     const newFlipped = [...flippedCardIds, card.id];
     setFlippedCardIds(newFlipped);
 
-    // If this is the second card flipped:
+    // If 2 cards are flipped
     if (newFlipped.length === 2) {
       setIsLocked(true);
       const firstCard = cards.find((c) => c.id === newFlipped[0]);
       const secondCard = card;
 
-      // Matching Rule: Cards match ONLY when they have the exact same image (same pairId)!
-      // (e.g. V1 matches V1 only; V2 matches V2 only; A1 matches A1 only; A2 matches A2 only)
       const isMatch = firstCard.pairId === secondCard.pairId;
 
       if (isMatch) {
-        // SUCCESSFUL MATCH
+        // MATCH: Keep cards flipped
         setTimeout(() => {
           setMatchedCardIds((prev) => {
             const next = new Set(prev);
             next.add(firstCard.id);
             next.add(secondCard.id);
+
+            // When all 6 cards are matched
+            if (next.size === 6) {
+              setTimeout(() => {
+                setIsCompleted(true);
+                setShowNameReveal(true);
+              }, 400);
+            }
             return next;
           });
-
-          // Trigger flying morph to its designated slot
-          const targetSlot = firstCard.targetSlotIndex;
-          triggerFlyingLetter(firstCard.id, firstCard.imgSrc, firstCard.letter, targetSlot);
-          setTimeout(() => {
-            triggerFlyingLetter(secondCard.id, secondCard.imgSrc, secondCard.letter, targetSlot);
-          }, 80);
 
           setFlippedCardIds([]);
           setIsLocked(false);
@@ -254,22 +144,11 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
         }, 850);
       }
     }
-  }, [cards, flippedCardIds, matchedCardIds, isLocked, triggerFlyingLetter]);
-
-  // Check for game completion when all 8 slots are filled
-  useEffect(() => {
-    const allFilled = filledSlots.every(Boolean);
-    if (allFilled && matchedCardIds.size === 16 && !isCompleted) {
-      const timer = setTimeout(() => {
-        setIsCompleted(true);
-      }, 700);
-      return () => clearTimeout(timer);
-    }
-  }, [filledSlots, matchedCardIds, isCompleted]);
+  }, [cards, flippedCardIds, matchedCardIds, isLocked]);
 
   return (
-    <div className="name-discovery-page">
-      {/* Subdued Back Button */}
+    <div className={`name-discovery-page ${showNameReveal ? 'has-reveal-active' : ''}`}>
+      {/* Top Navigation */}
       <nav className="name-nav-bar" aria-label="Page navigation">
         <button
           type="button"
@@ -292,50 +171,13 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
         </button>
       </nav>
 
+      {/* Main unified 6-block game area */}
       <main className="name-game-container">
-        {/* ================================================================
-            1. PAGE INTRO: Title & 8 Name Slots
-            ================================================================ */}
-        <header className="name-header-section">
-          <h1 className="name-game-title">WHAT IS MY NAME?</h1>
-
-          {/* 8 Letter Slots in V I S H V A R A */}
-          <div
-            className={`name-slots-row ${isCompleted ? 'is-completed-name' : ''}`}
-            role="status"
-            aria-label="Discovered name letters"
-          >
-            {TARGET_NAME.map((item, idx) => {
-              const isSlotFilled = filledSlots[idx];
-
-              return (
-                <div
-                  key={`slot-${item.index}`}
-                  ref={(el) => { slotRefs.current[idx] = el; }}
-                  className={`name-slot-box ${isSlotFilled ? 'is-filled' : 'is-empty'}`}
-                  aria-label={isSlotFilled ? `Slot ${idx + 1}: ${item.letter}` : `Slot ${idx + 1}: empty`}
-                >
-                  {isSlotFilled ? (
-                    <span className="name-slot-letter-filled">
-                      {item.letter}
-                    </span>
-                  ) : (
-                    <span className="name-slot-dash" aria-hidden="true">_</span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </header>
-
-        {/* ================================================================
-            2. THE MEMORY MATCHING GAME: 16 Cards (4x4 Grid)
-            ================================================================ */}
         <section
-          className="memory-grid-wrapper"
-          aria-label="Memory matching card grid"
+          className="memory-unified-section"
+          aria-label="Memory matching card grid with 6 cards"
         >
-          <div className="memory-grid-4x4">
+          <div className="memory-cards-grid">
             {cards.map((card) => {
               const isFlipped = flippedCardIds.includes(card.id) || matchedCardIds.has(card.id);
               const isMatched = matchedCardIds.has(card.id);
@@ -343,15 +185,14 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
               return (
                 <button
                   key={card.id}
-                  ref={(el) => { cardRefs.current[card.id] = el; }}
                   type="button"
                   className={`memory-card-btn ${isFlipped ? 'is-flipped' : ''} ${isMatched ? 'is-matched' : ''}`}
                   onClick={() => handleCardClick(card)}
                   disabled={isMatched || isLocked}
                   aria-label={
                     isFlipped
-                      ? `Letter ${card.letter} character (${card.name})`
-                      : 'Hidden letter card'
+                      ? `${card.name} card`
+                      : 'Hidden card'
                   }
                   tabIndex={0}
                 >
@@ -361,12 +202,12 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
                       <span className="card-back-dot">•</span>
                     </div>
 
-                    {/* CARD FRONT: Cream/Neutral surface with exact character SVG from src/assets */}
+                    {/* CARD FRONT: Solid Black Surface with character image */}
                     <div className="card-face card-front">
                       <div className="character-svg-container">
                         <img
                           src={card.imgSrc}
-                          alt={`Letter ${card.letter} character`}
+                          alt={card.name}
                           className="character-img"
                           loading="eager"
                           decoding="async"
@@ -379,44 +220,58 @@ export const WhatIsMyName = memo(({ onNavigateBack }) => {
             })}
           </div>
         </section>
-
-        {/* ================================================================
-            3. QUIET COMPLETION MOMENT
-            ================================================================ */}
-        {isCompleted && (
-          <footer className="completion-reveal-section" aria-live="polite">
-            <p className="completion-phrase">“Now you know.”</p>
-            <p className="completion-signature">Vishvara</p>
-          </footer>
-        )}
       </main>
 
-      {/* ================================================================
-          4. FLOATING FLYER CLONES (Fly from card to slot with morph)
-          ================================================================ */}
-      {flyingLetters.map((flight) => (
+      {/* Pop-forward Name Reveal Modal */}
+      {showNameReveal && (
         <div
-          key={flight.id}
-          className="flying-letter-clone"
-          style={{
-            '--start-x': `${flight.startX}px`,
-            '--start-y': `${flight.startY}px`,
-            '--target-x': `${flight.targetX}px`,
-            '--target-y': `${flight.targetY}px`
-          }}
-          aria-hidden="true"
+          className="name-reveal-backdrop"
+          onClick={() => setShowNameReveal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="name-reveal-title"
         >
-          {/* Cartoon Character Layer from src/assets (Fades Out) */}
-          <div className="flyer-cartoon-layer">
-            <img src={flight.imgSrc} alt="" className="flyer-img" />
-          </div>
+          {/* Top Cross / Close Button */}
+          <button
+            type="button"
+            className="name-reveal-top-close-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowNameReveal(false);
+            }}
+            aria-label="Close name reveal"
+            title="Close"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
 
-          {/* Refined Filled Letter Layer (Fades In) */}
-          <div className="flyer-outline-layer">
-            <span className="name-slot-letter-filled">{flight.letter}</span>
+          <div
+            className="name-reveal-pop-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 id="name-reveal-title" className="name-reveal-accent-name">
+              Vishvara
+            </h2>
+
+            <p className="name-reveal-white-pronunciation">
+              wish-wara
+            </p>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 });
