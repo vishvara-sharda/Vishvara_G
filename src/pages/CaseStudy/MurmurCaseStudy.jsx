@@ -1140,6 +1140,9 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               >
                 yes
               </button>
+              <h3 className="murmur-business-cta-caption">
+                The whole point of Murmur was never to teach someone how to be a better partner. It was to help <span className="murmur-cta-highlight">couples stay connected</span>, no matter the distance between them.
+              </h3>
             </div>
           </section>
 

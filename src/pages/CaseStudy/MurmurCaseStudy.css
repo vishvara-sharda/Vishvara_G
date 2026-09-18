@@ -2012,5 +2012,19 @@
   outline-offset: 4px;
 }
 
+.murmur-business-cta-caption {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h3-size, clamp(1.2rem, 1.8vw + 0.4rem, 1.65rem));
+  font-weight: 400;
+  line-height: var(--line-height-subheading, 1.35);
+  color: var(--color-text-secondary, #F2F0EF);
+  text-align: center;
+  max-width: 660px;
+  margin: clamp(54px, 8vh, 84px) auto 0;
+  letter-spacing: -0.015em;
+}
 
-
+.murmur-cta-highlight {
+  color: var(--color-accent, #F8C363);
+  font-weight: 500;
+}
