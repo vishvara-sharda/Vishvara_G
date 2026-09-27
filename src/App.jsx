@@ -17,6 +17,7 @@ import Navbar from './components/Navbar/Navbar';
 import CaseStudy from './pages/CaseStudy/CaseStudy';
 import WhatIsMyName from './pages/WhatIsMyName/WhatIsMyName';
 import { PortfolioSkeleton, CaseStudySkeleton } from './components/Skeleton/PortfolioSkeleton';
+import ContentProtection from './components/Protection/ContentProtection';
 
 const parseRoute = () => {
   const pathname = window.location.pathname;
@@ -130,6 +131,7 @@ export function App() {
       sparkCount={8}
       duration={400}
     >
+      <ContentProtection />
       <div className="portfolio-loading-container">
         {isLoading && (
           <div

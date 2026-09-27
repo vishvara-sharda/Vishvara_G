@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Content & Screenshot Protection Styles
+   ========================================================================== */
+
+/* Universal selection protection */
+*,
+*::before,
+*::after {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Allow text input for legitimate forms/inputs */
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Block dragging and long-press callout on all media */
+img,
+video,
+picture {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Anti-Screenshot & Window Defocus Shield */
+.content-protection-shield {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background-color: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.content-protection-shield.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.content-protection-shield-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  background: rgba(25, 25, 25, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f5f5f7;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  transform: translateY(10px);
+  transition: transform 0.25s ease;
+}
+
+.content-protection-shield.is-active .content-protection-shield-badge {
+  transform: translateY(0);
+}
+
+.content-protection-lock-icon {
+  font-size: 16px;
+}
+
+/* Discreet Toast Notification */
+.content-protection-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s;
+}
+
+.content-protection-toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.content-protection-toast-content {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fffafa;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Complete Print / Save to PDF Lockdown */
+@media print {
+  html,
+  body,
+  #root,
+  .app-root {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+}
