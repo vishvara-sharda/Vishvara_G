@@ -213,11 +213,10 @@
    ========================================================================== */
 .project-upper-bento {
   display: grid;
-  grid-template-columns: minmax(260px, 32%) 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "heading media"
-    "logo    media";
+    "heading"
+    "media";
   gap: clamp(12px, 1.8vh, 18px);
   width: 100%;
 }
@@ -232,6 +231,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: var(--space-2, 8px);
   box-sizing: border-box;
   transition: border-color 0.2s ease, background-color 0.2s ease;
@@ -246,6 +247,7 @@
   letter-spacing: 0.02em;
   color: var(--color-accent, #E2A9F1);
   margin: 0;
+  text-align: center;
   width: fit-content;
   transition: opacity 0.2s ease;
 }
@@ -263,6 +265,7 @@
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.65);
   margin: 0;
+  text-align: center;
 }
 
 /* Box 2 — Project Logo (Compact Square or Square-ish Box) */
@@ -493,28 +496,25 @@
   margin: 3px 0 0 0;
 }
 
-/* Tablet: Fluid columns and heights */
+/* Tablet: Fluid padding and gaps */
 @media (min-width: 768px) and (max-width: 1023px) {
   .project-upper-bento {
-    grid-template-columns: minmax(220px, 34%) 1fr;
     gap: clamp(10px, 1.4vw, 14px);
   }
 
   .project-box-heading,
-  .project-box-logo,
   .project-box-media {
     padding: clamp(14px, 1.8vw, 20px);
   }
 }
 
-/* Mobile: Stack the three boxes naturally (< 768px) */
+/* Mobile: Stack the boxes naturally (< 768px) */
 @media (max-width: 767px) {
   .project-upper-bento {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "heading"
-      "logo"
       "media";
     gap: clamp(10px, 1.5vh, 14px);
   }
@@ -529,16 +529,6 @@
 
   .project-tagline {
     font-size: 0.875rem;
-  }
-
-  .project-box-logo {
-    height: clamp(130px, 30vw, 180px);
-    padding: clamp(14px, 3.5vw, 18px);
-  }
-
-  .project-box-logo-img {
-    max-height: 85%;
-    max-width: 85%;
   }
 
   .project-box-media {

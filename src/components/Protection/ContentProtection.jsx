@@ -6,7 +6,7 @@ export const ContentProtection = () => {
   const [isShieldActive, setIsShieldActive] = useState(false);
   const toastTimeoutRef = useRef(null);
 
-  const showToast = useCallback((message) => {
+  const showToast = useCallback((message = "No, can't do.") => {
     if (toastTimeoutRef.current) {
       clearTimeout(toastTimeoutRef.current);
     }
@@ -16,7 +16,7 @@ export const ContentProtection = () => {
     }, 2200);
   }, []);
 
-  // Sync class on document.body for deep CSS blanking
+  // Sync class on document.body for image-specific screenshot shield
   useEffect(() => {
     if (isShieldActive) {
       document.body.classList.add('content-shield-active');
@@ -26,19 +26,30 @@ export const ContentProtection = () => {
   }, [isShieldActive]);
 
   useEffect(() => {
-    // 1. Right-Click / Context Menu Prevention
+    // 1. Right-Click Prevention strictly on pictures and media
     const handleContextMenu = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showToast('🔒 Right-click and saving images are disabled');
-      return false;
+      const isImageOrMedia = e.target.closest(
+        'img, video, picture, canvas, svg, .cached-image-wrapper, .project-video-wrapper, .personal-gallery-card, .media-placeholder-wrapper, .hero-media-wrapper'
+      );
+      if (isImageOrMedia) {
+        e.preventDefault();
+        e.stopPropagation();
+        showToast("No, can't do.");
+        return false;
+      }
     };
 
-    // 2. Drag & Drop Prevention
+    // 2. Drag & Drop Prevention on pictures
     const handleDragStart = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
+      const isImageOrMedia = e.target.closest(
+        'img, video, picture, canvas, svg, .cached-image-wrapper, .project-video-wrapper, .personal-gallery-card, .media-placeholder-wrapper, .hero-media-wrapper'
+      );
+      if (isImageOrMedia) {
+        e.preventDefault();
+        e.stopPropagation();
+        showToast("No, can't do.");
+        return false;
+      }
     };
 
     // 3. Intercept Snipping Tool & Screenshot Shortcuts at KeyDown
@@ -55,7 +66,7 @@ export const ContentProtection = () => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText('').catch(() => {});
         }
-        showToast('🔒 Screenshots are disabled');
+        showToast("No, can't do.");
         return;
       }
 
@@ -67,39 +78,22 @@ export const ContentProtection = () => {
           e.key === 'Meta'
         ) {
           setIsShieldActive(true);
-          showToast('🔒 Screenshot capture is disabled');
+          showToast("No, can't do.");
           return;
         }
       }
 
-      // Ctrl/Cmd + S (Save Page)
+      // Ctrl/Cmd + S (Save Page / Save Image)
       if (cmdOrCtrl && (e.key === 's' || e.key === 'S')) {
         e.preventDefault();
-        showToast('🔒 Saving page is disabled');
+        showToast("No, can't do.");
         return;
       }
 
       // Ctrl/Cmd + P (Print / Save as PDF)
       if (cmdOrCtrl && (e.key === 'p' || e.key === 'P')) {
         e.preventDefault();
-        showToast('🔒 Printing is disabled');
-        return;
-      }
-
-      // Ctrl/Cmd + U (View Source)
-      if (cmdOrCtrl && (e.key === 'u' || e.key === 'U')) {
-        e.preventDefault();
-        showToast('🔒 Source viewing is disabled');
-        return;
-      }
-
-      // F12 or Inspect shortcuts
-      if (
-        e.key === 'F12' ||
-        (cmdOrCtrl && e.shiftKey && ['i', 'I', 'j', 'J', 'c', 'C'].includes(e.key))
-      ) {
-        e.preventDefault();
-        showToast('🔒 Developer tools shortcut is disabled');
+        showToast("No, can't do.");
         return;
       }
     };
@@ -113,8 +107,7 @@ export const ContentProtection = () => {
       }
     };
 
-    // 5. Anti-Snipping Tool & Window Defocus Shields:
-    // When Snipping Tool, Snip & Sketch, or screen grab opens, browser window loses focus.
+    // 5. Anti-Snipping Tool: When snipping tool captures focus, shield pictures
     const handleWindowBlur = () => {
       setIsShieldActive(true);
     };
@@ -123,45 +116,12 @@ export const ContentProtection = () => {
       setIsShieldActive(false);
     };
 
-    // When the mouse leaves the browser window (e.g. moving cursor to taskbar to click Snipping Tool)
-    const handleMouseLeave = () => {
-      setIsShieldActive(true);
-    };
-
-    const handleMouseEnter = () => {
-      if (document.hasFocus()) {
-        setIsShieldActive(false);
-      }
-    };
-
-    // When user clicks the shield, if document is focused, remove shield
-    const handleShieldClick = () => {
-      if (document.hasFocus()) {
-        setIsShieldActive(false);
-      }
-    };
-
-    // Continuous heartbeat check: if the browser window does not have focus, enforce shield!
-    const focusHeartbeat = setInterval(() => {
-      if (!document.hasFocus()) {
-        setIsShieldActive(true);
-      }
-    }, 120);
-
-    // 6. Copy Prevention
-    const handleCopy = (e) => {
-      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-      const isInput = activeTag === 'input' || activeTag === 'textarea' || document.activeElement?.isContentEditable;
-      if (!isInput) {
-        e.preventDefault();
-        showToast('🔒 Content copying is disabled');
-      }
-    };
-
-    // 7. Visibility Change (Tab switch or minimize)
+    // 6. Tab visibility change (minimize or switch tab)
     const handleVisibilityChange = () => {
       if (document.hidden || document.visibilityState !== 'visible') {
         setIsShieldActive(true);
+      } else {
+        setIsShieldActive(false);
       }
     };
 
@@ -171,10 +131,7 @@ export const ContentProtection = () => {
     window.addEventListener('keyup', handleKeyUp, true);
     window.addEventListener('blur', handleWindowBlur);
     window.addEventListener('focus', handleWindowFocus);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    document.addEventListener('copy', handleCopy, true);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu, true);
@@ -183,11 +140,7 @@ export const ContentProtection = () => {
       window.removeEventListener('keyup', handleKeyUp, true);
       window.removeEventListener('blur', handleWindowBlur);
       window.removeEventListener('focus', handleWindowFocus);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('copy', handleCopy, true);
-      clearInterval(focusHeartbeat);
       if (toastTimeoutRef.current) {
         clearTimeout(toastTimeoutRef.current);
       }
@@ -196,23 +149,7 @@ export const ContentProtection = () => {
 
   return (
     <>
-      {/* Full-screen opaque shield that blanks everything for snipping tools */}
-      <div
-        className={`content-protection-shield ${isShieldActive ? 'is-active' : ''}`}
-        aria-hidden="true"
-        onClick={() => {
-          if (document.hasFocus()) {
-            setIsShieldActive(false);
-          }
-        }}
-      >
-        <div className="content-protection-shield-badge">
-          <span className="content-protection-lock-icon">🔒</span>
-          <span>Protected Portfolio • Click anywhere to view</span>
-        </div>
-      </div>
-
-      {/* Discrete security toast */}
+      {/* Toast Notification */}
       <aside
         className={`content-protection-toast ${toast.visible ? 'is-visible' : ''}`}
         role="status"

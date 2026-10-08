@@ -1,108 +1,72 @@
 /* ==========================================================================
-   Content & Screenshot Protection Styles
+   Picture-Specific Content & Screenshot Protection
    ========================================================================== */
 
-/* Universal text & element selection lock */
-*,
-*::before,
-*::after {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-}
-
-/* Allow interaction with form input fields */
-input,
-textarea,
-[contenteditable="true"] {
-  -webkit-user-select: text !important;
-  -moz-user-select: text !important;
-  -ms-user-select: text !important;
-  user-select: text !important;
-}
-
-/* Prevent image dragging, save-as, and long press callouts */
+/* Prevent image dragging, save-as, and long press callouts strictly on media */
 img,
 video,
-picture {
+picture,
+.cached-image-wrapper,
+.project-video-preview-image,
+.media-placeholder-image,
+.personal-gallery-img {
   -webkit-user-drag: none !important;
   -khtml-user-drag: none !important;
   -moz-user-drag: none !important;
   -o-user-drag: none !important;
   user-drag: none !important;
   -webkit-touch-callout: none !important;
-  pointer-events: none !important;
-}
-
-/* Ensure links and interactive cards wrapping images remain clickable */
-a,
-button,
-[role="button"],
-.personal-gallery-card,
-.project-card {
-  pointer-events: auto !important;
-}
-
-/* Deep blanking when screenshot or snipping tool is detected */
-body.content-shield-active .app-root,
-body.content-shield-active .portfolio-content-layer,
-body.content-shield-active .portfolio-skeleton-layer {
-  filter: blur(45px) brightness(0.1) !important;
-  opacity: 0.05 !important;
-  pointer-events: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
   user-select: none !important;
-  transition: opacity 0.1s ease, filter 0.1s ease;
+  pointer-events: auto;
 }
 
-/* Full-Screen Anti-Snipping & Screenshot Shield */
-.content-protection-shield {
-  position: fixed;
+/* Ensure picture wrappers are relatively positioned for protection overlays */
+.cached-image-wrapper,
+.project-video-wrapper,
+.media-placeholder-wrapper,
+.hero-media-wrapper,
+.personal-gallery-card {
+  position: relative;
+}
+
+/* Deep blanking applied ONLY to pictures and videos during screenshot / snipping tool capture */
+body.content-shield-active img,
+body.content-shield-active video,
+body.content-shield-active picture,
+body.content-shield-active .cached-image-wrapper img,
+body.content-shield-active .project-video-preview-image,
+body.content-shield-active .media-placeholder-image,
+body.content-shield-active .personal-gallery-img {
+  filter: blur(50px) brightness(0) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.08s ease, filter 0.08s ease;
+}
+
+/* "No, can't do." watermark overlay displayed over pictures when screenshot capture occurs */
+body.content-shield-active .cached-image-wrapper::after,
+body.content-shield-active .project-video-wrapper::after,
+body.content-shield-active .hero-media-wrapper::after,
+body.content-shield-active .personal-gallery-card::after {
+  content: "No, can't do.";
+  position: absolute;
   inset: 0;
-  z-index: 2147483647; /* Highest possible layer */
-  background-color: #050505 !important;
-  backdrop-filter: blur(60px);
-  -webkit-backdrop-filter: blur(60px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.12s ease-out, visibility 0.12s ease-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-}
-
-.content-protection-shield.is-active {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-}
-
-.content-protection-shield-badge {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
-  border-radius: 9999px;
-  background: rgba(22, 22, 24, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #0d0d10;
   color: #ffffff;
-  font-size: 14px;
+  font-family: var(--font-family-primary);
+  font-size: clamp(13px, 1.2vw, 16px);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
-  transform: translateY(12px) scale(0.98);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-}
-
-.content-protection-shield.is-active .content-protection-shield-badge {
-  transform: translateY(0) scale(1);
-}
-
-.content-protection-lock-icon {
-  font-size: 18px;
+  letter-spacing: 0.01em;
+  z-index: 999;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Discreet Toast Notification */
@@ -129,30 +93,31 @@ body.content-shield-active .portfolio-skeleton-layer {
 .content-protection-toast-content {
   display: inline-flex;
   align-items: center;
-  padding: 11px 22px;
+  padding: 11px 24px;
   border-radius: 9999px;
-  background: rgba(18, 18, 20, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(18, 18, 20, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #ffffff;
-  font-size: 13.5px;
+  font-family: var(--font-family-primary);
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
 }
 
-/* Complete Print / Save to PDF Lockdown */
+/* Prevent image preservation via browser print */
 @media print {
-  html,
-  body,
-  #root,
-  .app-root {
+  img,
+  video,
+  picture,
+  .cached-image-wrapper,
+  .project-video-wrapper,
+  .hero-media-wrapper,
+  .personal-gallery-img {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
   }
 }

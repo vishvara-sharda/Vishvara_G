@@ -2,8 +2,10 @@ import React, { memo, useCallback, useEffect } from 'react';
 import Section from '../../components/Section/Section';
 import Container from '../../components/Container/Container';
 import murmurCover from '../../components/Pictures/Projects/Murmur/Cover page.png';
+import murmurThumbnail from '../../components/Pictures/Projects/Murmur/Thumbnail murmur.jpg';
 import margdarshakLogo from '../../components/Pictures/Projects/Margdarshak/Margdarshak Logo.png';
 import margdarshakHome from '../../components/Pictures/Projects/Margdarshak/home.png';
+import margdarshakThumbnail from '../../components/Pictures/Projects/Margdarshak/Margdarshak Thumbnail.jpg';
 import { MARGDARSHAK_ALL_ASSETS } from '../../pages/CaseStudy/CaseStudy';
 import { MURMUR_ALL_ASSETS } from '../../pages/CaseStudy/MurmurCaseStudy';
 import CachedImage from '../../components/CachedImage/CachedImage';
@@ -19,7 +21,7 @@ const projectsData = [
     logoImage: murmurCover,
     logoAlt: 'Murmur project logo',
     videoSrc: null,
-    videoImage: null,
+    videoImage: murmurThumbnail,
     videoAlt: 'Murmur walkthrough video',
     videoPlaceholder: 'Walkthrough Video',
     aboutLabel: 'About the project',
@@ -27,27 +29,15 @@ const projectsData = [
     qaBlocks: [
       {
         question: 'What was the problem?',
-        answer: (
-          <>
-            <em>New mothers can feel emotionally disconnected</em>, while partners struggle to stay connected during this transition.
-          </>
-        )
+        answer: 'New mothers can feel emotionally disconnected, while partners struggle to stay connected during this transition.'
       },
       {
         question: 'What was the action I took?',
-        answer: (
-          <>
-            <em>Talked to new families</em> and explored what was getting in the way of their connection.
-          </>
-        )
+        answer: 'Talked to new families and explored what was getting in the way of their connection.'
       },
       {
         question: 'How did I solve it?',
-        answer: (
-          <>
-            <em>Designed a paired physical companion</em> that helps partners feel connected through shared rituals, touch, and distance.
-          </>
-        )
+        answer: 'Designed a paired physical companion that helps partners feel connected through shared rituals, touch, and distance.'
       }
     ]
   },
@@ -59,7 +49,7 @@ const projectsData = [
     logoImage: margdarshakLogo,
     logoAlt: 'Margdarshak logo',
     videoSrc: null,
-    videoImage: null,
+    videoImage: margdarshakThumbnail,
     videoAlt: 'Margdarshak walkthrough video',
     videoPlaceholder: 'Walkthrough Video',
     aboutLabel: 'About the project',
@@ -106,32 +96,7 @@ const ProjectCard = memo(({ project, onSelect }) => {
           <p className="project-tagline">{project.tagline}</p>
         </div>
 
-        {/* Box 2 — Project Logo (Compact Square-ish Box) */}
-        <div
-          className="project-box-logo"
-          onClick={() => onSelect(project.slug || project.id)}
-          style={{ cursor: 'pointer' }}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              onSelect(project.slug || project.id);
-            }
-          }}
-          title={`${project.heading} Logo`}
-        >
-          {project.logoImage && (
-            <CachedImage
-              src={project.logoImage}
-              alt={project.logoAlt || `${project.heading} Logo`}
-              className="project-box-logo-img"
-              objectFit="contain"
-            />
-          )}
-        </div>
-
-        {/* Box 3 — Project Media + Description (Largest Rectangular Box) */}
+        {/* Box 2 — Project Media + Description (Largest Rectangular Box) */}
         <div className="project-box-media">
           <div
             className="project-video-wrapper"
@@ -228,8 +193,8 @@ export const Projects = memo(({ onSelectProject, title = 'Projects' }) => {
   // Preload and cache project covers and idle-preload case study assets
   useEffect(() => {
     // Immediate cover pre-cache
-    imageCache.preloadAll([murmurCover, margdarshakLogo, margdarshakHome]);
-    browserCache.cacheUrls([murmurCover, margdarshakLogo, margdarshakHome]);
+    imageCache.preloadAll([murmurCover, murmurThumbnail, margdarshakLogo, margdarshakHome, margdarshakThumbnail]);
+    browserCache.cacheUrls([murmurCover, murmurThumbnail, margdarshakLogo, margdarshakHome, margdarshakThumbnail]);
 
     // Idle preload all Case Study assets in background for instant transition
     const allStudyAssets = [...MARGDARSHAK_ALL_ASSETS, ...MURMUR_ALL_ASSETS];
