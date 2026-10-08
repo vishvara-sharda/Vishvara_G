@@ -3,7 +3,6 @@ import Container from '../../components/Container/Container';
 import Section from '../../components/Section/Section';
 import MediaPlaceholder from '../../components/MediaPlaceholder/MediaPlaceholder';
 import Button from '../../components/Button/Button';
-import LinkedInIcon from '../../components/icons/LinkedInIcon';
 import HeroHeading from './HeroHeading';
 import HeroStatement from './HeroStatement';
 import thumbnailVideo from '../../components/Pictures/Thumbnail video.jpg';
@@ -18,6 +17,14 @@ export const Hero = memo(() => {
     imageCache.preloadAll(heroAssets);
     browserCache.cacheUrls(heroAssets);
   }, []);
+  const handleConnectClick = (e) => {
+    e.preventDefault();
+    const contactEl = document.getElementById('contact');
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Section id="hero" paddingTop="hero" paddingBottom="hero" className="hero-section">
       <Container>
@@ -36,12 +43,12 @@ export const Hero = memo(() => {
           </div>
           <div className="hero-actions">
             <Button
-              variant="apple-linkedin"
-              href="https://www.linkedin.com/in/vishvara-gandharv/"
-              aria-label="Visit LinkedIn profile"
-              icon={<LinkedInIcon size={22} />}
+              variant="accent"
+              href="#contact"
+              onClick={handleConnectClick}
+              aria-label="Connect with me"
             >
-              LinkedIn
+              Connect with me
             </Button>
           </div>
         </div>

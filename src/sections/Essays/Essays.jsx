@@ -89,7 +89,7 @@ EssayItem.displayName = 'EssayItem';
 /**
  * Editorial Essays Section Component — 2-Column Grid
  */
-export const Essays = memo(({ essays = DEFAULT_ESSAYS, title = 'Essays' }) => {
+export const Essays = memo(({ essays = DEFAULT_ESSAYS, title = 'Things I wrote' }) => {
   // Pre-cache essay illustrations in memory & browser cache
   useEffect(() => {
     imageCache.preloadAll([sadSnowmanImg, sadSnowmanMeltdownImg]);

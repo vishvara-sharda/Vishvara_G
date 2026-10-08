@@ -19,6 +19,7 @@ const OBSERVATIONS_DATA = [
     quote:
       '“I particularly wish to acknowledge Vishvara for her exceptional dedication and contributions.”',
     name: 'Bhushan Sharma',
+    linkedin: 'https://www.linkedin.com/in/bhushanascend/',
     role: 'CEO & Designer · Prakriti Design',
     photo: bhushanImg,
     photoAlt: 'Bhushan Sharma — CEO & Designer at Prakriti Design'
@@ -30,6 +31,7 @@ const OBSERVATIONS_DATA = [
     quote:
       '“I had the opportunity to work with Vishvara during the DFC Hackathon, and her dedication, hard work, and passion for learning UI/UX truly stood out.”',
     name: 'Hitesh Kumawat',
+    linkedin: 'https://www.linkedin.com/in/hiteshkrkumawat/',
     role: 'Product Designer · Gracker AI',
     photo: hiteshImg,
     photoAlt: 'Hitesh Kumawat — Product Designer at Gracker AI'
@@ -41,6 +43,7 @@ const OBSERVATIONS_DATA = [
     quote:
       '“Vishvara has a rare quality — she doesn’t just research users, she genuinely cares about them. Every insight she brings is grounded in real empathy, not just method. Working with her made our whole team think differently about who we were designing for.”',
     name: 'Komal Loat',
+    linkedin: 'https://www.linkedin.com/in/komal-loat-9719b225/',
     role: 'Senior UX/UI Designer',
     photo: komalImg,
     photoAlt: 'Komal Loat — Senior UX/UI Designer'
@@ -52,6 +55,7 @@ const OBSERVATIONS_DATA = [
     quote:
       '“What I really like about Vishvara is the way she thinks. She is smart, creative, curious, and she can come up with ideas that most of us wouldn’t even think of. She reads a lot, especially about psychology, and that naturally reflects in the way she understands people and approaches UX problems. I’ve also seen how genuinely interested she is in user research and healthcare. For me, her biggest strength is simple—she thinks differently, and that makes her stand out.”',
     name: 'Dhara Ponkia',
+    linkedin: 'https://www.linkedin.com/in/dhara-ponkia-0a064916/',
     role: 'Lead Product Designer · Adit',
     photo: dharaImg,
     photoAlt: 'Dhara Ponkia — Lead Product Designer at Adit',
@@ -82,6 +86,7 @@ export const ObservationCard = memo(({
   source,
   quote,
   name,
+  linkedin,
   role,
   photo,
   photoAlt,
@@ -103,7 +108,21 @@ export const ObservationCard = memo(({
       {/* Bottom Section: Author info on left, photo on right */}
       <footer className="observation-card-footer">
         <div className="observation-card-author">
-          <cite className="observation-card-name">{name}</cite>
+          <cite className="observation-card-name">
+            {linkedin ? (
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="observation-card-link"
+                title={`${name} on LinkedIn`}
+              >
+                {name}
+              </a>
+            ) : (
+              name
+            )}
+          </cite>
           <span className="observation-card-role">{role}</span>
         </div>
 
@@ -160,6 +179,7 @@ export const Testimonials = memo(({
               variant={obs.variant}
               quote={obs.quote}
               name={obs.name}
+              linkedin={obs.linkedin}
               role={obs.role}
               photo={obs.photo}
               photoAlt={obs.photoAlt}

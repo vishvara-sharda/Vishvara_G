@@ -17,15 +17,15 @@
   --color-lemon: #F2EDCB;
   --color-disabled: #C4C4C4;
 
-  /* Functional Surfaces & Borders (Apple HIG Dark Mode Materials) */
-  --color-surface: rgba(255, 255, 255, 0.04);
-  --color-surface-hover: rgba(255, 255, 255, 0.07);
-  --color-surface-elevated: rgba(255, 255, 255, 0.06);
-  --color-surface-flat: rgba(20, 12, 16, 0.95);
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
+  /* Functional Surfaces & Borders (Apple HIG Dark Mode Materials — 2 shades lighter than background) */
+  --color-surface: rgba(255, 255, 255, 0.09);
+  --color-surface-hover: rgba(255, 255, 255, 0.13);
+  --color-surface-elevated: rgba(255, 255, 255, 0.11);
+  --color-surface-flat: rgba(28, 20, 24, 0.95);
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+  --color-border-hover: rgba(255, 255, 255, 0.18);
   --color-border-focus: #E2A9F1;
-  --color-border-flat: rgba(255, 255, 255, 0.1);
+  --color-border-flat: rgba(255, 255, 255, 0.14);
 
   /* ==========================================================================
      Spacing Tokens (8px rhythm with 4px optical step)

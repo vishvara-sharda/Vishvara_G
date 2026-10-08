@@ -60,30 +60,38 @@
    Apple HIG LinkedIn Variant (Matching Reference Image)
    ========================================================================== */
 .system-btn-apple-linkedin {
-  background-color: #0B71D6; /* Vibrant reference blue */
-  color: #FFFFFF;
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
-  border-radius: 9999px; /* Apple HIG capsule / pill geometry */
-  height: 50px; /* Fixed height for exact optical & mathematical centering */
-  padding: 0 28px; /* Symmetrical horizontal padding */
-  box-shadow: 0 4px 16px rgba(11, 113, 214, 0.35);
+  background-color: var(--color-accent, #E2A9F1);
+  color: #000000;
+  border: 1px solid var(--color-accent, #E2A9F1);
+  border-radius: var(--radius-pill, 9999px);
+  min-height: 48px;
+  height: 48px;
+  padding: 0 28px;
+  box-shadow: none;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.15s ease,
+              border-color 0.15s ease,
+              color 0.15s ease;
 }
 
 .system-btn-apple-linkedin:hover:not(.is-disabled):not(:disabled) {
-  background-color: #127fe8;
-  color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 6px 20px rgba(11, 113, 214, 0.45);
-  transform: scale(1.02);
+  background-color: var(--color-accent-light, #EAD5FA);
+  border-color: var(--color-accent-light, #EAD5FA);
+  color: #000000;
+  box-shadow: none;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.system-btn-apple-linkedin:hover .system-btn-icon path {
+  fill: var(--color-accent-light, #EAD5FA);
 }
 
 .system-btn-apple-linkedin:active:not(.is-disabled):not(:disabled) {
-  transform: scale(0.97); /* Apple HIG tactile compression */
-  background-color: #095fb5;
+  transform: translateY(0) scale(0.98);
 }
 
 .system-btn-apple-linkedin:focus-visible {
-  outline: 3px solid rgba(11, 113, 214, 0.65);
+  outline: 2px solid var(--color-accent, #E2A9F1);
   outline-offset: 3px;
 }
 
@@ -130,38 +138,41 @@
    Accent Variant (Apple HIG Capsule CTA)
    ========================================================================== */
 .system-btn-accent {
-  background-color: var(--color-accent);
+  background-color: var(--color-accent, #E2A9F1);
   color: #000000;
-  border: 1.5px solid var(--color-accent);
-  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-accent, #E2A9F1);
+  border-radius: var(--radius-pill, 9999px);
   height: 48px;
   min-height: 48px;
   padding: 0 28px;
-  box-shadow: 0 4px 16px rgba(226, 169, 241, 0.25);
+  box-shadow: none;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.15s ease,
+              border-color 0.15s ease,
+              color 0.15s ease;
 }
 
 .system-btn-accent .system-btn-label {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  font-size: clamp(0.95rem, 1vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: #000000;
 }
 
 .system-btn-accent:hover:not(.is-disabled):not(:disabled) {
-  background-color: #ecbcf8;
-  border-color: #ecbcf8;
+  background-color: var(--color-accent-light, #EAD5FA);
+  border-color: var(--color-accent-light, #EAD5FA);
   color: #000000;
-  box-shadow: 0 6px 20px rgba(226, 169, 241, 0.35);
+  box-shadow: none;
+  transform: translateY(-2px) scale(1.02);
 }
 
 .system-btn-accent:active:not(.is-disabled):not(:disabled) {
-  transform: scale(0.96);
-  background-color: #d698e6;
-  border-color: #d698e6;
+  transform: translateY(0) scale(0.98);
 }
 
 .system-btn-accent:focus-visible {
-  outline: 3px solid rgba(226, 169, 241, 0.65);
+  outline: 2px solid var(--color-accent, #E2A9F1);
   outline-offset: 3px;
 }
 
@@ -181,9 +192,9 @@
 
 /* LinkedIn Specific Label Overrides for exact visual match */
 .system-btn-apple-linkedin .system-btn-label {
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: #FFFFFF;
-  transform: translateY(1.5px);
+  font-size: clamp(0.95rem, 1vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #000000;
+  transform: none;
 }

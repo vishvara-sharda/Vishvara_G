@@ -1,9 +1,9 @@
 import React from 'react';
 
 export const LinkedInIcon = ({
-  size = 22,
-  badgeFill = '#FFFFFF',
-  cutoutFill = '#0B71D6',
+  size = 20,
+  badgeFill = '#000000',
+  cutoutFill = 'var(--color-accent, #E2A9F1)',
   className = ''
 }) => {
   return (
