@@ -1268,7 +1268,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               <h2 className="murmur-architecture-heading">the architecture and <span className="murmur-heading-accent">why</span></h2>
             </div>
 
-            <h4 className="murmur-dimensions-heading">core body</h4>
+            <h4 className="murmur-dimensions-heading">core <span className="murmur-heading-accent">body</span></h4>
 
             {/* Interactive Sketch-to-3D Comparison Sliders & Dimension Studies Grid */}
             <div className="murmur-dimensions-grid">
@@ -1419,7 +1419,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
             </div>
 
             {/* Technical Details Heading (Center Aligned) */}
-            <h4 className="murmur-dimensions-heading murmur-technical-heading">Technical Details</h4>
+            <h4 className="murmur-dimensions-heading murmur-technical-heading"><span className="murmur-heading-accent">technical</span> details</h4>
 
             {/* Feature Section: Warm Body on Touch */}
             <article className="murmur-warm-body-card" aria-labelledby="warm-body-title">
@@ -1773,7 +1773,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
           {/* THE IDENTITY SECTION */}
           <section className="murmur-identity-section" id="identity" aria-label="Murmur Identity">
             <div className="murmur-identity-header">
-              <h2 className="murmur-architecture-heading">the <span className="murmur-heading-accent">identity</span></h2>
+              <h4 className="murmur-dimensions-heading">the <span className="murmur-heading-accent">identity</span></h4>
             </div>
 
             {/* Dual Lineup Banners: Mother & Partner skin tone ranges */}

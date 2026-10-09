@@ -1498,7 +1498,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 0 auto clamp(24px, 3.5vh, 36px);
+  margin: 0 auto clamp(68px, calc(6.5vh + 20px), 96px);
 }
 
 .murmur-architecture-heading {
@@ -1524,8 +1524,8 @@
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: var(--line-height-heading, 1.25);
-  color: #F8C363;
-  font-style: italic;
+  color: #FFFFFF;
+  font-style: normal;
   margin: 0 auto clamp(20px, 3vh, 32px) auto;
   padding: 0;
   text-align: center;
