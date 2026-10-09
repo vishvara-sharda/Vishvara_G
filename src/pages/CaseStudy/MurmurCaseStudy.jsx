@@ -14,6 +14,7 @@ import idea5Img from '../../components/Pictures/Projects/Murmur/idea5.jpg';
 import fullViewImg from '../../components/Pictures/Projects/Murmur/full view.png';
 import fullViewManImg from '../../components/Pictures/Projects/Murmur/full view man.png';
 import belliesImg from '../../components/Pictures/Projects/Murmur/bellies.png';
+import bellyImg from '../../components/Pictures/Projects/Murmur/belly.png';
 import pvmGlowRedImg from '../../components/Pictures/Projects/Murmur/pvm glow red.png';
 import pvwGlowRedImg from '../../components/Pictures/Projects/Murmur/pvw glow red.png';
 import p1Img from '../../components/Pictures/Projects/Murmur/p1.png';
@@ -26,6 +27,25 @@ import femaleVideo from '../../components/Pictures/Projects/Murmur/female.mp4';
 import maleVideo from '../../components/Pictures/Projects/Murmur/male.mp4';
 import technicalViewImg from '../../components/Pictures/Projects/Murmur/technical view.png';
 import menTechnicalImg from '../../components/Pictures/Projects/Murmur/men techoncal.png';
+import femaleDimensionSketchImg from '../../components/Pictures/Projects/Murmur/Female Doll Dimension Sketch.png';
+import femaleDimensionSheetImg from '../../components/Pictures/Projects/Murmur/Female Doll Dimension Sheet.png';
+import maleDimensionSketchImg from '../../components/Pictures/Projects/Murmur/Male Doll Dimensions Sketch.png';
+import maleDimensionStudyImg from '../../components/Pictures/Projects/Murmur/Male Doll Dimensional Study.png';
+import bellySketchImg from '../../components/Pictures/Projects/Murmur/belly sktech.png';
+import bellyPlateGuideImg from '../../components/Pictures/Projects/Murmur/Belly Plate Dimension Guide.png';
+import weightImg from '../../components/Pictures/Projects/Murmur/weight.png';
+import siliconImg from '../../components/Pictures/Projects/Murmur/silicon.png';
+import sensorAssemblyImg from '../../components/Pictures/Projects/Murmur/Sensor Assembly.png';
+import touchSensorAssemblyImg from '../../components/Pictures/Projects/Murmur/Touch Sensor Assembly.png';
+import bladderImg from '../../components/Pictures/Projects/Murmur/Bladder.png';
+import vibrationMotorImg from '../../components/Pictures/Projects/Murmur/Vibration Motor.png';
+import magneticBellyImg from '../../components/Pictures/Projects/Murmur/Magnetic Pregnancy Belly.png';
+import usbCPortImg from '../../components/Pictures/Projects/Murmur/USB-C Back Port Comparison.png';
+import houseSketchImg from '../../components/Pictures/Projects/Murmur/House-Shaped Mini Cabinet Technical Views.png';
+import houseRenderImg from '../../components/Pictures/Projects/Murmur/House-Shaped Enclosure Design Diagram.png';
+import coupleImg from '../../components/Pictures/Projects/Murmur/couple.png';
+import femaleDollsImg from '../../components/Pictures/Projects/Murmur/female dolls.png';
+import maleDollsImg from '../../components/Pictures/Projects/Murmur/male dolls.png';
 import { imageCache, browserCache, storageCache } from '../../utils/cache';
 import './CaseStudy.css';
 import './MurmurCaseStudy.css';
@@ -33,6 +53,7 @@ import './MurmurCaseStudy.css';
 export const MURMUR_ALL_ASSETS = [
   murmurCover,
   belliesImg,
+  bellyImg,
   pvmGlowRedImg,
   pvwGlowRedImg,
   p1Img,
@@ -48,6 +69,25 @@ export const MURMUR_ALL_ASSETS = [
   fullViewManImg,
   technicalViewImg,
   menTechnicalImg,
+  femaleDimensionSketchImg,
+  femaleDimensionSheetImg,
+  maleDimensionSketchImg,
+  maleDimensionStudyImg,
+  bellySketchImg,
+  bellyPlateGuideImg,
+  weightImg,
+  siliconImg,
+  sensorAssemblyImg,
+  touchSensorAssemblyImg,
+  bladderImg,
+  vibrationMotorImg,
+  magneticBellyImg,
+  usbCPortImg,
+  houseSketchImg,
+  houseRenderImg,
+  coupleImg,
+  femaleDollsImg,
+  maleDollsImg,
   researchIAImg,
   ia4Img,
   iaImg,
@@ -61,6 +101,29 @@ if (typeof window !== 'undefined') {
   imageCache.preloadAll(MURMUR_ALL_ASSETS);
   browserCache.cacheUrls(MURMUR_ALL_ASSETS);
 }
+
+/**
+ * Murmur Identity: 10 Skin Tones & 4 Hair Colours
+ */
+const MURMUR_SKIN_TONES = [
+  { hex: '#F0DCC4', name: 'Fair Ivory' },
+  { hex: '#E6C9A9', name: 'Warm Sand' },
+  { hex: '#D9AF85', name: 'Golden Wheat' },
+  { hex: '#C79968', name: 'Honey Almond' },
+  { hex: '#B3844E', name: 'Warm Amber' },
+  { hex: '#996B3A', name: 'Caramel Tan' },
+  { hex: '#7D5228', name: 'Rich Chestnut' },
+  { hex: '#5F3E1D', name: 'Cocoa Bronze' },
+  { hex: '#422C17', name: 'Deep Umber' },
+  { hex: '#2D1D10', name: 'Dark Espresso' }
+];
+
+const MURMUR_HAIR_COLOURS = [
+  { hex: '#171311', name: 'Jet Black' },
+  { hex: '#2A1C17', name: 'Dark Brown' },
+  { hex: '#493126', name: 'Medium Brown' },
+  { hex: '#68483A', name: 'Light Brown' }
+];
 
 /**
  * Postpartum Experience Research Synthesis Data
@@ -373,8 +436,8 @@ const MURMUR_DOLL_FEATURES = [
     id: 'detachable-bellies',
     number: '01',
     name: 'Detachable bellies',
-    image: belliesImg,
-    aspectRatio: '1683 / 935',
+    images: [belliesImg, bellyImg],
+    aspectRatio: '1536 / 1024',
     alt: 'Detachable bellies progressive magnetic attachments',
     howItWorks: (
       <>
@@ -440,129 +503,248 @@ const MURMUR_DOLL_FEATURES = [
 
 /**
  * Component: FeatureCard
- * Editorial product-story card for each Murmur doll feature.
- * 3-Column structure on desktop: Feature image / name | How it works? | Why this?
- * Mobile: Clean vertical stack.
+ */
+/**
+ * Component: SketchCompareSlider
+ * Interactive sketch-to-3D comparison slider with draggable divider
+ * Centered in the middle by default (50%)
+ */
+const SketchCompareSlider = memo(function SketchCompareSlider({
+  sketchSrc,
+  renderSrc,
+  aspectRatio = '1731 / 909',
+  sketchAlt = 'Murmur Technical Dimension Sketch',
+  renderAlt = 'Murmur 3D Render Dimension Sheet',
+  wrapperClassName = '',
+  onSelectImage
+}) {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = React.useRef(null);
+
+  const updatePosition = useCallback((clientX) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percent = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+    setSliderPosition(percent);
+  }, []);
+
+  const handlePointerDown = useCallback((e) => {
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    updatePosition(e.clientX);
+  }, [updatePosition]);
+
+  const handlePointerMove = useCallback((e) => {
+    if (!isDragging) return;
+    updatePosition(e.clientX);
+  }, [isDragging, updatePosition]);
+
+  const handlePointerUp = useCallback((e) => {
+    setIsDragging(false);
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // Ignore if pointer capture already released
+    }
+  }, []);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.max(0, prev - 5));
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.min(100, prev + 5));
+    }
+  }, []);
+
+  return (
+    <div className={`murmur-compare-section-wrap ${wrapperClassName}`}>
+      <div
+        ref={containerRef}
+        className={`murmur-compare-container ${isDragging ? 'is-dragging' : ''}`}
+        style={{ aspectRatio }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="slider"
+        aria-label="Interactive sketch to 3D render comparison slider"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(sliderPosition)}
+      >
+        {/* Bottom layer: 3D Render (revealed on the right) */}
+        <div className="murmur-compare-layer murmur-compare-layer-render">
+          <img
+            src={renderSrc}
+            alt={renderAlt}
+            className="murmur-compare-image"
+            draggable={false}
+          />
+        </div>
+
+        {/* Top layer: Technical Sketch (revealed on the left) clipped by sliderPosition */}
+        <div
+          className="murmur-compare-layer murmur-compare-layer-sketch"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        >
+          <img
+            src={sketchSrc}
+            alt={sketchAlt}
+            className="murmur-compare-image"
+            draggable={false}
+          />
+        </div>
+
+        {/* Draggable Divider Line & Handle */}
+        <div
+          className="murmur-compare-divider"
+          style={{ left: `${sliderPosition}%` }}
+        >
+          <div className="murmur-compare-line" />
+          <div className="murmur-compare-handle" aria-hidden="true">
+            <svg
+              className="murmur-compare-handle-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            <svg
+              className="murmur-compare-handle-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+/**
+ * Component: FeatureCard
+ * Showcase card for each Murmur doll feature: images in a big card, with feature name underneath.
+ * Features numbered 1, 2, 3 boldly outside on top of cards.
  */
 const FeatureCard = memo(function FeatureCard({ feature, onSelectImage }) {
+  const number = feature.number ? parseInt(feature.number, 10) : '';
+
   return (
-    <article className="murmur-feature-card" aria-label={`Feature: ${feature.name || feature.id}`}>
-      {/* Column 1 — Feature: Label + Visual Anchor + Name on Bottom */}
-      <div className="murmur-card-col murmur-card-col-feature">
-        <div className="murmur-card-col-header">
-          <span className="murmur-card-col-label">
-            {feature.number ? `${feature.number} · FEATURE` : 'FEATURE'}
-          </span>
-        </div>
+    <div className="murmur-feature-col">
+      {/* Number outside the card on top */}
+      {number && (
+        <span className="murmur-feature-number" aria-hidden="true">
+          {number}
+        </span>
+      )}
 
+      <figure className="murmur-feature-card" aria-label={`Feature: ${feature.name || feature.id}`}>
         {/* Feature Visual(s): Videos or Images */}
-        {feature.videos && feature.videos.length > 0 ? (
-          <div className="murmur-feature-gallery-grid">
-            {feature.videos.map((vidSrc, vidIdx) => (
-              <div key={vidIdx} className="murmur-feature-video-item">
-                <div
-                  className="murmur-feature-img-wrap murmur-feature-video-wrap"
-                  style={{ aspectRatio: feature.aspectRatio || '1536 / 1024' }}
-                >
-                  <video
-                    src={vidSrc}
-                    className="murmur-feature-img murmur-feature-video"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    aria-label={`${feature.name || 'Murmur partner figure video'} view ${vidIdx + 1}`}
-                  />
+        <div className="murmur-card-visuals">
+          {feature.videos && feature.videos.length > 0 ? (
+            <div className="murmur-feature-gallery-grid">
+              {feature.videos.map((vidSrc, vidIdx) => (
+                <div key={vidIdx} className="murmur-feature-video-item">
+                  <div
+                    className="murmur-feature-img-wrap murmur-feature-video-wrap"
+                    style={{ aspectRatio: feature.aspectRatio || '1536 / 1024' }}
+                  >
+                    <video
+                      src={vidSrc}
+                      className="murmur-feature-img murmur-feature-video"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      aria-label={`${feature.name || 'Murmur partner figure video'} view ${vidIdx + 1}`}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : feature.video ? (
-          <div className="murmur-feature-video-item">
-            <div
-              className="murmur-feature-img-wrap murmur-feature-video-wrap"
-              style={{ aspectRatio: feature.aspectRatio || '1683 / 935' }}
-            >
-              <video
-                src={feature.video}
-                className="murmur-feature-img murmur-feature-video"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                aria-label={feature.alt || feature.name || 'Feature video'}
-              />
+              ))}
             </div>
-          </div>
-        ) : feature.images && feature.images.length > 0 ? (
-          <div className="murmur-feature-gallery-grid">
-            {feature.images.map((imgSrc, imgIdx) => (
-              <button
-                key={imgIdx}
-                type="button"
-                className="murmur-feature-img-btn murmur-feature-gallery-btn"
-                onClick={() => onSelectImage?.({ src: imgSrc, alt: `${feature.name || 'Murmur partner figure'} view ${imgIdx + 1}` })}
-                aria-label={`Inspect visual ${imgIdx + 1}`}
+          ) : feature.video ? (
+            <div className="murmur-feature-video-item">
+              <div
+                className="murmur-feature-img-wrap murmur-feature-video-wrap"
+                style={{ aspectRatio: feature.aspectRatio || '1683 / 935' }}
               >
-                <CachedImage
-                  src={imgSrc}
-                  alt={`${feature.name || 'Murmur partner figure'} view ${imgIdx + 1}`}
-                  className="murmur-feature-img"
-                  wrapperClassName="murmur-feature-img-wrap"
-                  aspectRatio="1536 / 1024"
-                  objectFit="cover"
+                <video
+                  src={feature.video}
+                  className="murmur-feature-img murmur-feature-video"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  aria-label={feature.alt || feature.name || 'Feature video'}
                 />
-              </button>
-            ))}
-          </div>
-        ) : feature.image ? (
-          <button
-            type="button"
-            className="murmur-feature-img-btn"
-            onClick={() => onSelectImage?.({ src: feature.image, alt: feature.alt || feature.name || 'Feature visual' })}
-            aria-label={feature.alt || feature.name || "Inspect feature visual"}
-          >
-            <CachedImage
-              src={feature.image}
-              alt={feature.alt || feature.name || 'Feature visual'}
-              className="murmur-feature-img"
-              wrapperClassName="murmur-feature-img-wrap"
-              aspectRatio={feature.aspectRatio || "1683 / 935"}
-              objectFit="cover"
-            />
-          </button>
-        ) : null}
+              </div>
+            </div>
+          ) : feature.images && feature.images.length > 0 ? (
+            <div className="murmur-feature-gallery-grid">
+              {feature.images.map((imgSrc, imgIdx) => (
+                <button
+                  key={imgIdx}
+                  type="button"
+                  className="murmur-feature-img-btn murmur-feature-gallery-btn"
+                  onClick={() => onSelectImage?.({ src: imgSrc, alt: `${feature.name || 'Murmur partner figure'} view ${imgIdx + 1}` })}
+                  aria-label={`Inspect visual ${imgIdx + 1}`}
+                >
+                  <CachedImage
+                    src={imgSrc}
+                    alt={`${feature.name || 'Murmur partner figure'} view ${imgIdx + 1}`}
+                    className="murmur-feature-img"
+                    wrapperClassName="murmur-feature-img-wrap"
+                    aspectRatio="1536 / 1024"
+                    objectFit="cover"
+                  />
+                </button>
+              ))}
+            </div>
+          ) : feature.image ? (
+            <button
+              type="button"
+              className="murmur-feature-img-btn"
+              onClick={() => onSelectImage?.({ src: feature.image, alt: feature.alt || feature.name || 'Feature visual' })}
+              aria-label={feature.alt || feature.name || "Inspect feature visual"}
+            >
+              <CachedImage
+                src={feature.image}
+                alt={feature.alt || feature.name || 'Feature visual'}
+                className="murmur-feature-img"
+                wrapperClassName="murmur-feature-img-wrap"
+                aspectRatio={feature.aspectRatio || "1683 / 935"}
+                objectFit="cover"
+              />
+            </button>
+          ) : null}
+        </div>
 
-        {/* Feature Name placed on bottom of image for every card */}
+        {/* Caption of what the feature is */}
         {feature.name && (
-          <div className="murmur-card-feature-bottom-meta">
-            <h3 className="murmur-card-feature-name">{feature.name}</h3>
-          </div>
+          <figcaption className="murmur-card-caption">
+            {feature.name}
+          </figcaption>
         )}
-      </div>
-
-      {/* Column 2 — How it works? */}
-      <div className="murmur-card-col murmur-card-col-how">
-        <div className="murmur-card-col-header">
-          <span className="murmur-card-col-label">HOW IT WORKS?</span>
-        </div>
-        <div className="murmur-card-body-text murmur-card-how-text">
-          {feature.howItWorks}
-        </div>
-      </div>
-
-      {/* Column 3 — Why this? */}
-      <div className="murmur-card-col murmur-card-col-why">
-        <div className="murmur-card-col-header">
-          <span className="murmur-card-col-label">WHY THIS?</span>
-        </div>
-        <div className="murmur-card-body-text murmur-card-why-text">
-          {feature.whyThis}
-        </div>
-      </div>
-    </article>
+      </figure>
+    </div>
   );
 });
 
@@ -1062,18 +1244,14 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
             </div>
           </section>
 
-          {/* HOW IT WORKS / WHY THESE FEATURES SECTION */}
-          <section className="murmur-how-it-works-section" id="how-it-works" aria-label="How it works? Why these features?">
+          {/* FEATURES SECTION */}
+          <section className="murmur-how-it-works-section" id="how-it-works" aria-label="What are the main features">
             <div className="murmur-how-it-works-group">
-              <div className="murmur-how-grid">
-                <span className="murmur-how-line">how it works</span>
-                <span className="murmur-how-line">?</span>
-                <span className="murmur-how-line murmur-how-secondary">why these features?</span>
-              </div>
+              <h2 className="murmur-features-heading">what are the main features</h2>
             </div>
 
-            {/* Individual Feature Story Cards */}
-            <div className="murmur-feature-cards-wrap" role="region" aria-label="Murmur doll feature stories">
+            {/* Feature Cards: Picture with feature caption */}
+            <div className="murmur-feature-cards-wrap" role="region" aria-label="Murmur doll features">
               {MURMUR_DOLL_FEATURES.map((feature) => (
                 <FeatureCard
                   key={feature.id}
@@ -1084,46 +1262,629 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
             </div>
           </section>
 
-          {/* THE TECHNICALITIES SECTION */}
-          <section className="murmur-technicalities-section" id="technicalities" aria-label="The technicalities">
-            <div className="murmur-technicalities-header">
-              <h2 className="murmur-technicalities-heading">the technicalities</h2>
+          {/* THE ARCHITECTURE AND WHY SECTION */}
+          <section className="murmur-architecture-section" id="architecture" aria-label="The architecture and why">
+            <div className="murmur-architecture-header">
+              <h2 className="murmur-architecture-heading">the architecture and <span className="murmur-heading-accent">why</span></h2>
             </div>
-            <div className="murmur-technicalities-grid" role="group" aria-label="Technical internal diagrams side by side">
-              <button
-                type="button"
-                className="murmur-technical-card"
-                onClick={() => handleOpenLightbox({ src: technicalViewImg, alt: 'Technical internal view - Mother figure' })}
-                aria-label="Inspect mother figure technical internal view"
-              >
-                <div className="murmur-technical-img-wrap">
-                  <CachedImage
-                    src={technicalViewImg}
-                    alt="Technical internal view - Mother figure"
-                    className="murmur-technical-img"
-                    aspectRatio="1024 / 1536"
-                    objectFit="cover"
-                  />
-                </div>
-              </button>
 
-              <button
-                type="button"
-                className="murmur-technical-card"
-                onClick={() => handleOpenLightbox({ src: menTechnicalImg, alt: 'Technical internal view - Partner figure' })}
-                aria-label="Inspect partner figure technical internal view"
-              >
-                <div className="murmur-technical-img-wrap">
-                  <CachedImage
-                    src={menTechnicalImg}
-                    alt="Technical internal view - Partner figure"
-                    className="murmur-technical-img"
-                    aspectRatio="1024 / 1536"
-                    objectFit="cover"
+            <h4 className="murmur-dimensions-heading">core body</h4>
+
+            {/* Interactive Sketch-to-3D Comparison Sliders & Dimension Studies Grid */}
+            <div className="murmur-dimensions-grid">
+              {/* Row 1, Col 1: Female Doll Technical Sketch to 3D Render */}
+              <SketchCompareSlider
+                sketchSrc={femaleDimensionSketchImg}
+                renderSrc={femaleDimensionSheetImg}
+                aspectRatio="1731 / 909"
+                sketchAlt="Murmur Female Doll Technical Dimension Sketch"
+                renderAlt="Murmur Female Doll 3D Render Dimension Sheet"
+                onSelectImage={handleOpenLightbox}
+              />
+
+              {/* Row 1, Col 2: Male Doll Technical Sketch to 3D Render */}
+              <SketchCompareSlider
+                sketchSrc={maleDimensionSketchImg}
+                renderSrc={maleDimensionStudyImg}
+                aspectRatio="1731 / 909"
+                sketchAlt="Murmur Male Doll Technical Dimensions Sketch"
+                renderAlt="Murmur Male Doll 3D Dimensional Study"
+                onSelectImage={handleOpenLightbox}
+              />
+
+              {/* Row 2, Col 1: Modular Belly Attachment Slider (under Female Doll) */}
+              <SketchCompareSlider
+                sketchSrc={bellySketchImg}
+                renderSrc={bellyPlateGuideImg}
+                aspectRatio="1536 / 1024"
+                sketchAlt="Murmur Modular Belly Technical Sketch"
+                renderAlt="Murmur Belly Plate Dimension Guide"
+                onSelectImage={handleOpenLightbox}
+              />
+
+              {/* Row 2, Col 2: Why This Way Design Rationale Card (beside Belly) */}
+              <div className="murmur-compare-section-wrap">
+                <div className="murmur-why-card">
+                  <h5 className="murmur-why-heading">Why This Way</h5>
+                  <ul className="murmur-why-list">
+                    <li className="murmur-why-item">Small enough to fit comfortably in the palm and carry easily.</li>
+                    <li className="murmur-why-item">Different belly depths give users more control over how they represent their bodies.</li>
+                    <li className="murmur-why-item">Dimensions leave enough room for the internal mechanisms.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Row 3, Col 1: House Enclosure Why This Way Card (on the left side) */}
+              <div className="murmur-compare-section-wrap">
+                <div className="murmur-why-card">
+                  <h5 className="murmur-why-heading">Why This Way</h5>
+                  <ul className="murmur-why-list">
+                    <li className="murmur-why-item">
+                      The 11–12 cm house is designed to hold two Murmur dolls together, giving them a shared space to rest and charge.
+                    </li>
+                    <li className="murmur-why-item">
+                      The house creates a sense of belonging by giving the dolls a little home of their own.
+                    </li>
+                    <li className="murmur-why-item">
+                      Its solid outer body and textured plastic gates make it feel like a small decorative object, not just a charger.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Row 3, Col 2: House-Shaped Mini Cabinet / Enclosure Comparison Slider (on the right side) */}
+              <SketchCompareSlider
+                sketchSrc={houseSketchImg}
+                renderSrc={houseRenderImg}
+                aspectRatio="1536 / 1024"
+                sketchAlt="Murmur House-Shaped Mini Cabinet Technical Views"
+                renderAlt="Murmur House-Shaped Enclosure Design Diagram"
+                onSelectImage={handleOpenLightbox}
+              />
+
+              {/* Row 4, Col 1: Weight Specification Study (on the left side) */}
+              <div className="murmur-compare-section-wrap">
+                <div
+                  className="murmur-dimension-card"
+                  style={{ aspectRatio: '1536 / 1024' }}
+                  onClick={() => handleOpenLightbox({ src: weightImg, alt: 'Murmur figures weight specification 50g and 60g' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: weightImg, alt: 'Murmur figures weight specification 50g and 60g' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur figures weight specification"
+                >
+                  <img
+                    src={weightImg}
+                    alt="Murmur figures weight specification 50g and 60g"
+                    className="murmur-dimension-card-img"
+                    draggable={false}
                   />
                 </div>
-              </button>
+              </div>
+
+              {/* Row 4, Col 2: Why This Way Design Rationale Card (on the right side) */}
+              <div className="murmur-compare-section-wrap">
+                <div className="murmur-why-card">
+                  <h5 className="murmur-why-heading">Why This Way</h5>
+                  <ul className="murmur-why-list">
+                    <li className="murmur-why-item">
+                      Keeping the weight between 45–60 g makes Murmur light enough to carry while still feeling comforting to hold.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Row 5, Col 1: Why This Way Design Rationale Card (on the left side) */}
+              <div className="murmur-compare-section-wrap">
+                <div className="murmur-why-card">
+                  <h5 className="murmur-why-heading">Why This Way</h5>
+                  <ul className="murmur-why-list">
+                    <li className="murmur-why-item">
+                      Soft silicone creates a gentle, skin-like feel when held.
+                    </li>
+                    <li className="murmur-why-item">
+                      Medical-grade silicone is chosen with sensitive skin in mind, with safety testing needed before use.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Row 5, Col 2: Silicone Material Flexibility Study (on the right side) */}
+              <div className="murmur-compare-section-wrap">
+                <div
+                  className="murmur-dimension-card"
+                  style={{ aspectRatio: '1536 / 1024' }}
+                  onClick={() => handleOpenLightbox({ src: siliconImg, alt: 'Murmur modular belly soft silicone material study' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: siliconImg, alt: 'Murmur modular belly soft silicone material study' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur modular belly soft silicone material study"
+                >
+                  <img
+                    src={siliconImg}
+                    alt="Murmur modular belly soft silicone material study"
+                    className="murmur-dimension-card-img"
+                    draggable={false}
+                  />
+                </div>
+              </div>
             </div>
+
+            {/* Technical Details Heading (Center Aligned) */}
+            <h4 className="murmur-dimensions-heading murmur-technical-heading">Technical Details</h4>
+
+            {/* Feature Section: Warm Body on Touch */}
+            <article className="murmur-warm-body-card" aria-labelledby="warm-body-title">
+              {/* Header */}
+              <div className="murmur-warm-body-header">
+                <h3 id="warm-body-title" className="murmur-warm-body-title">
+                  Warm Body on Touch
+                </h3>
+              </div>
+
+              <div className="murmur-warm-body-divider" />
+
+              {/* Visual Showcase: Main feature on left, components on right */}
+              <div className="murmur-warm-body-media-grid">
+                {/* Left: Main Feature Visual & How it works directly below */}
+                <div className="murmur-warm-body-main-col">
+                  <div
+                    className="murmur-warm-body-img-wrap murmur-warm-body-main-img-wrap"
+                    onClick={() => handleOpenLightbox({ src: pvwGlowRedImg, alt: 'Murmur warm body on touch ambient glow' })}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handleOpenLightbox({ src: pvwGlowRedImg, alt: 'Murmur warm body on touch ambient glow' });
+                      }
+                    }}
+                    aria-label="Inspect Murmur warm body on touch main visual"
+                  >
+                    <img
+                      src={pvwGlowRedImg}
+                      alt="Murmur warm body on touch ambient glow"
+                      className="murmur-warm-body-img"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  </div>
+
+                  {/* Why This Way? subsection directly under pvw red glow image */}
+                  <div className="murmur-warm-body-how-it-works">
+                    <h4 className="murmur-warm-body-how-title">Why This Way?</h4>
+                    <h5 className="murmur-warm-body-how-text">
+                      Warmth helps Murmur feel more like a real partner when held. A temperature sensor monitors the body's temperature, while the heating element provides controlled warmth to mimic the natural warmth of human skin and make the experience feel more personal.
+                    </h5>
+                  </div>
+                </div>
+
+                {/* Right: Smaller Component Visuals with Captions */}
+                <div className="murmur-warm-body-components-col">
+                  {/* Component 1: Heating & sensor assembly */}
+                  <figure className="murmur-warm-body-comp-item">
+                    <div
+                      className="murmur-warm-body-img-wrap murmur-warm-body-comp-img-wrap"
+                      onClick={() => handleOpenLightbox({ src: sensorAssemblyImg, alt: 'Heating & sensor assembly' })}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleOpenLightbox({ src: sensorAssemblyImg, alt: 'Heating & sensor assembly' });
+                        }
+                      }}
+                      aria-label="Inspect Heating & sensor assembly"
+                    >
+                      <img
+                        src={sensorAssemblyImg}
+                        alt="Heating & sensor assembly"
+                        className="murmur-warm-body-img"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
+                    <figcaption className="murmur-warm-body-caption">
+                      Heating & sensor assembly
+                    </figcaption>
+                  </figure>
+
+                  {/* Component 2: Touch sensor assembly */}
+                  <figure className="murmur-warm-body-comp-item">
+                    <div
+                      className="murmur-warm-body-img-wrap murmur-warm-body-comp-img-wrap"
+                      onClick={() => handleOpenLightbox({ src: touchSensorAssemblyImg, alt: 'Touch sensor assembly' })}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleOpenLightbox({ src: touchSensorAssemblyImg, alt: 'Touch sensor assembly' });
+                        }
+                      }}
+                      aria-label="Inspect Touch sensor assembly"
+                    >
+                      <img
+                        src={touchSensorAssemblyImg}
+                        alt="Touch sensor assembly"
+                        className="murmur-warm-body-img"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
+                    <figcaption className="murmur-warm-body-caption">
+                      Touch sensor assembly
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            {/* Feature Section: Mimic Breathing */}
+            <article className="murmur-warm-body-card" aria-labelledby="mimic-breathing-title">
+              {/* Header */}
+              <div className="murmur-warm-body-header">
+                <h3 id="mimic-breathing-title" className="murmur-warm-body-title">
+                  Mimic Breathing
+                </h3>
+              </div>
+
+              <div className="murmur-warm-body-divider" />
+
+              {/* Visual Showcase: Video feature on left, components on right */}
+              <div className="murmur-warm-body-media-grid">
+                {/* Left: Main Feature Video & How it works directly below */}
+                <div className="murmur-warm-body-main-col">
+                  <div
+                    className="murmur-warm-body-img-wrap murmur-warm-body-main-img-wrap"
+                    aria-label="Murmur mimic breathing visual animation"
+                  >
+                    <video
+                      src={femaleVideo}
+                      className="murmur-warm-body-img"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      aria-label="Murmur mimic breathing animation"
+                    />
+                  </div>
+
+                  {/* Why This Way subsection directly under video */}
+                  <div className="murmur-warm-body-how-it-works">
+                    <h4 className="murmur-warm-body-how-title">Why This Way</h4>
+                    <h5 className="murmur-warm-body-how-text">
+                      Breathing and heartbeat are familiar signs of a person's presence. By mimicking the gentle rise and fall of breathing and the rhythmic pulse of a heartbeat, Murmur is designed to feel more like holding your partner close, helping create a deeper sense of connection even when they're away.
+                    </h5>
+                  </div>
+                </div>
+
+                {/* Right: Smaller Component Visuals with Captions */}
+                <div className="murmur-warm-body-components-col">
+                  {/* Component 1: Breathing bladder */}
+                  <figure className="murmur-warm-body-comp-item">
+                    <div
+                      className="murmur-warm-body-img-wrap murmur-warm-body-comp-img-wrap"
+                      onClick={() => handleOpenLightbox({ src: bladderImg, alt: 'Breathing bladder' })}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleOpenLightbox({ src: bladderImg, alt: 'Breathing bladder' });
+                        }
+                      }}
+                      aria-label="Inspect Breathing bladder"
+                    >
+                      <img
+                        src={bladderImg}
+                        alt="Breathing bladder"
+                        className="murmur-warm-body-img"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
+                    <figcaption className="murmur-warm-body-caption">
+                      Breathing bladder
+                    </figcaption>
+                  </figure>
+
+                  {/* Component 2: Vibration motor */}
+                  <figure className="murmur-warm-body-comp-item">
+                    <div
+                      className="murmur-warm-body-img-wrap murmur-warm-body-comp-img-wrap"
+                      onClick={() => handleOpenLightbox({ src: vibrationMotorImg, alt: 'Vibration motor' })}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleOpenLightbox({ src: vibrationMotorImg, alt: 'Vibration motor' });
+                        }
+                      }}
+                      aria-label="Inspect Vibration motor"
+                    >
+                      <img
+                        src={vibrationMotorImg}
+                        alt="Vibration motor"
+                        className="murmur-warm-body-img"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
+                    <figcaption className="murmur-warm-body-caption">
+                      Vibration motor
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            {/* Feature Section: Magnetic Belly */}
+            <article className="murmur-warm-body-card" aria-labelledby="magnetic-belly-title">
+              {/* Header */}
+              <div className="murmur-warm-body-header">
+                <h3 id="magnetic-belly-title" className="murmur-warm-body-title">
+                  Magnetic Belly
+                </h3>
+              </div>
+
+              <div className="murmur-warm-body-divider" />
+
+              {/* Visual Showcase: Image on left, How it works on right */}
+              <div className="murmur-magnetic-belly-grid">
+                {/* Left: Image */}
+                <div
+                  className="murmur-warm-body-img-wrap"
+                  onClick={() => handleOpenLightbox({ src: magneticBellyImg, alt: 'Murmur magnetic pregnancy belly modular mechanism' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: magneticBellyImg, alt: 'Murmur magnetic pregnancy belly modular mechanism' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur magnetic pregnancy belly mechanism"
+                >
+                  <img
+                    src={magneticBellyImg}
+                    alt="Murmur magnetic pregnancy belly modular mechanism"
+                    className="murmur-warm-body-img"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+
+                {/* Right: Why this way */}
+                <div className="murmur-magnetic-belly-how-col">
+                  <div className="murmur-warm-body-how-it-works murmur-magnetic-belly-how-content">
+                    <h4 className="murmur-warm-body-how-title">Why this way</h4>
+                    <h5 className="murmur-warm-body-how-text">
+                      The magnetic belly lets users choose how they want Murmur’s body to look. They can change the belly to represent different stages of pregnancy or remove it to represent life before or after pregnancy.
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Feature Section: Charging Port */}
+            <article className="murmur-warm-body-card" aria-labelledby="charging-port-title">
+              {/* Header */}
+              <div className="murmur-warm-body-header">
+                <h3 id="charging-port-title" className="murmur-warm-body-title">
+                  Charging Port
+                </h3>
+              </div>
+
+              <div className="murmur-warm-body-divider" />
+
+              {/* Visual Showcase: Image on left, Why this way on right */}
+              <div className="murmur-magnetic-belly-grid">
+                {/* Left: Image */}
+                <div
+                  className="murmur-warm-body-img-wrap"
+                  onClick={() => handleOpenLightbox({ src: usbCPortImg, alt: 'Murmur USB-C back port comparison' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: usbCPortImg, alt: 'Murmur USB-C back port comparison' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur USB-C back port comparison"
+                >
+                  <img
+                    src={usbCPortImg}
+                    alt="Murmur USB-C back port comparison"
+                    className="murmur-warm-body-img"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+
+                {/* Right: Why this way */}
+                <div className="murmur-magnetic-belly-how-col">
+                  <div className="murmur-warm-body-how-it-works murmur-magnetic-belly-how-content">
+                    <h4 className="murmur-warm-body-how-title">Why this way</h4>
+                    <h5 className="murmur-warm-body-how-text">
+                      Murmur is a secret language between two people, and the little house makes that connection more personal. It gives the doll a home of its own, turning a simple charging routine into a small, meaningful part of everyday life.
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Technical Internal Diagrams Grid */}
+            <div className="murmur-technical-grid" role="group" aria-label="Technical internal diagrams">
+              {/* Partner Figure Technical Internal View */}
+              <div className="murmur-compare-section-wrap">
+                <div
+                  className="murmur-dimension-card"
+                  style={{ aspectRatio: '1024 / 1536' }}
+                  onClick={() => handleOpenLightbox({ src: menTechnicalImg, alt: 'Murmur Partner figure internal technical view' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: menTechnicalImg, alt: 'Murmur Partner figure internal technical view' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur Partner figure internal technical view"
+                >
+                  <img
+                    src={menTechnicalImg}
+                    alt="Murmur Partner figure internal technical view"
+                    className="murmur-dimension-card-img"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+
+              {/* Mother Figure Technical Internal View */}
+              <div className="murmur-compare-section-wrap">
+                <div
+                  className="murmur-dimension-card"
+                  style={{ aspectRatio: '1024 / 1536' }}
+                  onClick={() => handleOpenLightbox({ src: technicalViewImg, alt: 'Murmur Mother figure internal technical view' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: technicalViewImg, alt: 'Murmur Mother figure internal technical view' });
+                    }
+                  }}
+                  aria-label="Inspect Murmur Mother figure internal technical view"
+                >
+                  <img
+                    src={technicalViewImg}
+                    alt="Murmur Mother figure internal technical view"
+                    className="murmur-dimension-card-img"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* THE IDENTITY SECTION */}
+          <section className="murmur-identity-section" id="identity" aria-label="Murmur Identity">
+            <div className="murmur-identity-header">
+              <h2 className="murmur-architecture-heading">the <span className="murmur-heading-accent">identity</span></h2>
+            </div>
+
+            {/* Dual Lineup Banners: Mother & Partner skin tone ranges */}
+            <div className="murmur-identity-lineups-wrap">
+              {/* Mother Figure Lineup */}
+              <figure className="murmur-identity-lineup-figure">
+                <div
+                  className="murmur-dimension-card murmur-identity-lineup-card"
+                  onClick={() => handleOpenLightbox({ src: femaleDollsImg, alt: 'Murmur Mother figures skin tone range' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: femaleDollsImg, alt: 'Murmur Mother figures skin tone range' });
+                    }
+                  }}
+                  aria-label="Inspect Mother figures skin tone range"
+                >
+                  <img
+                    src={femaleDollsImg}
+                    alt="Murmur Mother figures skin tone range"
+                    className="murmur-dimension-card-img"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <figcaption className="murmur-warm-body-caption murmur-identity-caption">
+                  Mother figure skin tone range
+                </figcaption>
+              </figure>
+
+              {/* Partner Figure Lineup */}
+              <figure className="murmur-identity-lineup-figure">
+                <div
+                  className="murmur-dimension-card murmur-identity-lineup-card"
+                  onClick={() => handleOpenLightbox({ src: maleDollsImg, alt: 'Murmur Partner figures skin tone range' })}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpenLightbox({ src: maleDollsImg, alt: 'Murmur Partner figures skin tone range' });
+                    }
+                  }}
+                  aria-label="Inspect Partner figures skin tone range"
+                >
+                  <img
+                    src={maleDollsImg}
+                    alt="Murmur Partner figures skin tone range"
+                    className="murmur-dimension-card-img"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <figcaption className="murmur-warm-body-caption murmur-identity-caption">
+                  Partner figure skin tone range
+                </figcaption>
+              </figure>
+            </div>
+
+            {/* Colour Selection Palette & Rationale Card */}
+            <article className="murmur-palette-card" aria-label="Murmur skin tone and hair colour selection">
+              {/* Skin Tone Group */}
+              <div className="murmur-palette-group">
+                <h3 className="murmur-palette-heading">Skin Tone</h3>
+                <div className="murmur-palette-grid murmur-palette-grid-skin" role="list" aria-label="Skin tone colour options">
+                  {MURMUR_SKIN_TONES.map((swatch, idx) => (
+                    <div key={idx} className="murmur-swatch-item" role="listitem">
+                      <div
+                        className="murmur-swatch-patch"
+                        style={{ backgroundColor: swatch.hex }}
+                        aria-label={`Skin tone ${swatch.name}: ${swatch.hex}`}
+                      />
+                      <span className="murmur-swatch-name">{swatch.name}</span>
+                      <span className="murmur-swatch-hex">{swatch.hex}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Subtle Divider */}
+              <div className="murmur-palette-divider" />
+
+              {/* Hair Colour Group */}
+              <div className="murmur-palette-group">
+                <h3 className="murmur-palette-heading">Hair Colour</h3>
+                <div className="murmur-palette-row murmur-palette-row-hair" role="list" aria-label="Hair colour options">
+                  {MURMUR_HAIR_COLOURS.map((swatch, idx) => (
+                    <div key={idx} className="murmur-swatch-item" role="listitem">
+                      <div
+                        className="murmur-swatch-patch"
+                        style={{ backgroundColor: swatch.hex }}
+                        aria-label={`Hair colour ${swatch.name}: ${swatch.hex}`}
+                      />
+                      <span className="murmur-swatch-name">{swatch.name}</span>
+                      <span className="murmur-swatch-hex">{swatch.hex}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Subtle Divider */}
+              <div className="murmur-palette-divider" />
+
+              {/* Why this way Section */}
+              <div className="murmur-palette-why">
+                <h4 className="murmur-palette-why-title">Why this way</h4>
+                <p className="murmur-palette-why-text">
+                  Indian skin tones vary widely, so Murmur offers 10 skin tone options to reflect this diversity. Hair colours focus on naturally common shades, from black to light brown, keeping the choices simple and familiar.
+                </p>
+              </div>
+            </article>
           </section>
 
           {/* FINAL BUSINESS CTA SECTION */}

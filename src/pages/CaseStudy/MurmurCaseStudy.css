@@ -1478,8 +1478,548 @@
 }
 
 /* ==========================================================================
-   How It Works & Why These Features Section
+   Murmur: The Architecture and Why Section
+   Interactive sketch-to-3D slider & technical specifications grid
+   Warm neutral tones, generous whitespace, clear typography, subtle dividers
    ========================================================================== */
+.murmur-architecture-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: clamp(72px, 10vh, 120px) auto 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.murmur-architecture-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto clamp(24px, 3.5vh, 36px);
+}
+
+.murmur-architecture-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.15);
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+
+.murmur-heading-accent {
+  color: #F8C363 !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+.murmur-dimensions-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h4-size, clamp(1.15rem, 1.6vw, 1.5rem));
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.25);
+  color: #F8C363;
+  font-style: italic;
+  margin: 0 auto clamp(20px, 3vh, 32px) auto;
+  padding: 0;
+  text-align: center;
+  max-width: 1160px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.murmur-technical-heading {
+  margin-top: clamp(64px, 8.5vh, 100px) !important;
+  text-align: center !important;
+}
+
+.murmur-technical-heading + .murmur-warm-body-card {
+  margin-top: clamp(24px, 3.5vh, 40px);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Sketch-to-3D Comparison Sliders & Studies 2x2 Grid
+   Row 1: Female Doll Comparison (left) | Male Doll Comparison (right)
+   Row 2: Modular Belly Comparison (left, under female) | Weight Study (right, beside belly)
+   -------------------------------------------------------------------------- */
+.murmur-dimensions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+@media (max-width: 820px) {
+  .murmur-dimensions-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+.murmur-technical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(64px, 8.5vh, 100px) auto 0 auto;
+}
+
+@media (max-width: 820px) {
+  .murmur-technical-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+/* ==========================================================================
+   Murmur: Technical Feature — Warm Body on Touch Card
+   Editorial minimal layout blending seamlessly with dark page background
+   ========================================================================== */
+.murmur-warm-body-card {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(48px, 7vh, 80px) auto 0;
+  background-color: transparent;
+  color: #FFFFFF;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.murmur-warm-body-header {
+  width: 100%;
+}
+
+.murmur-warm-body-title {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.murmur-warm-body-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: clamp(20px, 2.6vh, 28px) 0;
+}
+
+/* Media Showcase: Main image on left, components on right */
+.murmur-warm-body-media-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(20px, 2.8vw, 36px);
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.murmur-warm-body-main-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Magnetic Belly: Image on left, How it works on right */
+.murmur-magnetic-belly-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.murmur-magnetic-belly-how-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.murmur-magnetic-belly-how-content {
+  margin-top: 0 !important;
+  width: 100%;
+}
+
+@media (max-width: 820px) {
+  .murmur-magnetic-belly-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.murmur-warm-body-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+.murmur-warm-body-img-wrap:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+}
+
+.murmur-warm-body-img-wrap:focus-visible {
+  border-color: #F8C363;
+  box-shadow: 0 0 0 3px rgba(248, 195, 99, 0.35);
+}
+
+.murmur-warm-body-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+}
+
+/* Right Column: Stack of 2 component images */
+.murmur-warm-body-components-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.2vh, 22px);
+  width: 100%;
+}
+
+.murmur-warm-body-comp-item {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.murmur-warm-body-caption {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.85rem, 0.95vw, 0.92rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 10px;
+  padding: 0;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+/* How It Works Subsection */
+.murmur-warm-body-how-it-works {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 22px);
+  margin-top: clamp(28px, 4vh, 48px);
+  text-align: center;
+}
+
+.murmur-warm-body-how-title {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.85rem, 2.75vw, 2.6rem);
+  font-weight: 500;
+  font-style: normal;
+  color: #F8C363;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.murmur-warm-body-how-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  .murmur-warm-body-media-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.murmur-grid-item-span {
+  grid-column: 1 / -1;
+  max-width: calc(50% - clamp(10px, 1.25vw, 18px));
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 820px) {
+  .murmur-grid-item-span {
+    max-width: 100%;
+  }
+}
+
+.murmur-grid-item-left {
+  grid-column: 1;
+  width: 100%;
+}
+
+.murmur-dimension-card {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.murmur-dimension-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+  transform: translateY(-2px);
+}
+
+.murmur-dimension-card:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+
+.murmur-dimension-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Why This Way Design Rationale Card (Beside Belly, Weight, & Silicon)
+   Editorial rationale card blending seamlessly with dark page background
+   -------------------------------------------------------------------------- */
+.murmur-why-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  padding: clamp(24px, 3.2vw, 42px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.murmur-why-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+}
+
+.murmur-why-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h5-size, clamp(1.15rem, 1.45vw, 1.35rem));
+  font-weight: 500;
+  font-style: italic;
+  color: #F8C363;
+  margin: 0 0 clamp(16px, 2vw, 24px) 0;
+  padding: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.murmur-why-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 18px);
+  text-align: left;
+}
+
+.murmur-why-item {
+  position: relative;
+  padding-left: clamp(18px, 2vw, 24px);
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.murmur-why-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #F8C363;
+  border: none;
+}
+
+@media (max-width: 820px) {
+  .murmur-why-card {
+    aspect-ratio: auto;
+    padding: clamp(28px, 6vw, 36px) clamp(22px, 5vw, 30px);
+  }
+}
+
+.murmur-compare-section-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.murmur-compare-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1731 / 909;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.murmur-compare-container:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+
+.murmur-compare-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+}
+
+.murmur-compare-layer-render {
+  z-index: 1;
+}
+
+.murmur-compare-layer-sketch {
+  z-index: 2;
+  will-change: clip-path;
+}
+
+.murmur-compare-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Draggable Divider Line: Solid Black Line 3px in Width */
+.murmur-compare-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #000000;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  will-change: left;
+}
+
+.murmur-compare-line {
+  display: none;
+}
+
+/* Draggable Handle Knob: Minimal Black Grip with Subtle High Contrast Border */
+.murmur-compare-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #000000;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #FFFFFF;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  pointer-events: none;
+}
+
+.murmur-compare-container:hover .murmur-compare-handle,
+.murmur-compare-container.is-dragging .murmur-compare-handle {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
+}
+
+.murmur-compare-handle-arrow {
+  width: 11px;
+  height: 11px;
+  stroke: currentColor;
+}
+
+@media (max-width: 640px) {
+  .murmur-compare-handle {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 .murmur-how-it-works-section {
   display: flex;
   flex-direction: column;
@@ -1490,11 +2030,25 @@
   text-align: center;
 }
 
+.murmur-features-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.15);
+  color: #F8C363;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
 .murmur-how-it-works-group {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   margin: 0 auto;
-  text-align: left;
+  text-align: center;
+  width: 100%;
 }
 
 .murmur-how-grid {
@@ -1550,120 +2104,74 @@
 
 .murmur-feature-cards-wrap {
   width: 100%;
-  max-width: 1160px;
-  margin: clamp(72px, 10vh, 120px) auto 0;
+  max-width: 1200px;
+  margin: clamp(48px, 7vh, 80px) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.2vw, 32px);
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+/* Feature Column containing the number outside + the card */
+.murmur-feature-col {
   display: flex;
   flex-direction: column;
-  gap: clamp(40px, 6vh, 64px);
+  align-items: center;
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* Individual Feature Card */
+/* Number outside the card on top */
+.murmur-feature-number {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1;
+  margin-bottom: clamp(14px, 2vh, 20px);
+  text-align: center;
+  width: 100%;
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+/* Individual Feature Showcase Card */
 .murmur-feature-card {
   width: 100%;
-  display: grid;
-  grid-template-columns: minmax(280px, 320px) 1fr 1fr;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: stretch;
-  gap: clamp(24px, 3vw, 44px);
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: clamp(32px, 4.5vh, 48px) clamp(28px, 3.5vw, 44px);
+  border-radius: 24px;
+  padding: clamp(24px, 3vw, 32px) clamp(20px, 2.4vw, 28px);
   box-sizing: border-box;
   position: relative;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .murmur-feature-card:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.022);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+  transform: translateY(-4px);
 }
 
-/* Card Columns */
-.murmur-card-col {
+/* Visuals Area */
+.murmur-card-visuals {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  box-sizing: border-box;
-}
-
-/* Subtle vertical dividing lines between columns inside the card */
-.murmur-card-col:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.07);
-  padding-right: clamp(20px, 2.5vw, 36px);
-}
-
-.murmur-card-col:not(:first-child) {
-  padding-left: clamp(4px, 1vw, 12px);
-}
-
-/* Why this section - very light yellow editorial background */
-.murmur-card-col-why {
-  background: rgba(248, 195, 99, 0.055);
-  border: 1px solid rgba(248, 195, 99, 0.16);
-  border-radius: 16px;
-  padding: clamp(20px, 2.2vw, 28px) clamp(18px, 2vw, 24px) !important;
-  box-sizing: border-box;
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-.murmur-card-col-why:hover {
-  background: rgba(248, 195, 99, 0.075);
-  border-color: rgba(248, 195, 99, 0.25);
-}
-
-.murmur-card-col-why .murmur-card-col-label {
-  color: #F8C363;
-  opacity: 0.92;
-}
-
-.murmur-card-col-how {
-  border-right: none !important;
-}
-
-/* Column Header & Labels */
-.murmur-card-col-header {
-  margin-bottom: clamp(14px, 2vh, 20px);
-  width: 100%;
-}
-
-.murmur-card-col-label {
-  font-family: var(--font-family-primary);
-  font-size: clamp(0.74rem, 0.82vw, 0.8rem);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  display: block;
-  margin-bottom: 0;
-  text-align: left;
-}
-
-/* Feature Name on bottom of image */
-.murmur-card-feature-bottom-meta {
-  margin-top: clamp(14px, 2vh, 18px);
-  width: 100%;
-  max-width: 320px;
-  display: flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-}
-
-.murmur-card-feature-name {
-  font-family: var(--font-family-primary);
-  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
-  font-weight: 300;
-  color: #FFFFFF;
-  line-height: 1.3;
-  margin: 0;
-  letter-spacing: -0.01em;
-  text-align: center;
   width: 100%;
+  gap: 12px;
 }
 
 /* Feature Visual Buttons & Wraps */
-.murmur-card-col-feature .murmur-feature-img-btn {
+.murmur-feature-img-btn {
   background: transparent;
   border: none;
   outline: none;
@@ -1672,9 +2180,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  max-width: 320px;
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
@@ -1683,42 +2190,37 @@
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
 
-.murmur-card-col-feature .murmur-feature-img-btn:hover {
-  transform: translateY(-2px);
+.murmur-feature-img-btn:hover {
+  transform: scale(1.02);
   opacity: 0.95;
 }
 
-.murmur-card-col-feature .murmur-feature-img-btn:hover,
-.murmur-card-col-feature .murmur-feature-img-btn:focus,
-.murmur-card-col-feature .murmur-feature-img-btn:active,
-.murmur-card-col-feature .murmur-feature-img-btn:focus-visible {
+.murmur-feature-img-btn:focus,
+.murmur-feature-img-btn:active,
+.murmur-feature-img-btn:focus-visible {
   border: none;
   outline: none;
   box-shadow: none;
-  background: transparent;
 }
 
-/* 2-Stacked Gallery for Card 02 & Card 03 */
+/* Gallery Grid for Cards with Multiple Visuals */
 .murmur-feature-gallery-grid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
-  max-width: 320px;
   margin: 0;
 }
 
 .murmur-feature-gallery-btn {
   width: 100%;
-  max-width: 320px;
 }
 
 .murmur-feature-video-item {
   width: 100%;
-  max-width: 320px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
@@ -1727,7 +2229,6 @@
 
 .murmur-feature-img-wrap {
   width: 100%;
-  max-width: 320px;
   border-radius: 18px !important;
   overflow: hidden !important;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -1740,7 +2241,6 @@
 
 .murmur-feature-video-wrap {
   width: 100%;
-  max-width: 320px;
   border-radius: 18px !important;
   overflow: hidden !important;
   background-color: #000000;
@@ -1750,7 +2250,7 @@
 .murmur-feature-img {
   width: 100%;
   height: 100%;
-  max-height: 185px;
+  max-height: 220px;
   object-fit: cover !important;
   border-radius: 18px !important;
   display: block;
@@ -1761,7 +2261,7 @@
 .murmur-feature-video {
   width: 100%;
   height: 100%;
-  max-height: 185px;
+  max-height: 220px;
   object-fit: cover !important;
   border-radius: 18px !important;
   display: block;
@@ -1769,170 +2269,27 @@
   border: none;
 }
 
-/* Body text in How it works & Why this */
-.murmur-card-body-text {
+/* Caption of what the feature is */
+.murmur-card-caption {
   font-family: var(--font-family-primary);
-  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
-  line-height: 1.68;
-  text-align: left;
-  white-space: pre-line;
-  width: 100%;
-  padding-top: 50px;
-}
-
-.murmur-card-how-text {
-  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1.15rem, 1.35vw, 1.35rem);
   font-weight: 300;
-  letter-spacing: 0.01em;
-}
-
-.murmur-card-why-text {
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 300;
-  letter-spacing: 0.01em;
-}
-
-.murmur-card-body-text strong,
-.murmur-card-body-text b {
-  font-weight: 600;
   color: #FFFFFF;
+  line-height: 1.35;
+  margin: clamp(16px, 2.4vh, 22px) 0 0 0;
+  padding: 0;
+  letter-spacing: -0.01em;
+  text-align: center;
+  width: 100%;
 }
 
 /* Responsive Behavior: Mobile & Tablet Stacking */
-@media (max-width: 880px) {
-  .murmur-feature-card {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: clamp(28px, 4vh, 36px) clamp(20px, 3.5vw, 28px);
-  }
-
-  .murmur-card-col:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    padding-right: 0;
-    padding-bottom: 28px;
-  }
-
-  .murmur-card-col:not(:first-child) {
-    padding-left: 0;
-  }
-
-  .murmur-card-col-feature .murmur-feature-img-btn,
-  .murmur-feature-gallery-grid,
-  .murmur-feature-gallery-btn,
-  .murmur-feature-img-wrap,
-  .murmur-feature-video-item,
-  .murmur-feature-video-wrap,
-  .murmur-card-feature-bottom-meta {
-    max-width: 100%;
-  }
-
-  .murmur-card-col-how {
-    border-bottom: none !important;
-    padding-bottom: 8px !important;
-  }
-
-  .murmur-card-body-text {
-    padding-top: 0;
-  }
-}
-
-/* ==========================================================================
-   Murmur: The Technicalities
-   Side-by-side technical diagrams (Mother & Partner figures)
-   Spacious editorial presentation with rounded cards & lightbox inspection
-   ========================================================================== */
-
-.murmur-technicalities-section {
-  width: 100%;
-  max-width: 1160px;
-  margin: clamp(44px, 6.5vh, 76px) auto 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.murmur-technicalities-header {
-  margin-top: -30px;
-  margin-bottom: clamp(24px, 3.5vh, 38px);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.murmur-technicalities-heading {
-  font-family: var(--font-family-primary);
-  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: var(--line-height-heading, 1.15);
-  color: #FFFFFF;
-  margin: 0;
-  text-align: center;
-}
-
-.murmur-technicalities-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(20px, 3vw, 36px);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.murmur-technical-card {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 0;
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.murmur-technical-card:hover {
-  border-color: rgba(248, 195, 99, 0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(248, 195, 99, 0.06);
-}
-
-.murmur-technical-card:focus-visible {
-  outline: 2px solid #F8C363;
-  outline-offset: 4px;
-}
-
-.murmur-technical-img-wrap {
-  width: 100%;
-  border-radius: 18px !important;
-  overflow: hidden !important;
-  background-color: #000000;
-  display: block;
-}
-
-.murmur-technical-img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1024 / 1536;
-  object-fit: cover !important;
-  border-radius: 18px !important;
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .murmur-technicalities-grid {
+@media (max-width: 960px) {
+  .murmur-feature-cards-wrap {
     grid-template-columns: 1fr;
-    gap: 24px;
+    max-width: 440px;
   }
 }
-
 /* ==========================================================================
    Murmur: Business CTA Section
    Spacious, confident, editorial closing CTA
@@ -2027,4 +2384,257 @@
 .murmur-cta-highlight {
   color: var(--color-accent, #F8C363);
   font-weight: 500;
+}
+
+/* ==========================================================================
+   Murmur: The Identity Section
+   Diverse representation, skin tone range, and couple presentation
+   ========================================================================== */
+.murmur-identity-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(72px, 10vh, 120px) auto 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.murmur-identity-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto clamp(32px, 4.5vh, 48px);
+}
+
+.murmur-identity-lead {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 300;
+  max-width: 760px;
+  margin: 0 auto clamp(36px, 5vh, 56px);
+  text-align: center;
+}
+
+.murmur-identity-couple-container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto clamp(40px, 6vh, 64px);
+}
+
+.murmur-identity-couple-figure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.murmur-identity-couple-card {
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+}
+
+.murmur-identity-caption {
+  text-align: center !important;
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.murmur-identity-lineups-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4.5vh, 48px);
+}
+
+.murmur-identity-lineup-figure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.murmur-identity-lineup-card {
+  width: 100%;
+  aspect-ratio: 2400 / 1024;
+}
+
+@media (max-width: 820px) {
+  .murmur-identity-lineup-card {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ==========================================================================
+   Murmur: Skin Tone & Hair Colour Selection Palette Card
+   Warm off-white background, clean typography, subtle borders, editorial swatches
+   ========================================================================== */
+.murmur-palette-card {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(40px, 6vh, 64px) auto 0;
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  padding: clamp(28px, 4vw, 48px);
+  box-sizing: border-box;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.5vh, 36px);
+}
+
+.murmur-palette-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 20px);
+}
+
+.murmur-palette-heading {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.2rem, 1.55vw, 1.45rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+
+/* Swatches Grid: Vertical rectangular patches for Skin Tone & Hair Colour */
+.murmur-palette-grid-skin,
+.murmur-palette-row-hair {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: clamp(10px, 1.3vw, 16px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .murmur-palette-grid-skin,
+  .murmur-palette-row-hair {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .murmur-palette-grid-skin,
+  .murmur-palette-row-hair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Swatch Item */
+.murmur-swatch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Vertical Rectangle Swatch (3:4 ratio — identical proportions for all skin & hair boxes) */
+.murmur-swatch-patch {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.murmur-swatch-patch:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.65);
+}
+
+.murmur-swatch-name {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.7rem, 0.78vw, 0.78rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.murmur-swatch-hex {
+  font-family: var(--font-family-mono, monospace);
+  font-size: clamp(0.64rem, 0.72vw, 0.72rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Subtle Divider matching dark theme */
+.murmur-palette-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+/* Why it works subsection: Middle-aligned, matching the "How it works" editorial styling */
+.murmur-palette-why {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(14px, 2vh, 22px);
+  width: 100%;
+  margin-top: clamp(12px, 1.8vh, 20px);
+}
+
+.murmur-palette-why-title {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.85rem, 2.75vw, 2.6rem);
+  font-weight: 500;
+  font-style: normal;
+  color: #F8C363;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.murmur-palette-why-text {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  margin: 0 auto;
+  padding: 0;
+  letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 960px;
 }
