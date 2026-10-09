@@ -1526,12 +1526,59 @@
   line-height: var(--line-height-heading, 1.25);
   color: #FFFFFF;
   font-style: normal;
-  margin: 0 auto clamp(28px, 4vh, 40px) auto;
+  margin: 0;
   padding: 0;
   text-align: center;
-  max-width: 1160px;
-  width: 100%;
   box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Murmur: Architecture Modules Header System
+   Thin lines up and down, module name centered in the middle.
+   Standardized spacing adhering to design tokens.
+   ========================================================================== */
+.murmur-module-header {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto clamp(40px, 5.5vh, 56px) auto;
+  padding: clamp(16px, 2.2vh, 24px) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.murmur-module-header-technical {
+  margin-top: clamp(96px, 13vh, 150px) !important;
+  margin-bottom: clamp(40px, 5.5vh, 56px) !important;
+}
+
+.murmur-module-header-technical + .murmur-warm-body-card {
+  margin-top: 0 !important;
+}
+
+.murmur-module-header-identity {
+  margin-top: 0 !important;
+  margin-bottom: clamp(40px, 5.5vh, 56px) !important;
+}
+
+.murmur-module-title,
+.murmur-module-header .murmur-dimensions-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h3-size, clamp(1.4rem, 2.2vw, 1.85rem));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.25);
+  color: #FFFFFF;
+  font-style: normal;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center;
+  width: auto;
+  max-width: 100%;
 }
 
 .murmur-technical-heading {

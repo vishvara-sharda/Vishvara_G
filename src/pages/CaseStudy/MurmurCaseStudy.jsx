@@ -1268,7 +1268,10 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               <h2 className="murmur-architecture-heading">the architecture and <span className="murmur-heading-accent">why</span></h2>
             </div>
 
-            <h3 className="murmur-dimensions-heading">core <span className="murmur-heading-accent">body</span></h3>
+            {/* Module 1: Core Body */}
+            <div className="murmur-module-header">
+              <h3 className="murmur-dimensions-heading murmur-module-title">core <span className="murmur-heading-accent">body</span></h3>
+            </div>
 
             {/* Interactive Sketch-to-3D Comparison Sliders & Dimension Studies Grid */}
             <div className="murmur-dimensions-grid">
@@ -1418,8 +1421,10 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
             </div>
 
-            {/* Technical Details Heading (Center Aligned) */}
-            <h3 className="murmur-dimensions-heading murmur-technical-heading"><span className="murmur-heading-accent">technical</span> details</h3>
+            {/* Module 2: Technical Details */}
+            <div className="murmur-module-header murmur-module-header-technical">
+              <h3 className="murmur-dimensions-heading murmur-module-title"><span className="murmur-heading-accent">technical</span> details</h3>
+            </div>
 
             {/* Feature Section: Warm Body on Touch */}
             <article className="murmur-warm-body-card" aria-labelledby="warm-body-title">
@@ -1772,8 +1777,9 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
 
           {/* THE IDENTITY SECTION */}
           <section className="murmur-identity-section" id="identity" aria-label="Murmur Identity">
-            <div className="murmur-identity-header">
-              <h3 className="murmur-dimensions-heading">the <span className="murmur-heading-accent">identity</span></h3>
+            {/* Module 3: The Identity */}
+            <div className="murmur-module-header murmur-module-header-identity">
+              <h3 className="murmur-dimensions-heading murmur-module-title">the <span className="murmur-heading-accent">identity</span></h3>
             </div>
 
             {/* Dual Lineup Banners: Mother & Partner skin tone ranges */}
