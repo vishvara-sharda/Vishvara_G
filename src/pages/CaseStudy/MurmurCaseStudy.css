@@ -1520,13 +1520,13 @@
 
 .murmur-dimensions-heading {
   font-family: var(--font-family-primary);
-  font-size: var(--type-h4-size, clamp(1.15rem, 1.6vw, 1.5rem));
-  font-weight: 400;
+  font-size: var(--type-h3-size, clamp(1.4rem, 2.2vw, 1.85rem));
+  font-weight: 500;
   letter-spacing: 0.04em;
   line-height: var(--line-height-heading, 1.25);
   color: #FFFFFF;
   font-style: normal;
-  margin: 0 auto clamp(20px, 3vh, 32px) auto;
+  margin: 0 auto clamp(28px, 4vh, 40px) auto;
   padding: 0;
   text-align: center;
   max-width: 1160px;
@@ -1535,12 +1535,12 @@
 }
 
 .murmur-technical-heading {
-  margin-top: clamp(64px, 8.5vh, 100px) !important;
+  margin-top: clamp(96px, 13vh, 150px) !important;
   text-align: center !important;
 }
 
 .murmur-technical-heading + .murmur-warm-body-card {
-  margin-top: clamp(24px, 3.5vh, 40px);
+  margin-top: clamp(32px, 4.5vh, 48px);
 }
 
 /* --------------------------------------------------------------------------
@@ -2397,7 +2397,7 @@
   justify-content: center;
   width: 100%;
   max-width: 1160px;
-  margin: clamp(72px, 10vh, 120px) auto 0;
+  margin: clamp(96px, 13vh, 150px) auto 0;
   text-align: center;
   box-sizing: border-box;
 }
