@@ -11,7 +11,7 @@ const ModelCard = memo(function ModelCard({
   title,
   src,
   poster,
-  initialOrbit = '0deg 75deg 55%',
+  initialOrbit = '0deg 75deg auto',
 }) {
   const viewerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +34,9 @@ const ModelCard = memo(function ModelCard({
 
     const handleLoad = () => {
       setIsLoading(false);
+      if (typeof viewer.updateFraming === 'function') {
+        viewer.updateFraming();
+      }
     };
 
     viewer.addEventListener('progress', handleProgress);
@@ -50,6 +53,9 @@ const ModelCard = memo(function ModelCard({
       viewerRef.current.cameraOrbit = initialOrbit;
       viewerRef.current.cameraTarget = 'auto auto auto';
       viewerRef.current.fieldOfView = 'auto';
+      if (typeof viewerRef.current.updateFraming === 'function') {
+        viewerRef.current.updateFraming();
+      }
     }
   };
 
@@ -106,8 +112,8 @@ const ModelCard = memo(function ModelCard({
           bounds="tight"
           camera-orbit={initialOrbit}
           camera-target="auto auto auto"
-          min-camera-orbit="auto 20deg 35%"
-          max-camera-orbit="auto 100deg 110%"
+          min-camera-orbit="auto 15deg 50%"
+          max-camera-orbit="auto 100deg 130%"
           min-field-of-view="15deg"
           max-field-of-view="45deg"
           interpolation-decay="150"
@@ -176,12 +182,12 @@ export const Murmur3DViewer = memo(function Murmur3DViewer() {
         <ModelCard
           title="Woman Doll"
           src={womanGlbUrl}
-          initialOrbit="0deg 75deg 55%"
+          initialOrbit="0deg 75deg auto"
         />
         <ModelCard
           title="Man Doll"
           src={manGlbUrl}
-          initialOrbit="0deg 75deg 55%"
+          initialOrbit="0deg 75deg auto"
         />
       </div>
     </section>
