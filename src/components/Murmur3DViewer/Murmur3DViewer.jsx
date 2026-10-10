@@ -42,7 +42,27 @@ const ModelCard = memo(function ModelCard({
     viewer.addEventListener('progress', handleProgress);
     viewer.addEventListener('load', handleLoad);
 
+    // Watch for card resize and trigger updateFraming so model always fills the full card
+    let ro;
+    if (typeof ResizeObserver !== 'undefined' && containerRef.current) {
+      ro = new ResizeObserver(() => {
+        if (viewer && typeof viewer.updateFraming === 'function') {
+          viewer.updateFraming();
+        }
+      });
+      ro.observe(containerRef.current);
+    }
+
+    // Initial delayed frame to ensure card styles are resolved
+    const timer = setTimeout(() => {
+      if (viewer && typeof viewer.updateFraming === 'function') {
+        viewer.updateFraming();
+      }
+    }, 120);
+
     return () => {
+      clearTimeout(timer);
+      if (ro) ro.disconnect();
       viewer.removeEventListener('progress', handleProgress);
       viewer.removeEventListener('load', handleLoad);
     };
@@ -52,7 +72,10 @@ const ModelCard = memo(function ModelCard({
     if (viewerRef.current) {
       viewerRef.current.cameraOrbit = initialOrbit;
       viewerRef.current.cameraTarget = '0m 0m 0m';
-      viewerRef.current.fieldOfView = 'auto';
+      viewerRef.current.fieldOfView = '45deg';
+      if (typeof viewerRef.current.updateFraming === 'function') {
+        viewerRef.current.updateFraming();
+      }
     }
   };
 
@@ -109,6 +132,7 @@ const ModelCard = memo(function ModelCard({
           bounds="tight"
           camera-orbit={initialOrbit}
           camera-target="0m 0m 0m"
+          field-of-view="45deg"
           min-camera-orbit="auto 15deg 1.3m"
           max-camera-orbit="auto 100deg 3.5m"
           min-field-of-view="15deg"
@@ -125,6 +149,12 @@ const ModelCard = memo(function ModelCard({
           ar-modes="webxr scene-viewer quick-look"
           interaction-prompt="none"
           className="murmur-3d-canvas"
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'block',
+            outline: 'none',
+          }}
         />
 
         {/* Floating Controls Overlay */}
