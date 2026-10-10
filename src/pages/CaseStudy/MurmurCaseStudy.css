@@ -3106,6 +3106,25 @@
    ========================================================================== */
 
 @media (max-width: 768px) {
+  /* Navigation Bar: Remove logo & murmur case study badge, optimize back button */
+  .murmur-nav-bar {
+    justify-content: flex-start;
+    margin-bottom: clamp(24px, 4vh, 36px);
+    padding-bottom: 14px;
+  }
+
+  .murmur-nav-bar .murmur-category-badge {
+    display: none !important;
+  }
+
+  .murmur-back-btn {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    padding: 6px 0;
+    min-height: 40px;
+    letter-spacing: 0.03em;
+  }
+
   .murmur-turning-point-section {
     padding-top: clamp(24px, 4vh, 36px);
     margin-top: 20px;
