@@ -87,17 +87,6 @@ const ModelCard = memo(function ModelCard({
       ref={containerRef}
       className={`murmur-3d-card ${isFullscreen ? 'is-fullscreen' : ''}`}
     >
-      <div className="murmur-3d-card-header">
-        <div className="murmur-3d-title-group">
-          <h4 className="murmur-3d-model-name">{title}</h4>
-          {subtitle && <span className="murmur-3d-model-sub">{subtitle}</span>}
-        </div>
-        <div className="murmur-3d-quick-hint">
-          <span className="murmur-3d-hint-dot" />
-          <span>360° Interactive</span>
-        </div>
-      </div>
-
       <div className="murmur-3d-stage">
         {/* Loading Overlay */}
         {isLoading && (

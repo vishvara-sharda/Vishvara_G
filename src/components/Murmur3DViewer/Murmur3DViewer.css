@@ -104,62 +104,6 @@
   max-width: none !important;
 }
 
-/* Card Header */
-.murmur-3d-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.murmur-3d-title-group {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.murmur-3d-model-name {
-  font-family: var(--font-family-primary);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-.murmur-3d-model-sub {
-  font-family: var(--font-family-primary);
-  font-size: 0.8125rem;
-  color: #F8C363;
-  font-weight: 400;
-}
-
-.murmur-3d-quick-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-family-primary);
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.murmur-3d-hint-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #F8C363;
-  box-shadow: 0 0 8px #F8C363;
-  animation: murmur-pulse 2s infinite ease-in-out;
-}
-
-@keyframes murmur-pulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); }
-}
-
 /* 3D Stage & Canvas */
 .murmur-3d-stage {
   position: relative;
@@ -331,10 +275,6 @@
   .murmur-3d-stage {
     min-height: 320px;
     aspect-ratio: 1 / 1;
-  }
-
-  .murmur-3d-card-header {
-    padding: 12px 16px;
   }
 
   .murmur-3d-card-footer {
