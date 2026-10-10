@@ -188,13 +188,9 @@ export const Murmur3DViewer = memo(function Murmur3DViewer() {
   return (
     <section className="murmur-3d-section" id="3d-models" aria-labelledby="heading-3d-models">
       <div className="murmur-3d-header">
-        <span className="murmur-3d-eyebrow">3D Interactive Models</span>
         <h2 id="heading-3d-models" className="murmur-3d-heading">
           explore <span className="murmur-heading-accent">Murmur</span> in 3D
         </h2>
-        <p className="murmur-3d-lead">
-          Inspect the female and male companion figures from every angle. Rotate, zoom in on the tactile contours, and examine the palm-held form factor.
-        </p>
 
         {/* View Switcher Tabs */}
         <div className="murmur-3d-tab-bar" role="tablist" aria-label="3D model views">

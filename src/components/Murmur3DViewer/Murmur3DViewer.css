@@ -16,17 +16,6 @@
   margin: 0 auto clamp(28px, 4vh, 40px);
 }
 
-.murmur-3d-eyebrow {
-  display: inline-block;
-  font-family: var(--font-family-primary);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #F8C363;
-  margin-bottom: 10px;
-}
-
 .murmur-3d-heading {
   font-family: var(--font-family-primary);
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -34,16 +23,7 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  margin: 0 0 14px 0;
-}
-
-.murmur-3d-lead {
-  font-family: var(--font-family-primary);
-  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.72);
-  font-weight: 300;
-  margin: 0 auto clamp(20px, 3vh, 28px);
+  margin: 0 0 clamp(20px, 3vh, 28px) 0;
 }
 
 /* Tab Bar */
