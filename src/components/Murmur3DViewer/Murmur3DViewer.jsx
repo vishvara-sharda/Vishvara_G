@@ -11,7 +11,7 @@ const ModelCard = memo(function ModelCard({
   title,
   src,
   poster,
-  initialOrbit = '0deg 75deg 2.48m',
+  initialOrbit = '0deg 75deg 2.75m',
 }) {
   const viewerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -209,12 +209,12 @@ export const Murmur3DViewer = memo(function Murmur3DViewer() {
         <ModelCard
           title="Woman Doll"
           src={womanGlbUrl}
-          initialOrbit="0deg 75deg 2.48m"
+          initialOrbit="0deg 75deg 2.75m"
         />
         <ModelCard
           title="Man Doll"
           src={manGlbUrl}
-          initialOrbit="0deg 75deg 2.48m"
+          initialOrbit="0deg 75deg 2.75m"
         />
       </div>
     </section>
