@@ -2337,6 +2337,210 @@
     max-width: 440px;
   }
 }
+
+/* ==========================================================================
+   Murmur: Interaction Logic ("How it works") Tree Diagram
+   Minimal, architectural decision flow using simple text labels and connecting lines.
+   Zero icons, zero illustrations, zero decorative elements.
+   ========================================================================== */
+
+.murmur-logic-section {
+  width: 100%;
+  max-width: 1160px;
+  margin: clamp(72px, 10vh, 110px) auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.murmur-logic-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto clamp(36px, 5vh, 48px);
+}
+
+.murmur-logic-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--type-h2-size, clamp(1.75rem, 3vw, 2.5rem));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-heading, 1.15);
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+
+/* Logic Tree Card Container */
+.murmur-logic-tree-card {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: clamp(32px, 4.5vh, 48px) clamp(20px, 3.5vw, 40px);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Individual Tree Nodes */
+.murmur-tree-node {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.murmur-tree-text {
+  font-family: var(--font-family-primary);
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* Step 1: Root Node ("One partner picks up their Murmur") */
+.murmur-tree-root {
+  width: 100%;
+  max-width: 440px;
+  padding: clamp(14px, 1.8vh, 18px) clamp(20px, 2.5vw, 28px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+}
+
+.murmur-tree-root .murmur-tree-text {
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+/* Vertical Connecting Line */
+.murmur-tree-line {
+  width: 1px;
+  height: clamp(24px, 3vh, 32px);
+  background-color: rgba(255, 255, 255, 0.22);
+  margin: 0 auto;
+}
+
+/* Step 2: Decision Node ("Is the other partner holding theirs?") */
+.murmur-tree-decision {
+  width: 100%;
+  max-width: 440px;
+  padding: clamp(14px, 1.8vh, 18px) clamp(20px, 2.5vw, 28px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(248, 195, 99, 0.35);
+  border-radius: 12px;
+}
+
+.murmur-tree-decision .murmur-tree-text {
+  font-size: clamp(0.96rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+/* Desktop Connecting Fork SVG */
+.murmur-tree-fork-wrap {
+  width: 100%;
+  max-width: 760px;
+  height: clamp(32px, 4vh, 40px);
+  margin: 0 auto;
+}
+
+.murmur-tree-fork-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Step 3: Branches Container */
+.murmur-tree-branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3.5vw, 44px);
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.murmur-tree-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Condition Badges ("If no" / "If yes") */
+.murmur-tree-badge {
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.82rem, 0.95vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #F8C363;
+  background: rgba(10, 10, 12, 0.9);
+  border: 1px solid rgba(248, 195, 99, 0.35);
+  border-radius: 9999px;
+  padding: 4px 14px;
+  line-height: 1.3;
+}
+
+/* Small vertical connector from badge to outcome */
+.murmur-tree-subline {
+  width: 1px;
+  height: clamp(14px, 1.8vh, 20px);
+  background-color: rgba(255, 255, 255, 0.22);
+  margin: 0 auto;
+}
+
+/* Outcome Nodes */
+.murmur-tree-outcome {
+  width: 100%;
+  flex: 1;
+  padding: clamp(18px, 2.2vh, 24px) clamp(18px, 2vw, 24px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.murmur-tree-outcome .murmur-tree-text {
+  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+/* Responsive: Clean linear flow on mobile screens */
+@media (max-width: 620px) {
+  .murmur-tree-fork-wrap {
+    display: none;
+  }
+
+  .murmur-tree-branches {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 12px;
+  }
+
+  .murmur-tree-branch::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.22);
+    margin: 0 auto 0 auto;
+  }
+}
+
 /* ==========================================================================
    Murmur: Business CTA Section
    Spacious, confident, editorial closing CTA

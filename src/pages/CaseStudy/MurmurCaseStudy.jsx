@@ -1260,6 +1260,68 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
                 />
               ))}
             </div>
+
+            {/* HOW IT WORKS / INTERACTION LOGIC TREE */}
+            <div className="murmur-logic-section" aria-label="How it works interaction logic">
+              <div className="murmur-logic-header">
+                <h2 className="murmur-logic-heading">how it <span className="murmur-heading-accent">works</span></h2>
+              </div>
+
+              {/* Interaction Logic Tree Diagram */}
+              <div className="murmur-logic-tree-card" role="region" aria-label="Murmur interaction logic tree diagram">
+                {/* Step 1: Root Node */}
+                <div className="murmur-tree-node murmur-tree-root">
+                  <span className="murmur-tree-text">One partner picks up their Murmur</span>
+                </div>
+
+                {/* Vertical Connector Line */}
+                <div className="murmur-tree-line" aria-hidden="true" />
+
+                {/* Step 2: Decision Node */}
+                <div className="murmur-tree-node murmur-tree-decision">
+                  <span className="murmur-tree-text">Is the other partner holding theirs?</span>
+                </div>
+
+                {/* Desktop Fork Connector (SVG Lines) */}
+                <div className="murmur-tree-fork-wrap" aria-hidden="true">
+                  <svg
+                    className="murmur-tree-fork-svg"
+                    viewBox="0 0 100 40"
+                    preserveAspectRatio="none"
+                  >
+                    <line x1="50" y1="0" x2="50" y2="20" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                    <line x1="25" y1="20" x2="75" y2="20" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                    <line x1="25" y1="20" x2="25" y2="40" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                    <line x1="75" y1="20" x2="75" y2="40" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                  </svg>
+                </div>
+
+                {/* Step 3: Decision Branches */}
+                <div className="murmur-tree-branches">
+                  {/* Branch No */}
+                  <div className="murmur-tree-branch murmur-tree-branch-no">
+                    <span className="murmur-tree-badge">If no</span>
+                    <div className="murmur-tree-subline" aria-hidden="true" />
+                    <div className="murmur-tree-node murmur-tree-outcome">
+                      <span className="murmur-tree-text">
+                        The picked-up doll warms up, and the other partner’s doll sends a gentle vibration.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Branch Yes */}
+                  <div className="murmur-tree-branch murmur-tree-branch-yes">
+                    <span className="murmur-tree-badge">If yes</span>
+                    <div className="murmur-tree-subline" aria-hidden="true" />
+                    <div className="murmur-tree-node murmur-tree-outcome">
+                      <span className="murmur-tree-text">
+                        Both dolls warm up and activate their breathing mechanism.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
 
           {/* THE ARCHITECTURE AND WHY SECTION */}
