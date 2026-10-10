@@ -1382,7 +1382,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
 
               {/* Row 3, Col 1: House Enclosure Why This Way Card (on the left side) */}
-              <div className="murmur-compare-section-wrap">
+              <div className="murmur-compare-section-wrap murmur-grid-order-house-why">
                 <div className="murmur-why-card">
                   <h5 className="murmur-why-heading">Why This Way</h5>
                   <ul className="murmur-why-list">
@@ -1406,6 +1406,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
                 aspectRatio="1536 / 1024"
                 sketchAlt="Murmur House-Shaped Mini Cabinet Technical Views"
                 renderAlt="Murmur House-Shaped Enclosure Design Diagram"
+                wrapperClassName="murmur-grid-order-house-slider"
                 onSelectImage={handleOpenLightbox}
               />
 
@@ -1446,7 +1447,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
 
               {/* Row 5, Col 1: Why This Way Design Rationale Card (on the left side) */}
-              <div className="murmur-compare-section-wrap">
+              <div className="murmur-compare-section-wrap murmur-grid-order-silicon-why">
                 <div className="murmur-why-card">
                   <h5 className="murmur-why-heading">Why This Way</h5>
                   <ul className="murmur-why-list">
@@ -1461,7 +1462,7 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
 
               {/* Row 5, Col 2: Silicone Material Flexibility Study (on the right side) */}
-              <div className="murmur-compare-section-wrap">
+              <div className="murmur-compare-section-wrap murmur-grid-order-silicon-media">
                 <div
                   className="murmur-dimension-card"
                   style={{ aspectRatio: '1536 / 1024' }}
