@@ -1234,7 +1234,7 @@
 .murmur-turning-missing-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   position: relative;
 }
@@ -1263,33 +1263,44 @@
   flex-shrink: 0;
 }
 
-.murmur-turning-track-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 clamp(14px, 2.5vw, 36px);
-  position: relative;
-  overflow: visible;
-  min-width: 40px;
-}
-
 .murmur-turning-blank-line {
-  width: 100%;
+  flex: 1;
   height: 2px;
   background-color: #F8C363;
   border-radius: 2px;
-  margin-top: calc(clamp(1.45rem, 4.8vw, 3.8rem) * 0.84);
-  flex-shrink: 0;
+  margin: 0 clamp(16px, 2.5vw, 36px);
+  min-width: 24px;
+}
+
+/* Flow wrap: SVG line drops down centered from the blank line */
+.murmur-turning-flow-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: -1px;
 }
 
 .murmur-turning-flow-svg {
   width: clamp(40px, 5.5vw, 68px);
-  height: clamp(550px, 80vh, 850px);
+  height: clamp(450px, 65vh, 750px);
   display: block;
   overflow: visible;
   flex-shrink: 0;
-  margin-top: -1px;
+}
+
+/* Answer text container: Unconstrained by side headers, free to breathe */
+.murmur-turning-answer {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0 clamp(16px, 3vw, 24px);
 }
 
 .murmur-turning-connection-h3 {
@@ -1298,24 +1309,24 @@
   font-weight: 500;
   font-style: italic;
   color: #F8C363;
-  margin: 6px 0 0 0;
+  margin: 8px 0 0 0;
   text-align: center;
   letter-spacing: -0.01em;
   line-height: 1.25;
-  white-space: nowrap;
 }
 
 .murmur-turning-connection-sub {
   font-family: var(--font-family-primary);
-  font-size: var(--type-h4-size, clamp(1.1rem, 1.35vw + 0.4rem, 1.4rem));
+  font-size: var(--type-h4-size, clamp(1.05rem, 1.35vw + 0.35rem, 1.35rem));
   font-weight: 300;
   font-style: italic;
   color: #FFFFFF;
   margin: 14px 0 0 0;
   text-align: center;
   letter-spacing: -0.01em;
-  line-height: 1.45;
-  white-space: nowrap;
+  line-height: 1.5;
+  width: 100%;
+  max-width: 680px;
 }
 
 .murmur-turning-connection-context {
@@ -1323,75 +1334,69 @@
   font-size: clamp(0.88rem, 1.15vw, 1.05rem);
   font-weight: 300;
   color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
   text-align: center;
   letter-spacing: 0.01em;
-  line-height: 1.45;
-  white-space: nowrap;
+  line-height: 1.55;
+  width: 100%;
+  max-width: 580px;
 }
 
 @media (max-width: 640px) {
   .murmur-turning-missing-row {
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .murmur-turning-track-col {
-    margin: 0 clamp(8px, 2vw, 14px);
+  .murmur-turning-blank-line {
+    margin: 0 10px;
   }
 
   .murmur-turning-flow-svg {
-    height: clamp(380px, 60vh, 520px);
-    width: 36px;
+    height: clamp(200px, 32vh, 280px);
+    width: 32px;
+  }
+
+  .murmur-turning-answer {
+    padding: 0 12px;
+    max-width: 100%;
   }
 
   .murmur-turning-connection-h3 {
-    white-space: normal;
+    font-size: 1.4rem;
   }
 
   .murmur-turning-connection-sub {
-    white-space: normal;
-    max-width: min(340px, 86vw);
-    font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+    font-size: clamp(0.98rem, 3.8vw, 1.12rem);
+    line-height: 1.55;
+    max-width: 100%;
+    margin-top: 12px;
   }
 
   .murmur-turning-connection-context {
-    white-space: normal;
-    max-width: min(320px, 84vw);
-    font-size: 0.85rem;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    max-width: 100%;
+    margin-top: 8px;
   }
 }
 
 @media (max-width: 540px) {
   .murmur-turning-missing-group {
-    margin: 36px 0 clamp(64px, 10vh, 100px) 0;
+    margin: 36px 0 clamp(64px, 10vh, 96px) 0;
   }
 
   .murmur-turning-what-was-h1,
   .murmur-turning-missing-h1 {
-    font-size: clamp(1.2rem, 5.2vw, 1.6rem);
+    font-size: clamp(1.15rem, 5vw, 1.5rem);
   }
 
   .murmur-turning-blank-line {
-    margin-top: calc(clamp(1.2rem, 5.2vw, 1.6rem) * 0.84);
+    margin: 0 8px;
   }
 
   .murmur-turning-flow-svg {
-    height: clamp(280px, 45vh, 380px);
-    width: 30px;
-  }
-
-  .murmur-turning-connection-h3 {
-    font-size: 1.25rem;
-  }
-
-  .murmur-turning-connection-sub {
-    font-size: 0.92rem;
-    max-width: 290px;
-  }
-
-  .murmur-turning-connection-context {
-    font-size: 0.8rem;
-    max-width: 270px;
+    height: clamp(160px, 25vh, 230px);
+    width: 28px;
   }
 
   .murmur-turning-solve-row {

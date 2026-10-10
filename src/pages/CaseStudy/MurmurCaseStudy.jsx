@@ -1161,29 +1161,32 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
                 <div className="murmur-turning-missing-group">
                   <div className="murmur-turning-missing-row">
                     <h1 className="murmur-turning-what-was-h1">so what was</h1>
-                    <div className="murmur-turning-track-col">
-                      {/* Long horizontal blank line in Murmur yellow */}
-                      <div className="murmur-turning-blank-line" aria-hidden="true" />
+                    {/* Long horizontal blank line in Murmur yellow */}
+                    <div className="murmur-turning-blank-line" aria-hidden="true" />
+                    <h1 className="murmur-turning-missing-h1">missing?</h1>
+                  </div>
 
-                      {/* Continuous flowing vertical line extending across scroll space */}
-                      <svg
-                        className="murmur-turning-flow-svg"
-                        viewBox="0 0 80 800"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M 40 0 C 40 70, 52 130, 48 200 C 44 270, 30 340, 34 420 C 38 500, 48 560, 46 640 C 44 710, 40 760, 40 800"
-                          stroke="#F8C363"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          vectorEffect="non-scaling-stroke"
-                        />
-                      </svg>
+                  <div className="murmur-turning-flow-wrap">
+                    {/* Continuous flowing vertical line extending across scroll space */}
+                    <svg
+                      className="murmur-turning-flow-svg"
+                      viewBox="0 0 80 800"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M 40 0 C 40 70, 52 130, 48 200 C 44 270, 30 340, 34 420 C 38 500, 48 560, 46 640 C 44 710, 40 760, 40 800"
+                        stroke="#F8C363"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
 
-                      {/* The answer revealed upon scrolling */}
+                    {/* The answer revealed upon scrolling */}
+                    <div className="murmur-turning-answer">
                       <h3 className="murmur-turning-connection-h3">the connection</h3>
                       <h4 className="murmur-turning-connection-sub">
                         Less time together → emotional connection fades → presence feels invisible.
@@ -1192,7 +1195,6 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
                         during post pregnancy it is common for couples to spend less time together
                       </p>
                     </div>
-                    <h1 className="murmur-turning-missing-h1">missing?</h1>
                   </div>
                 </div>
 
