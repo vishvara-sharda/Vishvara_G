@@ -787,10 +787,10 @@
   font-weight: 600;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .murmur-flow-track {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
     width: 100%;
   }
@@ -800,11 +800,13 @@
     box-sizing: border-box;
     border-radius: 12px;
     padding: 12px 18px;
-    justify-content: flex-start;
+    justify-content: center;
+    text-align: center;
   }
 
   .murmur-flow-title {
     white-space: normal;
+    text-align: center;
   }
 
   .murmur-node-desktop-title {
@@ -816,7 +818,10 @@
   }
 
   .murmur-flow-arrow {
-    padding-left: 18px;
+    padding-left: 0;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
     font-size: 1.15rem;
   }
 
@@ -829,8 +834,9 @@
   }
 
   .murmur-flow-support-text {
-    margin-top: 4px;
-    padding-left: 2px;
+    margin-top: 8px;
+    padding-left: 0;
+    text-align: center;
   }
 }
 
