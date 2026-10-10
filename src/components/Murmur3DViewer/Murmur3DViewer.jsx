@@ -9,11 +9,9 @@ import './Murmur3DViewer.css';
  */
 const ModelCard = memo(function ModelCard({
   title,
-  subtitle,
   src,
   poster,
-  specs = [],
-  initialOrbit = '0deg 75deg 105%',
+  initialOrbit = '0deg 75deg 55%',
 }) {
   const viewerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -105,17 +103,24 @@ const ModelCard = memo(function ModelCard({
           poster={poster}
           alt={`Interactive 3D model of Murmur ${title}`}
           camera-controls
+          bounds="tight"
+          camera-orbit={initialOrbit}
+          camera-target="auto auto auto"
+          min-camera-orbit="auto 20deg 35%"
+          max-camera-orbit="auto 100deg 110%"
+          min-field-of-view="15deg"
+          max-field-of-view="45deg"
+          interpolation-decay="150"
           auto-rotate
           auto-rotate-delay="2500"
           rotation-per-second="24deg"
-          shadow-intensity="1.4"
-          shadow-softness="0.9"
-          exposure="1.08"
-          camera-orbit={initialOrbit}
+          shadow-intensity="1.5"
+          shadow-softness="0.8"
+          exposure="1.1"
           touch-action="pan-y"
           ar
           ar-modes="webxr scene-viewer quick-look"
-          interaction-prompt="auto"
+          interaction-prompt="none"
           className="murmur-3d-canvas"
         />
 
@@ -150,20 +155,6 @@ const ModelCard = memo(function ModelCard({
           </button>
         </div>
       </div>
-
-      {/* Footer Specs / Hints */}
-      <div className="murmur-3d-card-footer">
-        <div className="murmur-3d-specs">
-          {specs.map((spec, i) => (
-            <span key={i} className="murmur-3d-spec-badge">
-              {spec}
-            </span>
-          ))}
-        </div>
-        <p className="murmur-3d-interaction-hint">
-          Drag to orbit · Pinch or scroll to zoom · Double tap to focus
-        </p>
-      </div>
     </div>
   );
 });
@@ -172,67 +163,26 @@ const ModelCard = memo(function ModelCard({
  * Main Murmur 3D Viewport Section
  */
 export const Murmur3DViewer = memo(function Murmur3DViewer() {
-  const [activeTab, setActiveTab] = useState('both'); // 'woman' | 'man' | 'both'
-
   return (
     <section className="murmur-3d-section" id="3d-models" aria-labelledby="heading-3d-models">
       <div className="murmur-3d-header">
         <h2 id="heading-3d-models" className="murmur-3d-heading">
           explore <span className="murmur-heading-accent">Murmur</span> in 3D
         </h2>
-
-        {/* View Switcher Tabs */}
-        <div className="murmur-3d-tab-bar" role="tablist" aria-label="3D model views">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'both'}
-            className={`murmur-3d-tab ${activeTab === 'both' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('both')}
-          >
-            Both Models
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'woman'}
-            className={`murmur-3d-tab ${activeTab === 'woman' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('woman')}
-          >
-            Woman Model
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'man'}
-            className={`murmur-3d-tab ${activeTab === 'man' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('man')}
-          >
-            Man Model
-          </button>
-        </div>
       </div>
 
       {/* Grid of 3D Models */}
-      <div className={`murmur-3d-grid mode-${activeTab}`}>
-        {(activeTab === 'both' || activeTab === 'woman') && (
-          <ModelCard
-            title="Woman Doll"
-            subtitle="Mother Figure"
-            src={womanGlbUrl}
-            initialOrbit="0deg 75deg 105%"
-            specs={['Soft Silicone Belly', 'Heating Assembly', 'Touch Sensor']}
-          />
-        )}
-        {(activeTab === 'both' || activeTab === 'man') && (
-          <ModelCard
-            title="Man Doll"
-            subtitle="Partner Figure"
-            src={manGlbUrl}
-            initialOrbit="0deg 75deg 105%"
-            specs={['Palm-sized Form Factor', 'Breathing Bladder', 'Vibration Motor']}
-          />
-        )}
+      <div className="murmur-3d-grid">
+        <ModelCard
+          title="Woman Doll"
+          src={womanGlbUrl}
+          initialOrbit="0deg 75deg 55%"
+        />
+        <ModelCard
+          title="Man Doll"
+          src={manGlbUrl}
+          initialOrbit="0deg 75deg 55%"
+        />
       </div>
     </section>
   );
