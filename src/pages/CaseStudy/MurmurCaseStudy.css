@@ -223,27 +223,38 @@
   }
 }
 
-.murmur-why-heading {
-  font-family: var(--font-family-primary);
-  font-size: var(--type-h1-size, clamp(2.25rem, 4.5vw, 4rem));
-  font-weight: 700; /* Bold */
-  text-align: center;
-  color: #FFFFFF;
-  margin: var(--space-9, 64px) auto var(--space-2, 8px) auto;
+.murmur-transition-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  line-height: var(--line-height-tight, 1.1);
-  letter-spacing: -0.02em;
+  margin-top: clamp(36px, 6vh, 64px);
+  margin-bottom: clamp(6px, 1.2vh, 14px);
+}
+
+.murmur-why-design-heading {
+  font-family: var(--font-family-primary);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 500;
+  font-style: italic;
+  color: #F8C363;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin: 0 0 6px 0;
+  padding: 0;
 }
 
 .murmur-start-heading {
   font-family: var(--font-family-primary);
-  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.35vw, 1.25rem);
   font-weight: 400;
   font-style: italic;
   text-align: left;
   align-self: flex-start;
   color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
-  margin: var(--space-3, 12px) 0 var(--space-2, 8px) 0;
+  margin: 0;
+  padding: 0;
   line-height: 1.4;
   letter-spacing: 0.01em;
 }
@@ -3123,6 +3134,28 @@
     padding: 6px 0;
     min-height: 40px;
     letter-spacing: 0.03em;
+  }
+
+  /* Transition: why we design this? & let's start from the start (matching laptop version) */
+  .murmur-transition-block {
+    margin-top: clamp(28px, 4.5vh, 44px);
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+
+  .murmur-why-design-heading {
+    font-size: clamp(1.35rem, 5.8vw, 1.7rem);
+    margin-bottom: 4px;
+    text-align: left;
+    color: #F8C363;
+    font-style: italic;
+  }
+
+  .murmur-start-heading {
+    font-size: clamp(0.92rem, 3.8vw, 1.05rem);
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
   }
 
   .murmur-turning-point-section {

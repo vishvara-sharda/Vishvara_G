@@ -937,8 +937,10 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
 
               {/* Transition: Why we design this? */}
-              <h1 className="murmur-why-heading">why we design this?</h1>
-              <h6 className="murmur-start-heading">let's start from the start</h6>
+              <div className="murmur-transition-block">
+                <h2 className="murmur-why-design-heading">why we design this?</h2>
+                <h6 className="murmur-start-heading">let's start from the start</h6>
+              </div>
 
               {/* My role · Solving it */}
               <div className="murmur-role-section" id="role">
