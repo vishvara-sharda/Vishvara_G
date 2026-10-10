@@ -47,6 +47,7 @@ import coupleImg from '../../components/Pictures/Projects/Murmur/couple.png';
 import femaleDollsImg from '../../components/Pictures/Projects/Murmur/female dolls.png';
 import maleDollsImg from '../../components/Pictures/Projects/Murmur/male dolls.png';
 import { imageCache, browserCache, storageCache } from '../../utils/cache';
+const Murmur3DViewer = React.lazy(() => import('../../components/Murmur3DViewer/Murmur3DViewer'));
 import './CaseStudy.css';
 import './MurmurCaseStudy.css';
 
@@ -1959,6 +1960,11 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
               </div>
             </article>
           </section>
+
+          {/* Interactive 3D Models Viewport */}
+          <React.Suspense fallback={null}>
+            <Murmur3DViewer />
+          </React.Suspense>
 
           {/* FINAL BUSINESS CTA SECTION */}
           <section className="murmur-business-cta-section" id="business-cta" aria-label="Business discussion">
