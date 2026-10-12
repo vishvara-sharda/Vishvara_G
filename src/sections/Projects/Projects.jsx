@@ -20,7 +20,8 @@ const projectsData = [
     tagline: (
       <>
         59 studies reviewed · 587 apps mapped · 38 met screening criteria ·{' '}
-        <strong className="project-tagline-bold">very less partner-focused features</strong>
+        <strong className="project-tagline-bold">Few partner-focused features among qualifying apps</strong>
+        , revealing a gap in support for couples navigating pregnancy and postpartum together.
       </>
     ),
     logoImage: murmurCover,
