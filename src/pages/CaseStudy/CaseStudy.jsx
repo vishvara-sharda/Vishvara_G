@@ -21,6 +21,16 @@ import chooseLanguageImg from '../../components/Pictures/Projects/Margdarshak/ch
 import physicalGuideImg from '../../components/Pictures/Projects/Margdarshak/physical guide.png';
 import physicalGuide2Img from '../../components/Pictures/Projects/Margdarshak/physical guide 2.png';
 import margdarshakLogo from '../../components/Pictures/Projects/Margdarshak/Margdarshak Logo.png';
+import environmentImg from '../../components/Pictures/Projects/Margdarshak/environment.png';
+import emotionsImg from '../../components/Pictures/Projects/Margdarshak/emotions.png';
+import behaviourImg from '../../components/Pictures/Projects/Margdarshak/behaviour.png';
+import cognativeImg from '../../components/Pictures/Projects/Margdarshak/cognative.png';
+import literacyImg from '../../components/Pictures/Projects/Margdarshak/literacy.png';
+import digitalImg from '../../components/Pictures/Projects/Margdarshak/digital.png';
+import smartDevicesImg from '../../components/Pictures/Projects/Margdarshak/smart devices.png';
+import govtBuildingImg from '../../components/Pictures/Projects/Margdarshak/Government Building Silhouette Icon.png';
+import user1Img from '../../components/Pictures/Projects/Margdarshak/u2.png';
+import user2Img from '../../components/Pictures/Projects/Margdarshak/u1.png';
 import { imageCache, browserCache } from '../../utils/cache';
 import './CaseStudy.css';
 
@@ -53,7 +63,17 @@ export const MARGDARSHAK_ALL_ASSETS = [
   bookGuideImg,
   physicalGuideImg,
   physicalGuide2Img,
-  margdarshakLogo
+  margdarshakLogo,
+  environmentImg,
+  emotionsImg,
+  behaviourImg,
+  cognativeImg,
+  literacyImg,
+  digitalImg,
+  smartDevicesImg,
+  govtBuildingImg,
+  user1Img,
+  user2Img
 ];
 
 /**
@@ -242,6 +262,33 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
               </div>
             )}
 
+            {/* User Personas */}
+            <div className="personas-container" role="region" aria-label="User Personas">
+              <div className="persona-card">
+                <h3 className="persona-name">Salma, 36</h3>
+                <span className="persona-role-location">HOMEMAKER &middot; URBAN (DELHI)</span>
+                <div className="persona-tags">
+                  <span className="persona-tag">LOW DIGITAL EXPOSURE</span>
+                  <span className="persona-tag">FINANCIALLY DEPENDENT</span>
+                </div>
+                <blockquote className="persona-quote">
+                  "Every week I just think... will we have enough for food, rent, and medicines?"
+                </blockquote>
+              </div>
+
+              <div className="persona-card">
+                <h3 className="persona-name">Ramesh, 52</h3>
+                <span className="persona-role-location">DAILY WAGE WORKER &middot; RURAL (PUNE)</span>
+                <div className="persona-tags">
+                  <span className="persona-tag">NO SMARTPHONE</span>
+                  <span className="persona-tag">LOW LITERACY</span>
+                </div>
+                <blockquote className="persona-quote">
+                  "I heard there is money from the government for people like me. But I don't know where to go or who to ask."
+                </blockquote>
+              </div>
+            </div>
+
             {/* Affinity Mapping: Left-aligned image with h3 heading on the right */}
             <div className="case-study-affinity-block">
               <div className="case-study-affinity-img-wrap">
@@ -308,6 +355,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
               <span className="beec-system-caption">System Interaction</span>
               <div className="beec-system-flow">
                 <div className="beec-system-node">
+                  <div className="beec-node-image-container">
+                    <img src={environmentImg} alt="Environment" className="beec-node-image" loading="lazy" />
+                  </div>
                   <span className="beec-node-step">01</span>
                   <span className="beec-node-title">Environment</span>
                 </div>
@@ -319,6 +369,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </div>
 
                 <div className="beec-system-node">
+                  <div className="beec-node-image-container">
+                    <img src={emotionsImg} alt="Emotion" className="beec-node-image" loading="lazy" />
+                  </div>
                   <span className="beec-node-step">02</span>
                   <span className="beec-node-title">Emotion</span>
                 </div>
@@ -330,6 +383,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </div>
 
                 <div className="beec-system-node">
+                  <div className="beec-node-image-container">
+                    <img src={behaviourImg} alt="Behaviour" className="beec-node-image" loading="lazy" />
+                  </div>
                   <span className="beec-node-step">03</span>
                   <span className="beec-node-title">Behaviour</span>
                 </div>
@@ -341,6 +397,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </div>
 
                 <div className="beec-system-node">
+                  <div className="beec-node-image-container">
+                    <img src={cognativeImg} alt="Cognitive Load" className="beec-node-image" loading="lazy" />
+                  </div>
                   <span className="beec-node-step">04</span>
                   <span className="beec-node-title">Cognitive Load</span>
                 </div>
@@ -457,6 +516,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
               <div className="user-seg-parameters-row">
                 {/* Parameter 1 */}
                 <div className="user-seg-param-card">
+                  <div className="user-seg-param-image-container">
+                    <img src={literacyImg} alt="Literacy rate" className="user-seg-param-image" loading="lazy" />
+                  </div>
                   <div className="user-seg-param-top">
                     <span className="user-seg-param-index">PARAMETER 01</span>
                     <span className="user-seg-param-type">Dimension</span>
@@ -480,6 +542,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
 
                 {/* Parameter 2 */}
                 <div className="user-seg-param-card">
+                  <div className="user-seg-param-image-container">
+                    <img src={digitalImg} alt="Proficiency in digital devices" className="user-seg-param-image" loading="lazy" />
+                  </div>
                   <div className="user-seg-param-top">
                     <span className="user-seg-param-index">PARAMETER 02</span>
                     <span className="user-seg-param-type">Dimension</span>
@@ -598,6 +663,12 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       <span className="user-seg-attr-val user-seg-attr-val--accent">High – Medium</span>
                     </div>
                   </div>
+                  <div className="user-seg-group-media-block">
+                    <div className="user-seg-group-image-wrap">
+                      <img src={user1Img} alt="User 1" className="user-seg-group-image" loading="lazy" />
+                    </div>
+                    <h3 className="user-seg-group-name">User 1</h3>
+                  </div>
                 </div>
 
                 {/* User 02 Spec */}
@@ -616,6 +687,12 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       <span className="user-seg-attr-label">Proficiency in digital devices</span>
                       <span className="user-seg-attr-val">Medium – Low</span>
                     </div>
+                  </div>
+                  <div className="user-seg-group-media-block">
+                    <div className="user-seg-group-image-wrap">
+                      <img src={user2Img} alt="User 2" className="user-seg-group-image" loading="lazy" />
+                    </div>
+                    <h3 className="user-seg-group-name">User 2</h3>
                   </div>
                 </div>
               </div>
@@ -659,7 +736,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       </p>
                     </div>
                   </li>
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">02</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -667,7 +744,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       </p>
                     </div>
                   </li>
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">03</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -683,7 +760,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       </p>
                     </div>
                   </li>
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">05</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -707,7 +784,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </div>
 
                 <ul className="pain-points-list" role="list">
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">01</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -715,7 +792,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       </p>
                     </div>
                   </li>
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">02</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -723,7 +800,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                       </p>
                     </div>
                   </li>
-                  <li className="pain-points-item">
+                  <li className="pain-points-item pain-points-item--highlight">
                     <span className="pain-points-item-num">03</span>
                     <div className="pain-points-item-content">
                       <p className="pain-points-item-desc">
@@ -734,6 +811,10 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 </ul>
               </div>
             </div>
+
+            <p className="pain-points-caption">
+              The pain points we solved for
+            </p>
 
             <div className="case-study-extension-slot" />
           </section>
@@ -790,6 +871,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                   <span className="resources-tag">Resource 1</span>
                   <h3 className="resources-title">Smart Devices</h3>
                 </div>
+                <div className="resources-image-container">
+                  <img src={smartDevicesImg} alt="Smart Devices" className="resources-image" loading="lazy" />
+                </div>
                 <p className="resources-desc">
                   We used smart devices as the primary digital resource, while designing around differences in access and proficiency.
                 </p>
@@ -800,6 +884,9 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 <div className="resources-header">
                   <span className="resources-tag">Resource 2</span>
                   <h3 className="resources-title">Public Government Properties</h3>
+                </div>
+                <div className="resources-image-container">
+                  <img src={govtBuildingImg} alt="Public Government Properties" className="resources-image" loading="lazy" />
                 </div>
                 <p className="resources-desc">
                   We used existing public government properties — schools, Anganwadis, dispensaries, etc. — as physical access points for people who may not have reliable access to digital resources.
@@ -964,7 +1051,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                     <svg className="user-testing-callout-arrow" viewBox="0 0 32 16" fill="none" aria-hidden="true">
                       <path
                         d="M32 8H4M4 8L10 2M4 8L10 14"
-                        stroke="#E2A9F1"
+                        stroke="#FF6A00"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -1027,7 +1114,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                   <span className="branch-condition">Can use digital devices but needs assistance</span>
                   <div className="branch-arrow" aria-hidden="true">
                     <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                   <span className="branch-action-tag">DIGITAL GUIDE</span>
@@ -1041,7 +1128,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                   <span className="branch-condition">No smartphone / keypad phone</span>
                   <div className="branch-arrow" aria-hidden="true">
                     <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M5 0V12M5 12L1 8M5 12L9 8" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                   <span className="branch-action-tag">PHYSICAL GUIDE</span>
@@ -1079,7 +1166,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 {/* Directional arrow between 01 and 02 */}
                 <div className="sequence-track-arrow" aria-hidden="true">
                   <svg viewBox="0 0 28 16" fill="none">
-                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
 
@@ -1104,7 +1191,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
                 {/* Directional arrow between 02 and 03 */}
                 <div className="sequence-track-arrow" aria-hidden="true">
                   <svg viewBox="0 0 28 16" fill="none">
-                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
 
@@ -1196,7 +1283,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
 
                   <div className="physical-guide-arrow" aria-hidden="true">
                     <svg viewBox="0 0 28 16" fill="none">
-                      <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M0 8H24M24 8L17 2M24 8L17 14" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
 
@@ -1227,6 +1314,53 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
           </section>
 
           {/* ================================================================
+              HOW USERS REACTED — USABILITY TESTING & INSIGHTS
+              ================================================================ */}
+          <section className="case-study-section user-reaction-section" id="reactions" aria-labelledby="heading-reactions">
+            <h2 id="heading-reactions" className="case-study-section-heading">
+              How users reacted
+            </h2>
+
+            {/* Stat Callout */}
+            <div className="reaction-stat-block">
+              <span className="reaction-stat-big">90%</span>
+              <p className="reaction-stat-sub">
+                Task completion — Round 2 usability testing
+              </p>
+            </div>
+
+            {/* Two Side-by-Side Cards */}
+            <div className="reaction-cards-grid">
+              {/* Card 1: What 90% told us */}
+              <div className="reaction-card">
+                <span className="reaction-card-label reaction-card-label--orange">
+                  WHAT 90% TOLD US
+                </span>
+                <p className="reaction-card-text">
+                  Users who can read and use smartphones easily found their schemes on their own. The interface was clear, and the flow worked smoothly for them.
+                </p>
+              </div>
+
+              {/* Card 2: What the other 10% taught us */}
+              <div className="reaction-card">
+                <span className="reaction-card-label reaction-card-label--green">
+                  WHAT THE OTHER 10% TAUGHT US
+                </span>
+                <p className="reaction-card-text">
+                  Older users and people unfamiliar with phones couldn't do it alone. They understood the schemes and wanted the help, but they needed someone beside them. That led directly to the guide system.
+                </p>
+              </div>
+            </div>
+
+            {/* Summary / Takeaway caption */}
+            <p className="reaction-closing-quote">
+              The 90% validated the design. The 10% transformed it.
+            </p>
+
+            <div className="case-study-extension-slot" />
+          </section>
+
+          {/* ================================================================
               8. FUTURE SCOPE
               ================================================================ */}
           <section className="case-study-section future-scope-section" id="future-scope" aria-labelledby="heading-future-scope">
@@ -1248,7 +1382,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
 
               <div className="future-flow-arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 16" fill="none">
-                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
 
@@ -1258,7 +1392,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
 
               <div className="future-flow-arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 16" fill="none">
-                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#E2A9F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M0 8H20M20 8L14 2M20 8L14 14" stroke="#FF6A00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
 
@@ -1287,7 +1421,7 @@ export const CaseStudy = memo(({ projectSlug = 'margdarshak', onNavigateBack }) 
           >
             ← Return to Projects
           </button>
-          <span className="case-study-category-badge">Portfolio 2026</span>
+          <span className="case-study-footer-badge">VISHVARA · PORTFOLIO 2026</span>
         </footer>
       </Container>
     </div>
