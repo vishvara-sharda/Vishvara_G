@@ -749,6 +749,189 @@ const FeatureCard = memo(function FeatureCard({ feature, onSelectImage }) {
   );
 });
 
+/**
+ * Component: MurmurFeedbackLoop
+ * Concept & Feedback Loop section exploring Murmur's relevance across life stages
+ */
+const FEEDBACK_STAGES = [
+  {
+    id: 'unmarried',
+    label: 'Unmarried Couples',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+      </svg>
+    )
+  },
+  {
+    id: 'married',
+    label: 'Married Couples',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    )
+  },
+  {
+    id: 'family-planning',
+    label: 'Family Planning',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M7 20h10" />
+        <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+        <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+        <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4.1.9-4.9 2z" />
+      </svg>
+    )
+  },
+  {
+    id: 'expecting-parents',
+    label: 'Expecting Parents',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M9 12h.01" />
+        <path d="M15 12h.01" />
+        <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
+        <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5-1.5-1-1.5-1" />
+      </svg>
+    )
+  },
+  {
+    id: 'during-pregnancy',
+    label: 'During Pregnancy',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
+        <path d="m18 15-2-2" />
+        <path d="m15 18-2-2" />
+      </svg>
+    )
+  },
+  {
+    id: 'after-childbirth',
+    label: 'After Childbirth',
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M9 12h.01" />
+        <path d="M15 12h.01" />
+        <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
+        <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5-1.5-1-1.5-1" />
+      </svg>
+    )
+  }
+];
+
+const MurmurFeedbackLoop = memo(function MurmurFeedbackLoop() {
+  return (
+    <section
+      className="murmur-feedback-section"
+      id="concept-feedback-loop"
+      aria-label="Concept & Feedback Loop"
+    >
+      <div className="murmur-feedback-header">
+        <h2 className="murmur-feedback-title">Concept & Feedback Loop</h2>
+        <p className="murmur-feedback-subtitle">
+          I gathered feedback on Murmur from people across different relationship and family-planning stages to explore its relevance throughout life.
+        </p>
+      </div>
+
+      <div
+        className="murmur-feedback-grid"
+        role="list"
+        aria-label="Relationship and family planning feedback stages"
+      >
+        {FEEDBACK_STAGES.map((stage) => (
+          <div key={stage.id} className="murmur-feedback-card" role="listitem">
+            <div className="murmur-feedback-icon" aria-hidden="true">
+              {stage.icon}
+            </div>
+            <span className="murmur-feedback-card-label">{stage.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <ul className="murmur-feedback-takeaway-list">
+        <li className="murmur-feedback-takeaway-item">
+          <span className="murmur-feedback-takeaway-label">Wider audience:</span>{' '}
+          Murmur could support couples who are unmarried, married, or planning a family.
+        </li>
+        <li className="murmur-feedback-takeaway-item">
+          <span className="murmur-feedback-takeaway-label">Different life stages:</span>{' '}
+          The product could grow with users through pregnancy and life after childbirth.
+        </li>
+        <li className="murmur-feedback-takeaway-item">
+          <span className="murmur-feedback-takeaway-label">Market expansion:</span>{' '}
+          This creates opportunities to reach new user groups over time, instead of limiting Murmur to expecting parents.
+        </li>
+      </ul>
+    </section>
+  );
+});
+
 export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
   const [activeLightboxImage, setActiveLightboxImage] = useState(null);
 
@@ -1965,6 +2148,9 @@ export const MurmurCaseStudy = memo(({ onNavigateBack }) => {
           <React.Suspense fallback={null}>
             <Murmur3DViewer />
           </React.Suspense>
+
+          {/* CONCEPT & FEEDBACK LOOP SECTION */}
+          <MurmurFeedbackLoop />
 
           {/* FINAL BUSINESS CTA SECTION */}
           <section className="murmur-business-cta-section" id="business-cta" aria-label="Business discussion">
