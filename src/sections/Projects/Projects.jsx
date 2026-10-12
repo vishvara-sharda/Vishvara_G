@@ -17,7 +17,12 @@ const projectsData = [
     id: 'project-01',
     slug: 'murmur',
     heading: 'Murmur',
-    tagline: 'A kinder journey, together.',
+    tagline: (
+      <>
+        59 studies reviewed · 587 apps mapped · 38 met screening criteria ·{' '}
+        <strong className="project-tagline-bold">very less partner-focused features</strong>
+      </>
+    ),
     logoImage: murmurCover,
     logoAlt: 'Murmur project logo',
     videoSrc: null,
@@ -45,7 +50,14 @@ const projectsData = [
     id: 'project-02',
     slug: 'margdarshak',
     heading: 'Margdarshak',
-    tagline: 'Making government schemes easier to access.',
+    tagline: (
+      <>
+        Secondary research and user{' '}
+        <strong className="project-tagline-bold">interviews across 3 cities</strong>
+        , followed by usability testing that achieved{' '}
+        <strong className="project-tagline-bold">90% task completion in Round 2.</strong>
+      </>
+    ),
     logoImage: margdarshakLogo,
     logoAlt: 'Margdarshak logo',
     videoSrc: null,
@@ -77,7 +89,7 @@ const ProjectCard = memo(({ project, onSelect }) => {
       {/* Upper Section: 3-Box Bento Layout */}
       <div className="project-upper-bento">
         {/* Box 1 — Project Heading (Horizontal Rectangular Box) */}
-        <div className="project-box-heading">
+        <div className={`project-box-heading project-box-heading--${project.slug || project.id}`}>
           <h3
             className="project-title"
             onClick={() => onSelect(project.slug || project.id)}
